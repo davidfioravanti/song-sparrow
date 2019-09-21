@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'alexanaregular';
+    src: url('alexana-webfont.woff2') format('woff2')
+         url('alexana-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 body {
     background: url(../images/backgroundImage.png);
 }
+/* CUSTOM FONTS: Use the font family listed below */
