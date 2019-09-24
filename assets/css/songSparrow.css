@@ -1,0 +1,729 @@
+
+@font-face {
+    font-family: "alexana_neueregular";
+    src: url("alexana_neue-webfont.woff2") format('woff2'),
+         url("alexana_neue-webfont.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ===================================================================================
+   =================================== HTML NODES ====================================
+   =================================================================================== */
+
+a {
+    font-size: 20px;
+    color: yellow;
+}
+a:hover {
+    color: orange;
+}  
+body {
+    background: url(../images/backgroundImage.png);
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* box-shadow: 0px 0px 100px 10px rgba(255, 94, 0, 0.555) inset; */
+}
+label {
+    font-size: 24pt;
+    font-weight: bold;
+    margin-bottom: -30px;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 0.787);
+    text-shadow: 0px 2px 30px rgb(255, 197, 73);
+    user-select: none;
+}
+h3 {
+    color: white;
+}
+h2 {
+    color: white;
+}
+span {
+    color: white;
+}
+textarea {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(90, 77, 77);
+}
+
+/* ===================================================================================
+   ==================================== CLASSES ======================================
+   =================================================================================== */
+
+.buttonToggle {
+    filter: saturate(.8);
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    width: 48%;
+    border:2px rgb(71, 63, 63) solid;
+    border-radius: 50px;
+    opacity: .5;
+    transition: all .5s ease;
+}
+.buttonToggle:focus {
+    filter: saturate(.7);
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    width: 48%;
+    border:2px rgb(71, 63, 63) solid;
+    border-radius: 50px;
+}
+.buttonToggle:hover {
+    opacity: .9;
+}
+.btn:not(:disabled):not(.disabled).active, .btn:not(:disabled):not(.disabled):active {
+    filter: saturate(1);
+    background-image: linear-gradient(rgb(255, 170, 34), rgb(255, 117, 54));
+    color: white;
+    box-shadow: 0px 0px 20px 2px #ff7402;
+    opacity: 1;
+}
+.h1 {
+    font-family: "alexana_neueregular";
+    font-size: 50pt;
+    color: rgb(246, 188, 80);
+    -webkit-text-stroke-width: 5px;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 0.787);
+    text-shadow: 0px 10px 30px rgb(33,37,41);
+    user-select: none;
+    z-index: 1000;
+    background-color: rgba(36, 32, 32, 0.623);
+    border: rgb(33, 37, 41) 2px solid;
+    border-radius: 20px;
+    box-shadow: 0px 0px 30px 10px rgb(47, 47, 47);
+    animation: textGlow 2s infinite ease;
+}
+    @keyframes textGlow {
+        0% {text-shadow: 0px 10px 30px rgb(33,37,41)}
+        50% {text-shadow: 0px 10px 40px rgb(255, 212, 19)}
+        100% {text-shadow: 0px 10px 30px rgb(33,37,41)}
+    }
+.h1:hover {
+    animation: textGlowMulti 4s infinite ease;
+}
+    @keyframes textGlowMulti {
+        0% {text-shadow: 0px 10px 30px rgb(33,37,41)}
+        10% {text-shadow: 0px 10px 40px rgb(0, 132, 255)}
+        20% {text-shadow: 0px 10px 30px rgb(255, 212, 19)}
+        30% {text-shadow: 0px 10px 40px rgb(255, 0, 0)}
+        40% {text-shadow: 0px 10px 30px rgb(255, 19, 224)}
+        50% {text-shadow: 0px 10px 40px rgb(39, 255, 19)}
+        60% {text-shadow: 0px 10px 30px rgb(255, 136, 0)}
+        70% {text-shadow: 0px 10px 40px rgb(0, 255, 200)}
+        80% {text-shadow: 0px 10px 40px rgb(86, 0, 224)}
+        80% {text-shadow: 0px 10px 20px rgb(168, 114, 255)}
+        100% {text-shadow: 0px 10px 30px rgb(33,37,41)}
+    }
+.h2 {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    -webkit-text-stroke-width:2px;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 0.787);
+    
+}
+.form-control {
+    border: 2px rgb(85, 72, 72) solid;
+    transition: all .5s ease-in-out;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    text-align: center;
+}
+    .form-control:focus {
+        border: 2px rgb(85, 72, 72) solid;
+        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726);
+    }
+    .form-control:hover {
+        border: 2px rgb(85, 72, 72) solid;
+        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726);
+    }
+    .form-control::placeholder {
+        font-weight: bold;
+        color: rgb(90, 77, 77);
+    }
+.form-group {
+    background: rgba(0, 0, 0, 0.493);
+    border-radius: 15px;
+    border: rgb(33, 37, 41) 2px solid;
+}
+.modal-dialog {
+    border: 15px rgba(255, 115, 0, 0.733) solid;
+    border-radius: 5px;
+    margin-top: 30%;
+    border-radius: 20px;
+    background: black;
+    box-shadow: 0px 0px 1000px 1000px rgba(0, 0, 0, 0.863), 0px 0px 300px 300px rgb(0, 0, 0) inset;
+}
+.modal-body {
+    background: rgb(27, 24, 24);
+    color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 5px 5px #ff5100;
+}
+.modal-footer {
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    border: none;
+}
+.modalText {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+.noSelect {
+    user-select: none;
+}
+.big {
+    font-size: 40px;
+}
+.small {
+    font-size: 10px;
+}
+.blue {
+    color: blue;
+}
+.red {
+    color: red;
+}
+.yellow {
+    color: yellow;
+}
+.green {
+    color: rgb(0, 202, 0);
+}
+.glow {
+    color: rgb(255, 229, 111);
+    animation: glow 2s infinite ease;
+}
+    @keyframes glow {
+        0% {
+            text-shadow: 0px 0px 20px rgb(255, 230, 0);
+            filter: drop-shadow(0px 0px 10px black);
+        }
+        50% {
+            text-shadow: 0px 0px 00px rgb(255, 230, 0);
+            filter: drop-shadow(0px 0px 20px black);
+        }
+        100% {
+            text-shadow: 0px 0px 20px rgb(255, 230, 0);
+            filter: drop-shadow(0px 0px 10px black);
+        }
+    }
+.rotate {
+    transform-origin: left;
+    padding-left: 30px;
+    animation: rotate 1s infinite ease-in-out;
+}
+    @keyframes rotate {
+        0% {transform: rotate(0deg)}
+        25% {transform: rotate(5deg)}
+        75% {transform: rotate(-5deg)}
+        100% {transform: rotate(0deg)}
+    }
+.featureButton {
+    color:rgb(71, 63, 63) !important;
+    text-shadow: 0px 1px rgb(0, 0, 0);
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54)) !important;
+    border: 2px rgb(85, 72, 72) solid;
+    transition: all .5s ease-in-out;
+}
+    .featureButton:focus {
+        color: rgb(255, 145, 0) !important;
+        background-image: linear-gradient(rgb(98, 93, 85), rgb(34, 31, 29)) !important;
+        border: 2px rgb(85, 72, 72) solid !important;
+        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726) !important;
+    }
+    .featureButton:hover {
+        border: 2px rgb(85, 72, 72) solid !important;
+        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726) !important;
+    }
+
+/* ===================================================================================
+   ================================== UNIQUE ID'S ====================================
+   =================================================================================== */
+
+#aboutBg {
+    background: rgb(54, 48, 48);
+}
+#aboutHeader {
+    border-bottom: none;
+}
+#aboutModal {
+    position: fixed;
+    top: -100px;
+    width: 100%;
+    transition: all .5s ease;
+}
+#aboutTitle {
+    font-family: "alexana_neueregular";
+    font-size: 50pt;
+    color: rgb(246, 188, 80);
+    -webkit-text-stroke-width: 5px;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 0.787);
+    text-shadow: 0px 10px 30px rgb(33,37,41);
+    user-select: none;
+    z-index: 1000;
+    animation: textGlow 2s infinite ease;
+}
+#artistNameForm {
+height: 40px;
+background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+resize: none;
+}
+#bottomDiv {
+    margin-top: 100px;
+}
+#chat {
+    position: relative;
+    top: -100%;
+    right: -40%;
+    width: 500px;
+    z-index: 100;
+    
+}
+#chatDiv {
+    margin-top: 20px;
+    opacity: 0;
+    transition: all 1s ease-in-out;
+}
+#chatInput {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 40px;
+    width: 100%;
+    resize: none;
+    text-transform: none;
+    background: rgba(139, 87, 51, 0.678);
+    color: white;
+    border-bottom: none;
+}
+    #chatInput::placeholder {
+        color: white;
+        text-align: center;
+    }
+#chatNote {
+    position: relative;
+    top: -10px;
+    color:rgb(255, 255, 255);
+    text-shadow: 0px 1px rgb(0, 0, 0);
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    border: 2px rgb(85, 72, 72) solid;
+    transition: all .5s ease-in-out;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    transition: all .5s ease;
+}
+    #chatNote:focus {
+        border: 2px rgb(85, 72, 72) solid;
+        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726);
+    }
+#chatText {
+    font-size: 15px;
+    transition: all .5s ease;
+}
+#chatUsername {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 30px;
+    -webkit-text-stroke-width:2px;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 0.787);
+}
+#closeButton {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    border: 2px rgb(85, 72, 72) solid;
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+}
+    #closeButton:focus {
+        border: 2px rgb(85, 72, 72) solid;
+        box-shadow: 0px 2px 20px 10px rgba(255, 106, 19, 0.692);
+    }
+#closeButton2 {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    border: 2px rgb(85, 72, 72) solid;
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+}
+    #closeButton2:focus {
+        border: 2px rgb(85, 72, 72) solid;
+        box-shadow: 0px 2px 20px 10px rgba(255, 106, 19, 0.692);
+    }
+#favoritesBg {
+    background: rgb(54, 48, 48);
+}
+#favoritesHeader {
+    border-bottom: none;
+}
+#favoritesModal {
+    position: fixed;
+    top: -200px;
+    width: 100%;
+    transition: all .5s ease;
+}
+#favoritesTitle {
+    font-family: "alexana_neueregular";
+    font-size: 50pt;
+    color: rgb(246, 188, 80);
+    -webkit-text-stroke-width: 5px;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 0.787);
+    text-shadow: 0px 10px 30px rgb(33,37,41);
+    user-select: none;
+    z-index: 1000;
+    animation: textGlow 2s infinite ease;
+}
+#featureButtons {
+    margin-top: 30px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    background: rgba(39, 34, 34, 0.685);
+}
+#featuredImage {
+    width: 40%;
+    height: 40%;
+}
+#globalChat {
+    color: white;
+    padding-top: 10px;
+    padding-left: 10px;
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+    height: 130px;
+    background: white;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border: 2px rgb(85, 72, 72) solid;
+    background: rgba(85, 75, 75, 0.692);
+
+}
+#inputRow {
+    border: 2px rgb(42, 37, 37) solid;
+    background: rgba(34, 32, 32, 0.411);
+    padding-top: 30px;
+    padding-bottom: 15px;
+    margin-top: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 30px 30px rgba(255, 93, 18, 0.294);
+    z-index: 100;
+}
+#instructions{
+    position: relative;
+    top: -50px;
+    left: -20%;
+    width: 40%;
+    opacity: 1;
+    pointer-events: none;
+    user-select: none;
+    z-index: -100;
+    animation: instrFadeIn 4s ease-in-out;
+    transition: opacity 2s ease-in-out;
+}
+    @keyframes instrFadeIn {
+        0% {opacity: 0;}
+        50% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+#metricsDiv {
+    margin-top: -255px;
+    box-shadow: 0px 0px 30px 30px rgba(255, 102, 0, 0.37);
+}
+#metricsRow {
+    background: rgba(26, 23, 23, 0.589);
+}
+#modalHeader {
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+}
+#modalTitle {
+    color: rgb(65, 53, 53);
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 0px 0px 30px rgb(255, 220, 66);
+
+}
+#popOutChat {
+    position: relative;
+    top: -10px;
+    color:rgb(255, 255, 255);
+    text-shadow: 0px 1px rgb(0, 0, 0);
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    border: 2px rgb(85, 72, 72) solid;
+    transition: all .5s ease-in-out;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+    #popOutChat:focus {
+        border: 2px rgb(85, 72, 72) solid;
+        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726);
+    }
+#responseModal {
+    display: none;
+}
+#resultsDiv {
+    display: none;
+}
+#searchButton {
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    width: 100%;
+    font-weight: bold;
+    color: rgb(184, 84, 26);
+    border:2px rgb(71, 63, 63) solid;
+    border-radius: 50px;
+}
+    #searchButton:focus{
+        background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+        width: 100%;
+        font-weight: bold;
+        color: rgb(184, 84, 26);
+        border:2px rgb(71, 63, 63) solid;
+        box-shadow: 0px 0px 15px 5px rgba(255, 205, 68, 0.424);
+    }
+#songSparrowLogo {
+    position: relative;
+    top: 10%;
+    left: -15%;
+    width: 50%;
+    user-select: none;
+    transition: all .5s ease-in-out;
+    animation: logoAnim 2s, logoIdle 2s infinite;
+    animation-delay: 0s, 3s;
+}
+    @keyframes logoAnim {
+        0% {
+            filter: saturate(1);
+            transform: rotate(-30deg);
+            left: -50%;
+            width: 0px;
+        }
+        70% {
+            filter: saturate(2)
+        }
+    }
+    @keyframes logoIdle {
+        0% {filter: saturate(1), drop-shadow(0px 0px 40px #ff5100)}
+        50% {filter: saturate(1.5) drop-shadow(0px 0px 10px #ff5100)}
+        100% {filter: saturate(1), drop-shadow(0px 0px 40px #ff5100)}
+    }
+#spotify {
+    width: 100%;
+    height: 100%;
+}
+#username {
+    color: rgb(255, 233, 107);
+}
+
+/* ===================================================================================
+   ================================= MEDIA QUERIES ===================================
+   =================================================================================== */
+
+@media (max-width: 2200px) {
+    #bottomDiv {
+        width: 50%;
+    }
+    #songSparrowLogo {
+        position: relative;
+        left: -300px;
+    }
+    #chat {
+        position: relative;
+        left: 400px;
+        width: 100%;
+    }
+    #globalChat {
+        height: 200px;
+    }
+    #aboutModal {
+        top: -350px;
+    }
+}
+
+@media (max-width: 1920px) {
+    #bottomDiv {
+        width: 50%;
+    }
+    #songSparrowLogo {
+        position: relative;
+        left: -350px;
+    }
+    #chat {
+        position: relative;
+        left: 300px;
+        width: 100%;
+    }
+    #globalChat {
+        height: 200px;
+    }
+}
+@media (max-width: 1850px) {
+    #bottomDiv {
+        width: 50%;
+    }
+    #songSparrowLogo {
+        position: relative;
+        left: -320px;
+    }
+    #chat {
+        position: relative;
+        left: 400px;
+        top: -95%;
+        width: 90%;
+    }
+    #globalChat {
+        height: 200px;
+    }
+}
+@media (max-width: 1750px) {
+    #bottomDiv {
+        width: 50%;
+    }
+    #songSparrowLogo {
+        position: relative;
+        left: -270px;
+        top: 0px;
+    }
+    #chat {
+        position: relative;
+        left: 400px;
+        top: -95%;
+        width: 90%;
+    }
+    #globalChat {
+        height: 200px;
+    }
+}
+@media (max-width: 1550px) {
+    #aboutModal {
+        top: -300px;
+    }   
+    #favoritesModal {
+        top: -100px;
+    } 
+}
+@media (max-width: 1500px) {
+    #bottomDiv {
+        margin-top: 150px;
+    }
+    #songSparrowLogo {
+        position: relative;
+        width: 50%;
+        top: -3vw;
+        left: -270px;
+    }
+    #instructions {
+        display: none;
+    }
+    #chat {
+        position: relative;
+        left: 200px;
+        top: -95%;
+        width: 110%;
+    }
+    #globalChat {
+        height: 200px;
+    }
+}
+@media (max-width: 1200px) {
+    #songSparrowLogo {
+        width: 300px;
+        left: -180px;
+    }
+    #aboutModal {
+        top: -200px;
+    }   
+    #chat {
+        width: 80%;
+        left: 300px;
+        top: -320px;
+    }
+    #globalChat {
+        height: 100px;
+    }
+}
+@media (max-width: 880px) {
+    #songSparrowLogo {
+        width: 300px;
+        left: -180px;
+    }
+    #chat {
+        width: 85%;
+        left: 200px;
+        top: -320px;
+    }
+    #globalChat {
+        height: 100px;
+    }
+}
+@media (max-width: 850px) {
+    #aboutModal {
+        top: -100px;
+    }   
+}
+@media (max-width: 792px) {
+    #songSparrowLogo {
+        width: 300px;
+        left: -180px;
+    }
+    #chat {
+        width: 85%;
+        left: 200px;
+        top: -320px;
+    }
+    #globalChat {
+        height: 70px;
+    }
+}
+@media (max-width: 792px) {
+    #songSparrowLogo {
+        width: 300px;
+        left: -180px;
+    }
+    #chatNote {
+        display: none;
+    }
+    #chat {
+        width: 85%;
+        left: 200px;
+        top: -320px;
+    }
+    #globalChat {
+        height: 70px;
+    }
+}
+@media (max-width: 700px) {
+    #songSparrowLogo {
+        width: 300px;
+        left: -180px;
+        display: none;
+    }
+    #chatNote {
+        display: none;
+    }
+    #chat {
+        margin-top: 200px;
+        width: 150%;
+        left:-80px;
+        top: -320px;
+    }
+    #globalChat {
+        height: 70px;
+    }
+}
+@media (max-width: 570px) {
+    #songSparrowLogo {
+        width: 300px;
+        left: -180px;
+        display: none;
+    }
+    #chatNote {
+        display: none;
+    }
+    #chat {
+        margin-top: 200px;
+        width: 150%;
+        left:-60px;
+        top: -320px;
+    }
+    #globalChat {
+        height: 70px;
+    }
+}
+button.close {
+    outline: none;
+}

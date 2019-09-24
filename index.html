@@ -1,49 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <!-- Reset CSS -->
-    <link rel="stylesheet" href="assets/css/reset.css" />
-    <!-- Bootstrap CSS -->
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <!-- Font Awesome CSS -->
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css"
-    />
-    <!-- Link to main CSS -->
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <!-- Link to Font CSS -->
-    <link rel="stylesheet" href="assets/css/stylesheet.css">
-    <title>MSNGER</title>
-  </head>
-  <body>
-      <div id="divcontainer" class="container-fluid">
-      <h1 id="app_title">PROJECT ONE</h1>
-      <h3 id="description">Description</h3>
-      <h4 id="credits">CREDITS</h4>
-      <h5 id="names1">David F.</h5>
-      <h5 id="names2">Phil S.</h5>
-      <h5 id="names3">Paul P.</h5>
-      <h5 id="names4">Mark G.</h5>
-        <form>
-            <input id="text_input" class="control-form" type="text" placeholder="ENTER YOUR NAME">
-            <input id="submitbtn" type="submit" value="SUBMIT">
-        </form>
-      </div>
+<!doctype html>
 
-    <!-- Added link to the jQuery Library -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Popper JS Modules -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!-- Link to main JS -->
-    <script src="assets/javascript/app.js"></script>
-  </body>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- CUSTOM CSS-OVERRIDE -->
+    <link rel="stylesheet" href="assets/css/index.css">
+    <title>Song Sparrow: Music Info At Your Fingertips</title>
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+</head>
+
+
+<body>
+
+    <!-- WRAPPER -->
+    <div id="wrapper" class="container">
+
+        <!-- MAIN CONTAINER -->
+        <div class="container">
+            <div class="row">
+                <p id="description" class="text-center col-12">MUSIC INFO AT YOUR FINGERTIPS!</p>
+                <h1 class="text-center col-12">SONG SPARROW</h1>
+                <p id="credits" class="text-center col-12">
+                    CREDITS
+                    <span id="defaultFont">:</span>
+                    <span id="name1">David</span>
+                    <span id="name2">Mark</span>
+                    <span id="name3">Paul</span>
+                    <span id="name4">Phil</span>
+                </p>
+                <div id="landingPageForm" class="form-group text-center col-12">
+                    <textarea id="usernameForm" class="form-control" name="" rows="3"
+                        placeholder="ENTER A USERNAME TO CONTINUE" spellcheck="false"></textarea>
+                </div>
+                <img id="songSparrowLogo" src="assets/images/songSparrowLogo.png">
+                <img id="speechBubble" src="assets/images/speechBubble.png">
+                <img id="musicNote1" src="assets/images/musicNote.png">
+                <img id="musicNote2" src="assets/images/musicNote.png">
+            </div>
+        </div>
+
+        <!-- METRICS CONTAINER -->
+        <div id="metricsTab" class="container">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <h2>TRENDING ARTISTS:</h2>
+                    <table class="table table-bordered table-dark">
+                        <tbody>
+                            <thead>
+                                <th>RANK #:</th>
+                                <th>NAME:</th>
+                            </thead>
+                            <tr>
+                                <td class="big">1</td>
+                                <td class="big">GAINSTRIVE</td>
+                            </tr>
+                            <tr>
+                                <td class="medium">2</td>
+                                <td class="medium">ANOTHER ARTIST</td>
+                            </tr>
+                            <tr>
+                                <td class="small">3</td>
+                                <td class="small">ANOTHER ARTIST</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-6 text-center">
+                    <h2>FEATURED:</h2>
+                    <div class="row">
+                        <img id="featuredImage" src="assets/images/featuredPlaceholder.jpg">
+                        <div class="col-6">
+                            <h3 class="text-center">GAINSTRIVE</h3>
+                            <span class="text-center">ALBUM:</span>
+                            <br>
+                            <span id="featuredAlbum" class="small text-right">ANYWHERE BUT HERE</span>
+                            <br>
+                            <button class="btn btn-dark" type="button">
+                                <div class="col-12">
+                                    <img id="spotify" src="assets/images/spotify.png">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE ONLY CONTAINER -->
+        <div id="mobileOnly" class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center">
+                        LOOKING FOR INFO ON YOUR FAVORITE BANDS?
+                    </h2>
+                    <h3 class="text-center">
+                        YOUR BIRD-BUDDY 
+                        <br> 
+                        <span id="titleFont">SONG SPARROW</span>
+                        <br>
+                        HAS YOUR BACK!
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- JAVASCRIPT LINK -->
+    <script src="assets/javascript/index.js"></script>
+
+    <!-- BOOTSTRAP DEPENDENCIES -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+
 </html>
