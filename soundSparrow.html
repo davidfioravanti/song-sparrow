@@ -1,0 +1,263 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- CUSTOM CSS-OVERRIDE -->
+    <link rel="stylesheet" href="assets/css/songSparrow.css">
+    <title>Song Sparrow: Music Info At Your Fingertips</title>
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+</head>
+
+<body>
+
+    <!-- INPUT CONTAINER -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="h1">SONG SPARROW</p>
+            </div>
+        </div>
+        <div id="inputRow" class="row">
+            <div class="col-6">
+                <div class="form-group text-center">
+                    <label id="artistLabel" for="my-textarea">ARTIST NAME</label>
+                    <textarea id="artistNameForm" spellcheck="false" class="form-control text-center searchForm"
+                     name="" placeholder="EX: AC/DC" rows="3"></textarea>
+                </div>
+                <div class="form-group text-center">
+                        <label for="my-textarea">SONG NAME</label>
+                        <textarea id="artistNameForm" spellcheck="false" class="form-control text-center searchForm"
+                         name="" placeholder="EX: SHOOT TO THRILL" rows="3"></textarea>
+                </div>
+                <div class="btn-group-toggle" data-toggle="buttons">
+                    <label class="btn buttonToggle">
+                        <input type="checkbox"> LYRICS
+                    </label>
+                    <label class="btn buttonToggle">
+                            <input type="checkbox"> MEMBERS
+                    </label>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group text-center">
+                        <label for="my-textarea">ALBUM NAME</label>
+                        <textarea id="artistNameForm" spellcheck="false" class="form-control text-center searchForm"
+                         name="" placeholder="EX: BACK IN BLACK" rows="3"></textarea>
+                </div>
+                    <div class="form-group text-center">
+                            <label for="my-textarea">BY YEAR</label>
+                            <textarea id="artistNameForm" spellcheck="false" class="form-control text-center searchForm"
+                             name="" placeholder="EX: 1980" rows="3"></textarea>
+                    </div>
+                    <button id="searchButton" class="btn btn-primary" type="button">SEARCH!</button>
+                </div>
+        </div>
+    </div>
+
+    <!-- SEARCH RESULTS CONTAINER-->
+    <div id="resultsDiv" class="container text-center">
+        <p class="h2">results go here</p>
+    </div>
+
+    <!-- LOGO + CHAT CONTAINER -->
+    <div id="bottomDiv" class="container">
+        <div class="noSelect">
+            <img id="songSparrowLogo" src="assets/images/songSparrowLogo.png">
+            <img id="instructions" src="assets/images/speechBubbleInstructions.png">
+        </div>
+        <div class="row">
+            <div id="chatDiv" class="col">
+                <div id="chat" class="form-group text-center">
+                    <label for="my-textarea">USER CHAT</label>
+                    <br>
+                    <span id="chatUsername">Username: <span id="username">PLACEHOLDER </span></span>
+                    <textarea id="chatInput" class="form-control"
+                    placeholder="YOUR MESSAGE HERE! KEEP COMMENTS APPROPRIATE!"
+                    spellcheck="false" name="" rows="3"></textarea>
+                    <p class="text-left" id="globalChat"></p>
+                    <button id="chatNote" class="btn btn-primary" type="button">HTML MARKDOWN SUPPORTED</button>
+                    <button id="popOutChat" class="btn btn-primary" type="button">POPOUT CHAT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SITE METRICS CONTAINER -->
+    <div id="metricsDiv" class="container-fluid">
+            <div id="metricsRow" class="row">
+                    <div class="col-6 text-center">
+                        <h2>TRENDING ARTISTS:</h2>
+                        <table class="table table-bordered table-dark">
+                            <tbody>
+                                <thead>
+                                    <th>RANK #:</th>
+                                    <th>NAME:</th>
+                                </thead>
+                                <tr>
+                                    <td class="">1</td>
+                                    <td class="">GAINSTRIVE</td>
+                                </tr>
+                                <tr>
+                                    <td class="">2</td>
+                                    <td class="">ANOTHER ARTIST</td>
+                                </tr>
+                                <tr>
+                                    <td class="">3</td>
+                                    <td class="">YET ANOTHER ARTIST</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-6 text-center">
+                        <h2>FEATURED:</h2>
+                        <div class="row">
+                            <img id="featuredImage" src="assets/images/featuredPlaceholder.jpg">
+                            <div class="col-6">
+                                <h3 class="text-center">GAINSTRIVE</h3>
+                                <span class="text-center">ALBUM:</span>
+                                <br>
+                                <span id="featuredAlbum" class="text-right">ANYWHERE BUT HERE</span>
+                                <br>
+                                <button class="btn btn-dark" type="button">
+                                    <div class="col-12">
+                                        <img id="spotify" src="assets/images/spotify.png">
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+    <!-- FOOTER BUTTONS ROW -->
+    <div id="featureButtons" class="container-fluid">
+        <div id="featureRow" class="row">
+                <button class="btn btn-primary featureButton col" onclick="home()" type="button">HOME</button>
+                <button id="aboutButton" class="btn btn-primary featureButton col" type="button">ABOUT</button>
+                <button id="favoritesButton" class="btn btn-primary featureButton col" type="button">FAVORITES</button>
+                <button class="btn btn-primary featureButton col" onclick="github()" type="button">GITHUB</button>
+        </div>
+    </div>
+
+    <!-- RESPONSE MODAL (FOR ERROR/SITE RESP.) -->
+    <div id="responseModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div id="modalHeader" class="modal-header">
+                    <h5 class="modal-title text-center" id="modalTitle">Title</h5>
+                    <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">BACK</span>
+                    </button>
+                </div>
+                <div id="modalBody" class="modal-body">
+                    <p id="modalText"></p>
+                </div>
+                <div id="modalFooter" class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT MODAL -->
+    <div id="aboutModal" class="modal text-center" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div id="aboutBg" class="modal-content">
+                    <div class="modal-body">
+                        <h5 class="modal-title text-center" id="aboutTitle">ABOUT</h5>
+                        <p>SONG SPARROW
+                        <br>
+                        is a dynamically built web app that
+                        does the heavy-lifting of searching for music info.
+                        It can find information on your favorite artists and
+                        others you want to discover!
+                        <br><br>
+                        It also has the capability to let you know if an artist
+                        is playing any shows in your area! Pretty handy right?
+                        <br><br>
+                        Our team of Junior Full-Stack Web Developers wanted a better way
+                        to gather everything you'd want to know about music. Our app
+                        is sleek and inspired by the urban-jungle known as the PHILLY
+                        MUSIC SCENE. 
+                        </p>
+                        We hope that this app helps you connect with the artists you love,
+                        and to find new music to enjoy!
+                        <br><br>
+                        { THE DEVS }
+                        <br>
+                        <a href="https://github.com/gainstrive" target="blank">DAVID</a>
+                        &nbsp;
+                        <a href="#">PAUL</a>
+                        &nbsp;
+                        <a href="#">PAUL</a>
+                        &nbsp;
+                        <a href="#">MARK</a>
+                        &nbsp;
+                        <br>
+
+                        <button id="closeButton" class="btn btn-primary" type="button">GO BACK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- FAVORITES MODAL -->
+    <div id="favoritesModal" class="modal text-center" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="favoritesBg" class="modal-content">
+                <div class="modal-body">
+                    <h5 class="modal-title text-center" id="favoritesTitle">FAVORITES</h5>
+
+                    <h2>Searches you FAVORITE will automatically go here!</h2>
+                    <p>If you'd like to remove an item, click the "X" button next to
+                        that item from your favorites list.</p>
+                    <span class="small"> NOTE: Favorites will be deleted
+                        when you clear your browser cache. </span>
+                        <br></br>
+                    
+                    <button id="closeButton2" class="btn btn-primary" type="button">GO BACK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LINK -->
+    <script src="assets/javascript/songSparrow.js"></script>
+
+    <!-- onClick FUNCTIONS -->
+    <script>
+        function home() {
+            window.location.href= "index.html";
+        }
+        function github() {
+            window.open("https://github.com/gainstrive/Project-1");
+        }
+    </script>
+
+
+    <!-- BOOTSTRAP DEPENDENCIES -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
