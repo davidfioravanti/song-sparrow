@@ -30,7 +30,7 @@ $(document).ready(function () {
             $("#instructions").css("opacity" , "0");
             // Fade in chat window...
             $("#chatDiv").css("opacity", "1");
-        }, 5000);
+        }, 1500);
     });
 
     // When the user clicks the Song Sparrow Logo...
