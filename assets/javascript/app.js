@@ -18,7 +18,7 @@ $.ajax({
     method: "GET",
     headers: {
         "x-rapidapi-host": "genius.p.rapidapi.com",
-		"x-rapidapi-key": APIKEY
+		"x-rapidapi-key": geniusAPIKey
     }
 }).then(function(response){
 
@@ -36,21 +36,27 @@ $.ajax({
 
 var Search = "dave grohl";
 
-var myKEY = config.seatGeekKEY;
+var artistName = $('#artistNameForm').on('click', function () {
 
-var queryURL = "https://api.seatgeek.com/2/performers?q="+Search+"&client_id="+myKEY;
+var artistNameSearch = $('#artistNameForm').val().trim();
+
+var seatGeekKEY = config.seatGeekKEY;
+
+var queryURL = "https://api.seatgeek.com/2/performers?q="+artistNameSearch+"&client_id="+seatGeekKEY;
 
 
 
-// seat geek API call
-$.ajax({
-    url: queryURL,
-    method: "GET",
-    
-}).then(function(response){
+    // seat geek API call
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+        
+    }).then(function(response){
 
-    console.log(response)
+        console.log(response)
+
+
+    });
 
 
 });
-
