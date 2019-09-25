@@ -36,9 +36,10 @@ $.ajax({
 
 var Search = "dave grohl";
 
-var artistName = $('#artistNameForm').on('click', function () {
+var artistName = $('#searchButton').on('click', function () {
 
 var artistNameSearch = $('#artistNameForm').val().trim();
+console.log(artistNameSearch);
 
 var seatGeekKEY = config.seatGeekKEY;
 
