@@ -278,12 +278,10 @@ resize: none;
     right: -40%;
     width: 500px;
     z-index: 100;
-    
 }
 #chatDiv {
     margin-top: 20px;
     opacity: 0;
-    transition: all 1s ease-in-out;
 }
 #chatInput {
     border-top-left-radius: 15px;
@@ -723,7 +721,4 @@ resize: none;
     #globalChat {
         height: 70px;
     }
-}
-button.close {
-    outline: none;
 }
