@@ -1,8 +1,7 @@
 
 
 // api key for the genius API
-var APIKEY = config.APIKEY;
-
+var geniusAPIKey = config.geniusKEY;
 
 
 // sample artist search, change to user input later on
