@@ -1,7 +1,17 @@
+<<<<<<< HEAD
 assets/.DS_Storeassets/.DS_Store
+=======
+
+
+assets/.DS_Store
+>>>>>>> db5eb971d69e8a28c02c74b17db12e6f5a9c97cc
 audio/.DS_Store
 images/.DS_Store
 javascript/.DS_Store
 css/.DS_Store
 DS.Store
+<<<<<<< HEAD
+=======
+
+>>>>>>> db5eb971d69e8a28c02c74b17db12e6f5a9c97cc
 config.js
