@@ -455,7 +455,7 @@ resize: none;
     display: none;
 }
 #resultsDiv {
-    display: none;
+
 }
 #searchButton {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
