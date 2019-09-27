@@ -531,7 +531,7 @@ resize: none;
     }
     #chat {
         position: relative;
-        left: 400px;
+        left: 300px;
         width: 100%;
     }
     #globalChat {
@@ -588,9 +588,9 @@ resize: none;
     }
     #chat {
         position: relative;
-        left: 400px;
+        left: 320px;
         top: -95%;
-        width: 90%;
+        width: 39vw;
     }
     #globalChat {
         height: 200px;
@@ -620,8 +620,8 @@ resize: none;
     #chat {
         position: relative;
         left: 200px;
-        top: -95%;
-        width: 110%;
+        top: -28vw;
+        width: 50vw;
     }
     #globalChat {
         height: 200px;
@@ -676,6 +676,7 @@ resize: none;
     #globalChat {
         height: 70px;
     }
+  
 }
 @media (max-width: 792px) {
     #songSparrowLogo {
@@ -692,6 +693,9 @@ resize: none;
     }
     #globalChat {
         height: 70px;
+    }
+    label.btn.buttonToggle {
+        font-size: .8em;
     }
 }
 @media (max-width: 700px) {
@@ -711,6 +715,12 @@ resize: none;
     }
     #globalChat {
         height: 70px;
+    }
+    label {
+    font-size: 1em;
+    }
+    label.btn.buttonToggle {
+        font-size: .6em;
     }
 }
 @media (max-width: 570px) {
