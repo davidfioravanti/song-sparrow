@@ -80,13 +80,9 @@ function API_Search(){
         newDiv.html('<a href=' + artist_URL + '>Artist HomePage</a>');
         newDiv.append('<p>'+top_Song+'</>');
 
-<<<<<<< HEAD
-         $('#resultsDiv').append('<img src='+artist_Image+'>');
-=======
         $('#resultsDiv').append('<img id=artistImg src='+artist_Image+'>');
 
         $('#resultsDiv').append(newDiv);
->>>>>>> e507eff8cf2a1be546a6609d887dd4721ed229dc
 
 
     });
