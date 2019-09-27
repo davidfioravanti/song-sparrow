@@ -4,15 +4,14 @@ $(document).ready(function () {
     
   // Your web app's Firebase configuration
   var firebaseConfig = {
-    apiKey: "AIzaSyBOsUXGIfG_aTH7TvqmOayFAWs_tAXCnhk",
-    authDomain: "song-sparrow-84a16.firebaseapp.com",
-    databaseURL: "https://song-sparrow-84a16.firebaseio.com",
-    projectId: "song-sparrow-84a16",
+    apiKey: "AIzaSyCeGNMI-uJ6gVv7zoJIrSa-RU2G6UiIfk8",
+    authDomain: "project-one-153f1.firebaseapp.com",
+    databaseURL: "https://project-one-153f1.firebaseio.com",
+    projectId: "project-one-153f1",
     storageBucket: "",
-    messagingSenderId: "361838930394",
-    appId: "1:361838930394:web:98fd953fcceed5641e38e3"
+    messagingSenderId: "947287095403",
+    appId: "1:947287095403:web:c5d4b6022e2fdd90d6592e"
   };
-
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
@@ -101,6 +100,7 @@ $(document).ready(function () {
         "menubar=0,resizable=0,width=600,height=600");
     })
 
+
     // When the user presses a key inside of a search form...
     $(".searchForm").on("keydown", function (e) {
         if (e.which == 13) {
@@ -151,6 +151,7 @@ function search() {
         console.log("SEARCH STARTED: ")
         console.log("ARTIST NAME: " + artistName);
         clearSearchForms();
+        
     }
     // If artistsNameForm has at least 1 character...
     else {

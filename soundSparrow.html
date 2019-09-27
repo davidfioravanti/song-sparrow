@@ -15,8 +15,7 @@
     <!-- CUSTOM CSS-OVERRIDE -->
     <link rel="stylesheet" href="assets/css/songSparrow.css">
     <title>Song Sparrow: Music Info At Your Fingertips</title>
-    <!-- JQUERY -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
     <!-- FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
 </head>
@@ -69,7 +68,7 @@
 
     <!-- SEARCH RESULTS CONTAINER-->
     <div id="resultsDiv" class="container text-center">
-        <p class="h2">results go here</p>
+        <!-- <p class="h2">results go here</p> -->
     </div>
 
     <!-- LOGO + CHAT CONTAINER -->
@@ -233,6 +232,14 @@
         </div>
     </div>
 
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   
+    <!-- config JS file to store API info, must load before app.js-->
+    <script src="assets/javascript/config.js"></script>
+
+    <!-- Link to API call JS -->
+    <script src="assets/javascript/app.js"></script>
 
     <!-- JAVASCRIPT LINK -->
     <script src="assets/javascript/songSparrow.js"></script>
@@ -249,9 +256,7 @@
 
 
     <!-- BOOTSTRAP DEPENDENCIES -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
