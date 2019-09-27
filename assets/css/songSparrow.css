@@ -480,7 +480,7 @@ textarea {
     padding-bottom: 15px;
     margin: 20px auto 0 auto;
     border-radius: 15px;
-    z-index: 100;
+    overflow: scroll;
 }
 #searchButton {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));

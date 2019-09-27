@@ -78,7 +78,7 @@ function API_Search(){
         newDiv.text('helloooooo');
         newDiv.html('<a href=' + artist_URL + '>Artist HomePage</a>');
 
-        // $('#resultsDiv').append('<img src='+artist_Image+'</img>');
+         $('#resultsDiv').append('<img src='+artist_Image+'>');
 
 
     });
@@ -100,7 +100,7 @@ function API_Search(){
 
     }).then(function (response) {
 
-        // console.log(response)
+         console.log(response)
 
 
 
