@@ -265,10 +265,25 @@ textarea {
     animation: textGlow 2s infinite ease;
 }
 #artistNameForm {
-height: 40px;
-background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
-resize: none;
+    height: 40px;
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    resize: none;
 }
+#albumNameForm {
+    height: 40px;
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    resize: none;
+}
+#songNameForm {
+        height: 40px;
+        background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+        resize: none;
+    }
+        #yearNameForm {
+            height: 40px;
+            background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+            resize: none;
+            }
 #bottomDiv {
     margin-top: 100px;
 }
