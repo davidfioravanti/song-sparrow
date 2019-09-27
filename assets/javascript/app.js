@@ -1,10 +1,14 @@
 
 
+
+var config = {
+    geniusKEY: 'c73834d65amsh116e415b6adfba2p14b76cjsnf234503f539a',
+    seatGeekKEY: 'MTg1NzgxOTZ8MTU2OTM0NDQ1NS44'
+
+} 
+
 // api key for the genius API
 var geniusAPIKey = config.geniusKEY;
-
-
-
 
 
 
@@ -26,11 +30,12 @@ function API_Search(){
 
 
     var artistNameSearch = $('#artistNameForm').val().trim();
-    var albumNameSearch = $('#artistNameForm').val().trim();
+    var songNameSearch = $('#songNameForm').val().trim();
+    var albumNameSearch = $('#albumNameForm').val().trim();
+    var yearNameSearch = $('#yearNameForm').val().trim();
 
-
-
-    // console.log(artistNameSearch);
+    // var lyricsSearch = $('#lyricsNameForm').val().trim();
+    // var membersSearch = $('#membersNameForm').val().trim();
 
 
     // basic search url, can be changed to search by songs, artist songs etc
@@ -54,6 +59,8 @@ function API_Search(){
         // in genius each artist has a unique ID that you need to grab
         // if you want to search for bio & other related info about the artist
         // you can't specifically access that info with the basic search api
+        var artist_ID = response.response.hits[0].result.primary_artist.id;
+
         var artist_URL = response.response.hits[0].result.primary_artist.url;
 
         var artist_Image = response.response.hits[0].result.primary_artist.image_url;
