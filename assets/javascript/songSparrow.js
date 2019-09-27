@@ -29,7 +29,7 @@ $(document).ready(function () {
             $("#instructions").css("opacity" , "0");
             // Fade in chat window...
             $("#chatDiv").css("opacity", "1");
-        }, 1500);
+        }, 5000);
     });
 
     // When the user clicks the Song Sparrow Logo...
@@ -100,6 +100,7 @@ $(document).ready(function () {
         "menubar=0,resizable=0,width=600,height=600");
     })
 
+
     // When the user presses a key inside of a search form...
     $(".searchForm").on("keydown", function (e) {
         if (e.which == 13) {
@@ -150,6 +151,7 @@ function search() {
         console.log("SEARCH STARTED: ")
         console.log("ARTIST NAME: " + artistName);
         clearSearchForms();
+        
     }
     // If artistsNameForm has at least 1 character...
     else {
