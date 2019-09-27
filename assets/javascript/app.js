@@ -8,10 +8,29 @@ var geniusAPIKey = config.geniusKEY;
 
 
 
-var artistName = $('#searchButton').on('click', function () {
+$(".searchForm").on("keydown", function (e) {
+    if (e.which == 13) {
+        e.preventDefault();
+        API_Search();
+    }
+
+});
+
+$('#searchButton').on('click', function(){
+
+    API_Search();
+
+})
+
+function API_Search(){
+
 
     var artistNameSearch = $('#artistNameForm').val().trim();
-    console.log(artistNameSearch);
+    var albumNameSearch = $('#artistNameForm').val().trim();
+
+
+
+    // console.log(artistNameSearch);
 
 
     // basic search url, can be changed to search by songs, artist songs etc
@@ -50,7 +69,7 @@ var artistName = $('#searchButton').on('click', function () {
         $('#resultsDiv').append(newDiv);
         // $('#resultsDiv').text('hellloooo');
         newDiv.text('helloooooo');
-        newDiv.html('<a href='+artist_URL+'></a>');
+        newDiv.html('<a href=' + artist_URL + '>Artist HomePage</a>');
 
         // $('#resultsDiv').append('<img src='+artist_Image+'</img>');
 
@@ -82,4 +101,6 @@ var artistName = $('#searchButton').on('click', function () {
     });
 
 
-});
+};
+
+

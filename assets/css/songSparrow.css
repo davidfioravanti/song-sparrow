@@ -456,9 +456,6 @@ resize: none;
     display: none;
 }
 #resultsDiv {
-<<<<<<< HEAD
-
-=======
     border: white solid 5px;    
     width:  100%;
     height: 402px;
@@ -469,7 +466,6 @@ resize: none;
     margin: 20px auto 0 auto;
     border-radius: 15px;
     z-index: 100;
->>>>>>> 5573430f57f829ecac7026c15050a7c3d4b1c4eb
 }
 #searchButton {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
