@@ -60,7 +60,6 @@ function API_Search(){
         // if you want to search for bio & other related info about the artist
         // you can't specifically access that info with the basic search api
         var artist_ID = response.response.hits[0].result.primary_artist.id;
-
         var artist_URL = response.response.hits[0].result.primary_artist.url;
         var top_Song = response.response.hits[0].result.stats.pageviews;
 
@@ -75,14 +74,11 @@ function API_Search(){
         // display genre of artist
         var newDiv = $('<div>');
 
-        // $('#resultsDiv').text('hellloooo');
-        newDiv.text('helloooooo');
-        newDiv.html('<a href=' + artist_URL + '>Artist HomePage</a>');
-        newDiv.append('<p>'+top_Song+'</>');
-
-        $('#resultsDiv').append('<img id=artistImg src='+artist_Image+'>');
-
-        $('#resultsDiv').append(newDiv);
+        // $('#resultsDiv').text('hellloooo');;
+        var nameUprCase = artistNameSearch.toUpperCase();
+        $("#resultsArtistName").text(nameUprCase);
+        $("#artistImg").attr("src", artist_Image);
+        $("#resultsDiv").fadeIn(1000);
 
 
     });
