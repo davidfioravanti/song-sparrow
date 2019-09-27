@@ -272,3 +272,10 @@ function geniusAPISecondCall() {
     $("#resultsDiv").fadeIn(1000);
     })
 }
+$("#resultsminbtn").on("click", function(){
+if($(this).text() === "+"){
+    $("#resultsminbtn").text("-")
+} else {
+    $("#resultsminbtn").text("+")
+}
+})

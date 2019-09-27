@@ -491,19 +491,36 @@ textarea {
     display: none;
 }
 #resultsDiv {
-    display: none;
+
     position: relative;
     border: white solid 5px;    
     width:  100%;
     height: auto;
     border: 2px rgb(42, 37, 37) solid;
     background: rgba(34, 32, 32, 0.411);
-    padding-top: 30px;
-    padding-bottom: 40px;
-    margin: 20px auto 0 auto;
-    border-radius: 15px;
+    padding-bottom: 50px;
+    margin: 0 auto 0 auto;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     z-index: 100;
     transition: all .3s ease-in-out;
+}
+#resultsmindiv {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 2px rgb(42, 37, 37) solid;
+    margin-top:20px;
+    background: rgba(34, 32, 32, 0.411);
+    width: 100%;
+    padding: 0;
+}
+button#resultsminbtn {
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    padding: 0 10px 0 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    font-size: 1.2em;
+
 }
     #resultsArtistName {
         font-size: 3vw;
