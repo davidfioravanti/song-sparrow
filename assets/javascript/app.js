@@ -26,7 +26,15 @@ function API_Search(){
 
 
     var artistNameSearch = $('#artistNameForm').val().trim();
-    var albumNameSearch = $('#artistNameForm').val().trim();
+    var songNameSearch = $('#songNameForm').val().trim();
+    var albumNameSearch = $('#albumNameForm').val().trim();
+    var yearNameSearch = $('#yearNameForm').val().trim();
+
+    // var lyricsSearch = $('#lyricsNameForm').val().trim();
+    // var membersSearch = $('#membersNameForm').val().trim();
+
+
+
 
 
 
