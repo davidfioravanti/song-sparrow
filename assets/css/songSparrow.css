@@ -79,6 +79,47 @@ textarea {
     box-shadow: 0px 0px 20px 2px #ff7402;
     opacity: 1;
 }
+.featureButton {
+    color:rgb(71, 63, 63) !important;
+    text-shadow: 0px 1px rgb(0, 0, 0);
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54)) !important;
+    border: 2px rgb(85, 72, 72) solid;
+    transition: all .5s ease-in-out;
+}
+    .featureButton:focus {
+        color: rgb(255, 145, 0) !important;
+        background-image: linear-gradient(rgb(98, 93, 85), rgb(34, 31, 29)) !important;
+        border: 2px rgb(85, 72, 72) solid !important;
+        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726) !important;
+    }
+    .featureButton:hover {
+        border: 2px rgb(85, 72, 72) solid !important;
+        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726) !important;
+    }
+.form-control {
+    border: 2px rgb(85, 72, 72) solid;
+    transition: all .5s ease-in-out;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    text-align: center;
+}
+    .form-control:focus {
+        border: 2px rgb(85, 72, 72) solid;
+        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726);
+    }
+    .form-control:hover {
+        border: 2px rgb(85, 72, 72) solid;
+        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726);
+    }
+    .form-control::placeholder {
+        font-weight: bold;
+        color: rgb(90, 77, 77);
+    }
+.form-group {
+    background: rgba(0, 0, 0, 0.493);
+    border-radius: 15px;
+    border: rgb(33, 37, 41) 2px solid;
+}
 .h1 {
     font-family: "alexana_neueregular";
     font-size: 50pt;
@@ -123,30 +164,6 @@ textarea {
     -webkit-text-stroke-color: rgba(0, 0, 0, 0.787);
     
 }
-.form-control {
-    border: 2px rgb(85, 72, 72) solid;
-    transition: all .5s ease-in-out;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    text-align: center;
-}
-    .form-control:focus {
-        border: 2px rgb(85, 72, 72) solid;
-        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726);
-    }
-    .form-control:hover {
-        border: 2px rgb(85, 72, 72) solid;
-        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726);
-    }
-    .form-control::placeholder {
-        font-weight: bold;
-        color: rgb(90, 77, 77);
-    }
-.form-group {
-    background: rgba(0, 0, 0, 0.493);
-    border-radius: 15px;
-    border: rgb(33, 37, 41) 2px solid;
-}
 .modal-dialog {
     border: 15px rgba(255, 115, 0, 0.733) solid;
     border-radius: 5px;
@@ -172,70 +189,53 @@ textarea {
 .noSelect {
     user-select: none;
 }
-.big {
-    font-size: 40px;
-}
-.small {
-    font-size: 10px;
-}
-.blue {
-    color: blue;
-}
-.red {
-    color: red;
-}
-.yellow {
-    color: yellow;
-}
-.green {
-    color: rgb(0, 202, 0);
-}
-.glow {
-    color: rgb(255, 229, 111);
-    animation: glow 2s infinite ease;
-}
-    @keyframes glow {
-        0% {
-            text-shadow: 0px 0px 20px rgb(255, 230, 0);
-            filter: drop-shadow(0px 0px 10px black);
+    .big {
+        font-size: 40px;
+    }
+    .small {
+        font-size: 10px;
+    }
+    .blue {
+        color: blue;
+    }
+    .red {
+        color: red;
+    }
+    .yellow {
+        color: yellow;
+    }
+    .green {
+        color: rgb(0, 202, 0);
+    }
+    .glow {
+        color: rgb(255, 229, 111);
+        animation: glow 2s infinite ease;
+    }
+        @keyframes glow {
+            0% {
+                text-shadow: 0px 0px 20px rgb(255, 230, 0);
+                filter: drop-shadow(0px 0px 10px black);
+            }
+            50% {
+                text-shadow: 0px 0px 00px rgb(255, 230, 0);
+                filter: drop-shadow(0px 0px 20px black);
+            }
+            100% {
+                text-shadow: 0px 0px 20px rgb(255, 230, 0);
+                filter: drop-shadow(0px 0px 10px black);
+            }
         }
-        50% {
-            text-shadow: 0px 0px 00px rgb(255, 230, 0);
-            filter: drop-shadow(0px 0px 20px black);
+    .rotate {
+        transform-origin: left;
+        padding-left: 30px;
+        animation: rotate 1s infinite ease-in-out;
+    }
+        @keyframes rotate {
+            0% {transform: rotate(0deg)}
+            25% {transform: rotate(5deg)}
+            75% {transform: rotate(-5deg)}
+            100% {transform: rotate(0deg)}
         }
-        100% {
-            text-shadow: 0px 0px 20px rgb(255, 230, 0);
-            filter: drop-shadow(0px 0px 10px black);
-        }
-    }
-.rotate {
-    transform-origin: left;
-    padding-left: 30px;
-    animation: rotate 1s infinite ease-in-out;
-}
-    @keyframes rotate {
-        0% {transform: rotate(0deg)}
-        25% {transform: rotate(5deg)}
-        75% {transform: rotate(-5deg)}
-        100% {transform: rotate(0deg)}
-    }
-.featureButton {
-    color:rgb(71, 63, 63) !important;
-    text-shadow: 0px 1px rgb(0, 0, 0);
-    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54)) !important;
-    border: 2px rgb(85, 72, 72) solid;
-    transition: all .5s ease-in-out;
-}
-    .featureButton:focus {
-        color: rgb(255, 145, 0) !important;
-        background-image: linear-gradient(rgb(98, 93, 85), rgb(34, 31, 29)) !important;
-        border: 2px rgb(85, 72, 72) solid !important;
-        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726) !important;
-    }
-    .featureButton:hover {
-        border: 2px rgb(85, 72, 72) solid !important;
-        box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726) !important;
-    }
 
 /* ===================================================================================
    ================================== UNIQUE ID'S ====================================
@@ -264,26 +264,16 @@ textarea {
     z-index: 1000;
     animation: textGlow 2s infinite ease;
 }
-#artistNameForm {
-    height: 40px;
-    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
-    resize: none;
+#artistImg {
+    max-width: 250px;
+    max-height: 250px;
+    box-shadow: 0px 0px 10px 10px rgb(47, 40, 37), 0px 0px 50px 20px rgb(255, 117, 54);
+    transition: all .4s ease-in-out;
 }
-#albumNameForm {
-    height: 40px;
-    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
-    resize: none;
-}
-#songNameForm {
-        height: 40px;
-        background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
-        resize: none;
+    #artistImg:hover {
+        filter: none;
+        box-shadow: 0px 0px 10px 10px rgb(255, 178, 54), 0px 0px 50px 20px rgb(46, 40, 38);
     }
-        #yearNameForm {
-            height: 40px;
-            background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
-            resize: none;
-            }
 #bottomDiv {
     margin-top: 100px;
 }
@@ -297,7 +287,7 @@ textarea {
 #chatDiv {
     margin-top: 20px;
     opacity: 0;
-    transition: all 1s ease-in;
+    /* transition: all 1s ease-in; */
 }
 #chatInput {
     border-top-left-radius: 15px;
@@ -364,6 +354,16 @@ textarea {
 #favoritesBg {
     background: rgb(54, 48, 48);
 }
+#favoriteButton {
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    border: 2px rgb(85, 72, 72) solid;
+    color: #495057;
+}
+    #favoriteButton:focus {
+        background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+        border: 2px rgb(85, 72, 72) solid;
+        box-shadow: 0px 2px 20px 10px rgba(255, 106, 19, 0.692);
+    }
 #favoritesHeader {
     border-bottom: none;
 }
@@ -418,6 +418,26 @@ textarea {
     box-shadow: 0px 0px 30px 30px rgba(255, 93, 18, 0.294);
     z-index: 100;
 }
+    #artistNameForm {
+        height: 40px;
+        background-image: linear-gradient(rgb(255, 180, 60), rgba(255, 118, 54, 0.993));
+        resize: none;
+    }
+    #albumNameForm {
+        height: 40px;
+        background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+        resize: none;
+    }
+    #songNameForm {
+        height: 40px;
+        background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+        resize: none;
+    }
+    #yearNameForm {
+        height: 40px;
+        background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+        resize: none;
+    }
 #instructions{
     position: relative;
     top: -50px;
@@ -471,17 +491,32 @@ textarea {
     display: none;
 }
 #resultsDiv {
+    display: none;
+    position: relative;
     border: white solid 5px;    
     width:  100%;
-    height: 402px;
+    height: auto;
     border: 2px rgb(42, 37, 37) solid;
     background: rgba(34, 32, 32, 0.411);
     padding-top: 30px;
-    padding-bottom: 15px;
+    padding-bottom: 40px;
     margin: 20px auto 0 auto;
     border-radius: 15px;
     z-index: 100;
+    transition: all .3s ease-in-out;
 }
+    #resultsArtistName {
+        font-size: 3vw;
+        font-weight: bold;
+        color: white;
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: rgba(0, 0, 0, 0.787);
+        z-index: 1000;
+    }
+    #resultsContent {
+        color: white;
+        font-weight: bold;
+    }
 #searchButton {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
     width: 100%;

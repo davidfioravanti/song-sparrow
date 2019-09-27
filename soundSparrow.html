@@ -15,7 +15,7 @@
     <!-- CUSTOM CSS-OVERRIDE -->
     <link rel="stylesheet" href="assets/css/songSparrow.css">
     <title>Song Sparrow: Music Info At Your Fingertips</title>
-    
+
     <!-- FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
 </head>
@@ -33,42 +33,54 @@
             <div class="col-6">
                 <div class="form-group text-center">
                     <label id="artistLabel" for="my-textarea">ARTIST NAME</label>
-                    <textarea id="artistNameForm" spellcheck="false" class="form-control text-center searchForm"
-                     name="" placeholder="EX: AC/DC" rows="3"></textarea>
+                    <textarea id="artistNameForm" spellcheck="false" class="form-control text-center searchForm" name=""
+                        placeholder="EX: AC/DC" rows="3"></textarea>
                 </div>
                 <div class="form-group text-center">
-                        <label for="my-textarea">SONG NAME</label>
-                        <textarea id="songNameForm" spellcheck="false" class="form-control text-center searchForm"
-                         name="" placeholder="EX: SHOOT TO THRILL" rows="3"></textarea>
+                    <label for="my-textarea">SONG NAME</label>
+                    <textarea id="songNameForm" spellcheck="false" class="form-control text-center searchForm" name=""
+                        placeholder="EX: SHOOT TO THRILL" rows="3"></textarea>
                 </div>
                 <div class="btn-group-toggle" data-toggle="buttons">
                     <label class="btn buttonToggle">
                         <input type="checkbox"> LYRICS
                     </label>
                     <label class="btn buttonToggle">
-                            <input type="checkbox"> MEMBERS
+                        <input type="checkbox"> MEMBERS
                     </label>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group text-center">
-                        <label for="my-textarea">ALBUM NAME</label>
-                        <textarea id="albumNameForm" spellcheck="false" class="form-control text-center searchForm"
-                         name="" placeholder="EX: BACK IN BLACK" rows="3"></textarea>
+                    <label for="my-textarea">ALBUM NAME</label>
+                    <textarea id="albumNameForm" spellcheck="false" class="form-control text-center searchForm" name=""
+                        placeholder="EX: BACK IN BLACK" rows="3"></textarea>
                 </div>
-                    <div class="form-group text-center">
-                            <label for="my-textarea">BY YEAR</label>
-                            <textarea id="yearNameForm" spellcheck="false" class="form-control text-center searchForm"
-                             name="" placeholder="EX: 1980" rows="3"></textarea>
-                    </div>
-                    <button id="searchButton" class="btn btn-primary" type="button">SEARCH!</button>
+                <div class="form-group text-center">
+                    <label for="my-textarea">BY YEAR</label>
+                    <textarea id="yearNameForm" spellcheck="false" class="form-control text-center searchForm" name=""
+                        placeholder="EX: 1980" rows="3"></textarea>
                 </div>
+                <button id="searchButton" class="btn btn-primary" type="button">SEARCH!</button>
+            </div>
         </div>
     </div>
 
     <!-- SEARCH RESULTS CONTAINER-->
     <div id="resultsDiv" class="container text-center">
-        <p class="h2"></p> 
+        <div class="row">
+            <p id="resultsArtistName" class="col-6">NAME</p>
+            <p id="resultsArtistName" class="col-6">INFO</p>
+        </div>
+        <div class="row">
+            <div class="col-6 er">
+                <a id="artistURL" target="_blank" rel="noopener" href=""><img id="artistImg" src=""></a>
+            </div>
+            <p id="resultsContent" class="col-6">Click the artist image to visit their page.
+                <br>
+                <button id="favoriteButton" class="btn btn-primary" type="button">ADD TO FAVORITES</button>
+            </p>
+        </div>
     </div>
 
     <!-- LOGO + CHAT CONTAINER -->
@@ -84,8 +96,8 @@
                     <br>
                     <span id="chatUsername">Username: <span id="username">PLACEHOLDER </span></span>
                     <textarea id="chatInput" class="form-control"
-                    placeholder="YOUR MESSAGE HERE! KEEP COMMENTS APPROPRIATE!"
-                    spellcheck="false" name="" rows="3"></textarea>
+                        placeholder="YOUR MESSAGE HERE! KEEP COMMENTS APPROPRIATE!" spellcheck="false" name=""
+                        rows="3"></textarea>
                     <p class="text-left" id="globalChat"></p>
                     <button id="chatNote" class="btn btn-primary" type="button">HTML MARKDOWN SUPPORTED</button>
                     <button id="popOutChat" class="btn btn-primary" type="button">POPOUT CHAT</button>
@@ -96,63 +108,64 @@
 
     <!-- SITE METRICS CONTAINER -->
     <div id="metricsDiv" class="container-fluid">
-            <div id="metricsRow" class="row">
-                    <div class="col-6 text-center">
-                        <h2>TRENDING ARTISTS:</h2>
-                        <table class="table table-bordered table-dark">
-                            <tbody>
-                                <thead>
-                                    <th>RANK #:</th>
-                                    <th>NAME:</th>
-                                </thead>
-                                <tr>
-                                    <td class="">1</td>
-                                    <td class="">GAINSTRIVE</td>
-                                </tr>
-                                <tr>
-                                    <td class="">2</td>
-                                    <td class="">ANOTHER ARTIST</td>
-                                </tr>
-                                <tr>
-                                    <td class="">3</td>
-                                    <td class="">YET ANOTHER ARTIST</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-6 text-center">
-                        <h2>FEATURED:</h2>
-                        <div class="row">
-                            <img id="featuredImage" src="assets/images/featuredPlaceholder.jpg">
-                            <div class="col-6">
-                                <h3 class="text-center">GAINSTRIVE</h3>
-                                <span class="text-center">ALBUM:</span>
-                                <br>
-                                <span id="featuredAlbum" class="text-right">ANYWHERE BUT HERE</span>
-                                <br>
-                                <button class="btn btn-dark" type="button">
-                                    <div class="col-12">
-                                        <img id="spotify" src="assets/images/spotify.png">
-                                    </div>
-                                </button>
+        <div id="metricsRow" class="row">
+            <div class="col-6 text-center">
+                <h2>TRENDING ARTISTS:</h2>
+                <table class="table table-bordered table-dark">
+                    <tbody>
+                        <thead>
+                            <th>RANK #:</th>
+                            <th>NAME:</th>
+                        </thead>
+                        <tr>
+                            <td class="">1</td>
+                            <td class="">GAINSTRIVE</td>
+                        </tr>
+                        <tr>
+                            <td class="">2</td>
+                            <td class="">ANOTHER ARTIST</td>
+                        </tr>
+                        <tr>
+                            <td class="">3</td>
+                            <td class="">YET ANOTHER ARTIST</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6 text-center">
+                <h2>FEATURED:</h2>
+                <div class="row">
+                    <img id="featuredImage" src="assets/images/featuredPlaceholder.jpg">
+                    <div class="col-6">
+                        <h3 class="text-center">GAINSTRIVE</h3>
+                        <span class="text-center">ALBUM:</span>
+                        <br>
+                        <span id="featuredAlbum" class="text-right">ANYWHERE BUT HERE</span>
+                        <br>
+                        <button class="btn btn-dark" type="button">
+                            <div class="col-12">
+                                <img id="spotify" src="assets/images/spotify.png">
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
+            </div>
+        </div>
     </div>
 
     <!-- FOOTER BUTTONS ROW -->
     <div id="featureButtons" class="container-fluid">
         <div id="featureRow" class="row">
-                <button class="btn btn-primary featureButton col" onclick="home()" type="button">HOME</button>
-                <button id="aboutButton" class="btn btn-primary featureButton col" type="button">ABOUT</button>
-                <button id="favoritesButton" class="btn btn-primary featureButton col" type="button">FAVORITES</button>
-                <button class="btn btn-primary featureButton col" onclick="github()" type="button">GITHUB</button>
+            <button class="btn btn-primary featureButton col" onclick="home()" type="button">HOME</button>
+            <button id="aboutButton" class="btn btn-primary featureButton col" type="button">ABOUT</button>
+            <button id="favoritesButton" class="btn btn-primary featureButton col" type="button">FAVORITES</button>
+            <button class="btn btn-primary featureButton col" onclick="github()" type="button">GITHUB</button>
         </div>
     </div>
 
     <!-- RESPONSE MODAL (FOR ERROR/SITE RESP.) -->
-    <div id="responseModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div id="responseModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="my-modal-title"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div id="modalHeader" class="modal-header">
@@ -172,11 +185,11 @@
 
     <!-- ABOUT MODAL -->
     <div id="aboutModal" class="modal text-center" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div id="aboutBg" class="modal-content">
-                    <div class="modal-body">
-                        <h5 class="modal-title text-center" id="aboutTitle">ABOUT</h5>
-                        <p>SONG SPARROW
+        <div class="modal-dialog" role="document">
+            <div id="aboutBg" class="modal-content">
+                <div class="modal-body">
+                    <h5 class="modal-title text-center" id="aboutTitle">ABOUT</h5>
+                    <p>SONG SPARROW
                         <br>
                         is a dynamically built web app that
                         does the heavy-lifting of searching for music info.
@@ -189,28 +202,28 @@
                         Our team of Junior Full-Stack Web Developers wanted a better way
                         to gather everything you'd want to know about music. Our app
                         is sleek and inspired by the urban-jungle known as the PHILLY
-                        MUSIC SCENE. 
-                        </p>
-                        We hope that this app helps you connect with the artists you love,
-                        and to find new music to enjoy!
-                        <br><br>
-                        { THE DEVS }
-                        <br>
-                        <a href="https://github.com/gainstrive" target="blank">DAVID</a>
-                        &nbsp;
-                        <a href="#">PAUL</a>
-                        &nbsp;
-                        <a href="https://github.com/pswartz66" target="blank">PHIL</a>
-                        &nbsp;
-                        <a href="#">MARK</a>
-                        &nbsp;
-                        <br>
+                        MUSIC SCENE.
+                    </p>
+                    We hope that this app helps you connect with the artists you love,
+                    and to find new music to enjoy!
+                    <br><br>
+                    { THE DEVS }
+                    <br>
+                    <a href="https://github.com/gainstrive" target="blank">DAVID</a>
+                    &nbsp;
+                    <a href="#">PAUL</a>
+                    &nbsp;
+                    <a href="https://github.com/pswartz66" target="blank">PHIL</a>
+                    &nbsp;
+                    <a href="#">MARK</a>
+                    &nbsp;
+                    <br>
 
-                        <button id="closeButton" class="btn btn-primary" type="button">GO BACK</button>
-                    </div>
+                    <button id="closeButton" class="btn btn-primary" type="button">GO BACK</button>
                 </div>
             </div>
         </div>
+    </div>
 
     <!-- FAVORITES MODAL -->
     <div id="favoritesModal" class="modal text-center" tabindex="-1" role="dialog" aria-hidden="true">
@@ -224,8 +237,8 @@
                         that item from your favorites list.</p>
                     <span class="small"> NOTE: Favorites will be deleted
                         when you clear your browser cache. </span>
-                        <br></br>
-                    
+                    <br></br>
+
                     <button id="closeButton2" class="btn btn-primary" type="button">GO BACK</button>
                 </div>
             </div>
@@ -235,16 +248,13 @@
     <!-- JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <!-- Link to API call JS -->
-    <script src="assets/javascript/app.js"></script>
-
     <!-- JAVASCRIPT LINK -->
     <script src="assets/javascript/songSparrow.js"></script>
 
     <!-- onClick FUNCTIONS -->
     <script>
         function home() {
-            window.location.href= "index.html";
+            window.location.href = "index.html";
         }
         function github() {
             window.open("https://github.com/gainstrive/Project-1");
@@ -253,7 +263,7 @@
 
 
     <!-- BOOTSTRAP DEPENDENCIES -->
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>

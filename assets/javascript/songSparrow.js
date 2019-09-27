@@ -1,7 +1,11 @@
 
 $(document).ready(function () {
-
     
+/* =================================================================
+======================== FIREBASE CONFIG ===========================
+================================================================= */
+
+
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyCeGNMI-uJ6gVv7zoJIrSa-RU2G6UiIfk8",
@@ -15,11 +19,10 @@ $(document).ready(function () {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
+/* =================================================================
+======================== ANIMATION/SOUNDS ==========================
+================================================================= */
 
-    // Grab the username entered from Local Storage...
-    let username = localStorage.getItem("username");
-    // Change the username used for site chat to that username...
-    $("#username").text(username);
 
     // Fade in speech bubble...
     setTimeout(function() {
@@ -29,7 +32,7 @@ $(document).ready(function () {
             $("#instructions").css("opacity" , "0");
             // Fade in chat window...
             $("#chatDiv").css("opacity", "1");
-        }, 5000);
+        }, 2000);
     });
 
     // When the user clicks the Song Sparrow Logo...
@@ -41,19 +44,28 @@ $(document).ready(function () {
     })
 
 
+/* =================================================================
+========================= MAIN APP LOGIC ===========================
+================================================================= */
+
+
+    // Grab the username entered from Local Storage...
+    let username = localStorage.getItem("username");
+    // Change the username used for site chat to that username...
+    $("#username").text(username);
+
+
     // When the user presses a key while inside the chat input area...
     $("#chatInput").on("keydown", function (e) {
 
         // If the button pressed was "enter"...
         if (e.which == 13) {
-            // Prevent page refresh...
             e.preventDefault();
 
         // Store the users submitted message...
         var chatMessage = $("#chatInput").val().trim();
         console.log(chatMessage);
 
-            // If the users message was empty...
             if (chatMessage == "") {
                 // Dynamically create the appropriate error modal...
                 $("#modalTitle").text("UH-OH!");
@@ -111,32 +123,25 @@ $(document).ready(function () {
 
     // When the user clicks a close button on a response modal...
     $(".close").on("click", function() {
-        // Hide the response modal...
         $("#responseModal").css("display", "none");
     })
 
     // When the user clicks the about button in footer...
     $("#aboutButton").on("click", function () {
-
-        // Show the about modal...
         $("#aboutModal").css("display", "block");
 
         // When the user clicks the close button...
         $("#closeButton").on("click", function(){
-            // Hide the about modal...
             $("#aboutModal").css("display", "none");
         })
     })
 
     // When the user clicks the favorites button in footer...
     $("#favoritesButton").on("click", function () {
-
-        // Show the favorites modal...
         $("#favoritesModal").css("display", "block");
 
         // When the user clicks the close button...
         $("#closeButton2").on("click", function(){
-            // Hide the favorites modal...
             $("#favoritesModal").css("display", "none");
         })
     })
@@ -150,7 +155,7 @@ function search() {
         console.log("===========================")
         console.log("SEARCH STARTED: ")
         console.log("ARTIST NAME: " + artistName);
-        clearSearchForms();
+        geniusAPIFirstCall();
         
     }
     // If artistsNameForm has at least 1 character...
@@ -173,4 +178,97 @@ function clearSearchForms() {
 
 function clearChatForms() {
     $("#chatInput").val("");
+}
+
+function geniusAPIFirstCall() {
+
+/* =================================================================
+======================= GENIUS API CONFIG ==========================
+================================================================= */
+
+    var config = {
+        geniusKEY: 'c73834d65amsh116e415b6adfba2p14b76cjsnf234503f539a',
+        seatGeekKEY: 'MTg1NzgxOTZ8MTU2OTM0NDQ1NS44'
+    
+    } 
+    var geniusAPIKey = config.geniusKEY;
+
+    var artistNameSearch = $('#artistNameForm').val().trim();
+    var songNameSearch = $('#songNameForm').val().trim();
+    var albumNameSearch = $('#albumNameForm').val().trim();
+    var yearNameSearch = $('#yearNameForm').val().trim();
+
+    var GeniusQueryURL = 'https://genius.p.rapidapi.com/search?q=' + artistNameSearch;
+
+/* =================================================================
+====================== GENIUS AJAX CALL 1 ==========================
+================================================================= */
+
+    $.ajax({
+        url: GeniusQueryURL,
+        method: "GET",
+        headers: {
+            "x-rapidapi-host": "genius.p.rapidapi.com",
+            "x-rapidapi-key": geniusAPIKey
+        }
+    }).then(function (response) {
+
+        console.log(response.response);
+
+        var artist_ID = response.response.hits[0].result.primary_artist.id;
+        var artist_URL = response.response.hits[0].result.primary_artist.url;
+        var artist_Image = response.response.hits[0].result.primary_artist.image_url;
+
+        // $('#resultsDiv').text('hellloooo');;
+        var nameUprCase = artistNameSearch.toUpperCase();
+        $("#resultsArtistName").text(nameUprCase);
+        $("#artistURL").attr("href", artist_URL);
+        $("#artistImg").attr("src", artist_Image);
+
+        /* =================================================
+        ====================================================
+        HERE, WE STORE THE ARTIST ID IN ORDER TO PERFORM A
+        SECOND AJAX CALL TO GET A MORE DETAILED RESPONSE
+        OBJECT FROM GENIUS API. NOW WE CAN USE IT'S OBJECT.
+        ====================================================
+        ================================================= */
+
+        sessionStorage.setItem("artistId", artist_ID);
+        geniusAPISecondCall();
+    });
+}
+
+function geniusAPISecondCall() {
+
+    // Re-declare the config...
+    var config = {
+        geniusKEY: 'c73834d65amsh116e415b6adfba2p14b76cjsnf234503f539a',
+        seatGeekKEY: 'MTg1NzgxOTZ8MTU2OTM0NDQ1NS44'  
+    } 
+    var geniusAPIKey = config.geniusKEY;
+
+/* =================================================================
+====================== GENIUS AJAX CALL 2 ==========================
+================================================================= */
+
+    // Get the artist ID that was stored in first call...
+    let artist_ID = sessionStorage.getItem("artistId");
+    console.log("ARTIST ID:" + artist_ID);
+    // Use it in a SECOND ajax call to get more information...
+    var artistIDQueryURL = 'https://genius.p.rapidapi.com/search?q=' + artist_ID;
+    
+    $.ajax({
+        url: artistIDQueryURL,
+        method: "GET",
+        headers: {
+            "x-rapidapi-host": "genius.p.rapidapi.com",
+            "x-rapidapi-key": geniusAPIKey
+        }
+    }).then(function (response) {
+    console.log(response.response);
+    
+
+    // Show the populated results div!
+    $("#resultsDiv").fadeIn(1000);
+    })
 }
