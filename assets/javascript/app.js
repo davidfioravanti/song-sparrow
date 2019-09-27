@@ -62,6 +62,8 @@ function API_Search(){
         var artist_ID = response.response.hits[0].result.primary_artist.id;
 
         var artist_URL = response.response.hits[0].result.primary_artist.url;
+        var top_Song = response.response.hits[0].result.stats.pageviews;
+
 
         var artist_Image = response.response.hits[0].result.primary_artist.image_url;
 
@@ -73,12 +75,14 @@ function API_Search(){
         // display genre of artist
         var newDiv = $('<div>');
 
-        $('#resultsDiv').append(newDiv);
         // $('#resultsDiv').text('hellloooo');
         newDiv.text('helloooooo');
         newDiv.html('<a href=' + artist_URL + '>Artist HomePage</a>');
+        newDiv.append('<p>'+top_Song+'</>');
 
-        // $('#resultsDiv').append('<img src='+artist_Image+'</img>');
+        $('#resultsDiv').append('<img id=artistImg src='+artist_Image+'>');
+
+        $('#resultsDiv').append(newDiv);
 
 
     });
