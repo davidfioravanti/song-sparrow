@@ -223,6 +223,7 @@ function search() {
     $("#resultsDiv").css("display", "none");
     $("#seatGeekRow").css("display", "none");
     $("#eventImage").remove();
+    $('#songsDiv').remove();
     // If artistNameForm is not empty...
     if ($("#artistNameForm").val() !== "") {
         var artistName = $("#artistNameForm").val().trim();
@@ -344,6 +345,28 @@ function geniusAPIFirstCall() {
                 song.attr("id", "songTitle");
         };
         
+        var counter = 0;
+        for (var i = 0; i < response.response.hits.length; i++) {
+
+            var lowerCaseArtist = (response.response.hits[i].result.primary_artist.name).toLowerCase();
+            // console.log(lowerCaseArtist);
+
+            if (artistNameSearch.toLowerCase() === lowerCaseArtist) {
+                console.log('FOUND ARTIST NAME: ' + response.response.hits[i].result.primary_artist.name);
+                counter = i;
+
+                var artist_URL = response.response.hits[i].result.primary_artist.url;
+                var artist_Image = response.response.hits[i].result.primary_artist.image_url;
+
+                $("#artistURL").attr("href", artist_URL);
+                $("#artistImg").attr("src", artist_Image);
+                
+            }
+
+            //console.log(response.response.hits[i].result.primary_artist.name);
+        };
+
+
 
 
     console.log(topSongs);
