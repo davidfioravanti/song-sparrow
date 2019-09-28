@@ -360,14 +360,6 @@ textarea {
 #bottomDiv {
     margin-top: 100px;
 }
-#chat {
-    position: relative;
-    top: -100%;
-    right: -40%;
-    width: 500px;
-    z-index: 100;
-    border: 3px rgb(36, 30, 30) solid;
-}
 #chatDiv {
     margin-top: 20px;
     opacity: 0;
@@ -593,7 +585,6 @@ textarea {
     display: none;
 }
 #resultsDiv {
-
     position: relative;
     border: white solid 5px;    
     width:  100%;
@@ -602,8 +593,9 @@ textarea {
     background: rgba(34, 32, 32, 0.904);
     padding-top: 30px;
     padding-bottom: 40px;
-    margin: 20px auto 0 auto;
-    border-radius: 15px;
+    margin: 0 auto 0 auto;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     z-index: 100;
     transition: all .3s ease-in-out;
     box-shadow: 0px 0px 20px 20px rgba(39, 34, 34, 0.89) inset;
@@ -613,9 +605,10 @@ textarea {
     border-top-right-radius: 5px;
     border: 2px rgb(42, 37, 37) solid;
     margin-top:20px;
-    background: rgba(34, 32, 32, 0.411);
+    background: rgba(34, 32, 32, 0.904);
     width: 100%;
     padding: 0;
+    display: none;
 }
 button#resultsminbtn {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
@@ -654,14 +647,12 @@ button#resultsminbtn {
     }
 #searchClose {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
-    width: 100%;
-    font-weight: bold;
-    color: rgb(61, 49, 49);
-    border:2px rgb(71, 63, 63) solid;
-    border-radius: 50px;
-    width: 10vw;
-    font-size: 10px;
-    font-weight: bold;
+    padding: 0 10px 0 10px;
+    font-weight: bolder;
+    font-size: 1.29em;
+    color: black;
+    border: none;
+
 }
 #songSparrowLogo {
     position: relative;
@@ -854,8 +845,7 @@ button#resultsminbtn {
     }
     #chat {
         position: relative;
-        left: 320px;
-        top: -95%;
+        left: 40%;
         width: 39vw;
     }
     #globalChat {
@@ -886,7 +876,6 @@ button#resultsminbtn {
     #chat {
         position: relative;
         left: 200px;
-        top: -28vw;
         width: 50vw;
     }
     #globalChat {
@@ -903,8 +892,7 @@ button#resultsminbtn {
     }   
     #chat {
         width: 80%;
-        left: 300px;
-        top: -320px;
+        left: 50%;
     }
     #globalChat {
         height: 100px;
@@ -917,8 +905,8 @@ button#resultsminbtn {
     }
     #chat {
         width: 85%;
-        left: 200px;
-        top: -320px;
+        left: 60%;
+
     }
     #globalChat {
         height: 100px;
@@ -937,7 +925,6 @@ button#resultsminbtn {
     #chat {
         width: 85%;
         left: 200px;
-        top: -320px;
     }
     #globalChat {
         height: 70px;
@@ -954,7 +941,7 @@ button#resultsminbtn {
     }
     #chat {
         width: 80%;
-        left: 170px;
+        left: 50%;
         top: -320px;
     }
     #globalChat {
@@ -981,7 +968,7 @@ button#resultsminbtn {
     #chat {
         margin-top: 200px;
         width: 150%;
-        left:-80px;
+        left: -24%;
         top: -320px;
     }
     #globalChat {
