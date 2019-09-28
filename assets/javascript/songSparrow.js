@@ -232,12 +232,15 @@ function search() {
         console.log("ARTIST NAME: " + artistName);
         geniusAPIFirstCall();
         
+        
     }
     // If artistsNameForm is EMPTY!
     else {
         searchErrorEmpty();
     }
 }
+
+
 
 function addToFavorites() {
 }
@@ -293,7 +296,7 @@ function geniusAPIFirstCall() {
         }
     }).then(function (response) {
 
-        console.log(response.response);
+        // console.log(response.response);
 
         var artist_ID = response.response.hits[0].result.primary_artist.id;
         var artist_URL = response.response.hits[0].result.primary_artist.url;
@@ -369,8 +372,9 @@ function geniusAPIFirstCall() {
 
 
 
-    console.log(topSongs);
+    // console.log(topSongs);
         geniusAPISecondCall();
+        seatGeekSecondAPICall();
     });
 }
 
@@ -401,7 +405,8 @@ function geniusAPISecondCall() {
             "x-rapidapi-key": geniusAPIKey
         }
     }).then(function (response) {
-    console.log(response.response);
+    console.log('-----Genius Second API call------')
+    // console.log(response.response);
     
 
     // Show the populated results div!
@@ -417,6 +422,40 @@ function geniusAPISecondCall() {
     }
     })
 }
+
+function seatGeekSecondAPICall() {
+    var config = {
+        geniusKEY: 'c73834d65amsh116e415b6adfba2p14b76cjsnf234503f539a',
+        seatGeekKEY: 'MTg1NzgxOTZ8MTU2OTM0NDQ1NS44'
+    } 
+
+    let artistName = sessionStorage.getItem("artistName");
+    var seatGeekKEY = config.seatGeekKEY;
+    var queryURL = "https://api.seatgeek.com/2/events?q=" + artistName + "&client_id=" + seatGeekKEY;
+
+    var genresArr = [];
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response){
+
+        console.log(response);
+
+        if (response.events[0].perfomers[0].genre !== "") {
+        for (var i = 0; i < response.events[0].performers.length; i++) {
+            genresArr.push(i);
+
+        }
+        console.log(genresArr);
+
+    }
+
+
+    });
+
+
+}
+
 
 function seatGeekAPICall() {
 
@@ -436,7 +475,7 @@ function seatGeekAPICall() {
         method: "GET",
 
     }).then(function (response) {
-        console.log(response)
+        // console.log(response)
         $("#seatGeekRow").css("display", "block");
         let geekResponse = response.events[0];
         let info = {
@@ -470,4 +509,4 @@ $("#resultsminbtn").on("click", function(){
     } else {
         $("#resultsminbtn").text("+")
     }
-    })
+});
