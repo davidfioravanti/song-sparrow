@@ -274,6 +274,8 @@ function geniusAPIFirstCall() {
 
     var GeniusQueryURL = 'https://genius.p.rapidapi.com/search?q=' + artistNameSearch;
 
+    var topSongs = [];
+
 /* =================================================================
 ====================== GENIUS AJAX CALL 1 ==========================
 ================================================================= */
@@ -328,6 +330,20 @@ function geniusAPIFirstCall() {
         ================================================= */
         sessionStorage.setItem("artistName", artistNameSearch);
         sessionStorage.setItem("artistId", artist_ID);
+        var newDiv = $("<div id='songsDiv'>");
+        newDiv.appendTo(".artistSongs");
+        // get top three hits and push to songList section under artistImg
+        for (var i = 0; i < 3; i++) {
+                var song = $('<p>');
+                topSongs.push((response.response.hits[i].result.title).toUpperCase());
+                song.append(topSongs[i]);
+                $('#songsDiv').append(song);
+                song.attr("id", "songTitle");
+        };
+        
+
+
+    console.log(topSongs);
         geniusAPISecondCall();
     });
 }
