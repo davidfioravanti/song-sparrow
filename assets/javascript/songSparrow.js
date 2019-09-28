@@ -5,20 +5,39 @@ $(document).ready(function () {
 ======================== FIREBASE CONFIG ===========================
 ================================================================= */
 
-
-  // Your web app's Firebase configuration
   var firebaseConfig = {
-    apiKey: "AIzaSyCeGNMI-uJ6gVv7zoJIrSa-RU2G6UiIfk8",
-    authDomain: "project-one-153f1.firebaseapp.com",
-    databaseURL: "https://project-one-153f1.firebaseio.com",
-    projectId: "project-one-153f1",
+    apiKey: "AIzaSyA-boyJhILCEE5YejxDlFIhU37LYe-IXq8",
+    authDomain: "song-sparrow-app-ef307.firebaseapp.com",
+    databaseURL: "https://song-sparrow-app-ef307.firebaseio.com",
+    projectId: "song-sparrow-app-ef307",
     storageBucket: "",
-    messagingSenderId: "947287095403",
-    appId: "1:947287095403:web:c5d4b6022e2fdd90d6592e"
+    messagingSenderId: "233980157165",
+    appId: "1:233980157165:web:d15eacb9f1afb5022440e4"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+  var database = firebase.database();
+  var database = firebase.database();
+  var connectionsRef = database.ref("/users/(connected)/");
+  // console.log(messagesRef)
+  var connectedRef = database.ref(".info/connected/");
 
+  sessionStorage.setItem("rowNum", "1");
+
+    // When the client's connection state changes...
+    connectedRef.on("value", function(snap) {
+
+        // If they are connected..
+        if (snap.val()) {
+    
+        // Add user to the connections list.
+        var con = connectionsRef.push({
+            username,
+        })
+        // Remove user from the connection list when they disconnect.
+        con.onDisconnect().remove()
+        }
+    })
 /* =================================================================
 ======================== ANIMATION/SOUNDS ==========================
 ================================================================= */
@@ -43,7 +62,29 @@ $(document).ready(function () {
         birdSound.play();
     })
 
+    // UPDATES THE LATEST SEARCHES TABLE WITH RESULTS!
+    database.ref("/searches").limitToLast(3).on("child_added", function(childSnap) {
+        var rowNumStr = sessionStorage.getItem("rowNum");
+        console.log(rowNumStr);
+        var rowNumInt = parseInt(rowNumStr);
+        console.log(rowNumInt);
 
+        if (rowNumInt < 4){
+            let latestSearch = childSnap.val().artistName;
+            let newTr = $("<tr class='added" + rowNumInt + "'>");
+            let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
+            let newTdName = $("<td class='added td" + rowNumInt + "'>" + latestSearch + "</td>");
+            newTdName.prependTo(newTr);
+            newTdNum.prependTo(newTr);
+            newTr.prependTo("tbody");
+            rowNumInt++;
+            sessionStorage.setItem("rowNum", rowNumInt);
+        }
+        else {
+            $(".added").remove();
+            sessionStorage.setItem("rowNum", "1");
+        }
+    })
 /* =================================================================
 ========================= MAIN APP LOGIC ===========================
 ================================================================= */
@@ -64,7 +105,7 @@ $(document).ready(function () {
 
         // Store the users submitted message...
         var chatMessage = $("#chatInput").val().trim();
-        console.log(chatMessage);
+        // console.log(chatMessage);
 
             if (chatMessage == "") {
                 // Dynamically create the appropriate error modal...
@@ -112,12 +153,34 @@ $(document).ready(function () {
         "menubar=0,resizable=0,width=600,height=600");
     })
 
+    // When the user clicks the seach button...
+    $("#searchButton").on("click", function (){
+        let artistName = $("#artistNameForm").val().trim().toUpperCase();
+        if (artistName !== "") {
+            database.ref("/searches").push({
+                artistName: artistName,
+            })
+            search();
+        }
+        else {
+            searchErrorEmpty();
+        }
+    })
 
     // When the user presses a key inside of a search form...
     $(".searchForm").on("keydown", function (e) {
         if (e.which == 13) {
             e.preventDefault();
-            search();
+            let artistName = $("#artistNameForm").val().trim().toUpperCase();
+            if (artistName !== "") {
+                database.ref("/searches").push({
+                    artistName: artistName,
+                })
+                search();
+            }
+            else {
+                searchErrorEmpty();
+            }
         }
     })
 
@@ -125,7 +188,9 @@ $(document).ready(function () {
     $(".close").on("click", function() {
         $("#responseModal").css("display", "none");
     })
-
+    $("#searchClose").on("click", function() {
+        $("#resultsDiv").css("display", "none");
+    })
     // When the user clicks the about button in footer...
     $("#aboutButton").on("click", function () {
         $("#aboutModal").css("display", "block");
@@ -136,6 +201,9 @@ $(document).ready(function () {
         })
     })
 
+    $("#favoriteButton").on("click", function(){
+        var artistImage = $("#artistImg").attr
+    })
     // When the user clicks the favorites button in footer...
     $("#favoritesButton").on("click", function () {
         $("#favoritesModal").css("display", "block");
@@ -147,8 +215,11 @@ $(document).ready(function () {
     })
 });
 
-
 function search() {
+
+    $("#resultsDiv").css("display", "none");
+    $("#seatGeekRow").css("display", "none");
+    $("#eventImage").remove();
     // If artistNameForm is not empty...
     if ($("#artistNameForm").val() !== "") {
         var artistName = $("#artistNameForm").val().trim();
@@ -158,14 +229,9 @@ function search() {
         geniusAPIFirstCall();
         
     }
-    // If artistsNameForm has at least 1 character...
+    // If artistsNameForm is EMPTY!
     else {
-        $("#modalTitle").text("ERROR!");
-        $("#modalBody").empty();
-        var modalText = $("<p class='modalText'>");
-        modalText.text("ENTER AN ARTIST NAME TO SEARCH FOR!");
-        modalText.appendTo($("#modalBody"));
-        $("#responseModal").css("display", "block");
+        searchErrorEmpty();
     }
 }
 
@@ -180,6 +246,15 @@ function clearChatForms() {
     $("#chatInput").val("");
 }
 
+function searchErrorEmpty() {
+    $("#modalTitle").text("ERROR!");
+    $("#modalBody").empty();
+    var modalText = $("<p class='modalText'>");
+    modalText.text("ENTER AN ARTIST NAME TO SEARCH FOR!");
+    modalText.appendTo($("#modalBody"));
+    $("#responseModal").css("display", "block");
+}
+
 function geniusAPIFirstCall() {
 
 /* =================================================================
@@ -189,7 +264,6 @@ function geniusAPIFirstCall() {
     var config = {
         geniusKEY: 'c73834d65amsh116e415b6adfba2p14b76cjsnf234503f539a',
         seatGeekKEY: 'MTg1NzgxOTZ8MTU2OTM0NDQ1NS44'
-    
     } 
     var geniusAPIKey = config.geniusKEY;
 
@@ -199,6 +273,8 @@ function geniusAPIFirstCall() {
     var yearNameSearch = $('#yearNameForm').val().trim();
 
     var GeniusQueryURL = 'https://genius.p.rapidapi.com/search?q=' + artistNameSearch;
+
+    var topSongs = [];
 
 /* =================================================================
 ====================== GENIUS AJAX CALL 1 ==========================
@@ -219,12 +295,32 @@ function geniusAPIFirstCall() {
         var artist_URL = response.response.hits[0].result.primary_artist.url;
         var artist_Image = response.response.hits[0].result.primary_artist.image_url;
 
+        var altImg1 = response.response.hits[1].result.primary_artist.image_url;
+        var altURL1 = response.response.hits[1].result.primary_artist.url;
+        var altImg2 = response.response.hits[2].result.primary_artist.image_url;
+        var altURL2 = response.response.hits[2].result.primary_artist.url;
+        var altImg3 = response.response.hits[3].result.primary_artist.image_url;
+        var altURL3 = response.response.hits[3].result.primary_artist.url;
+        var altImg4 = response.response.hits[4].result.primary_artist.image_url;
+        var altURL4 = response.response.hits[4].result.primary_artist.url;
+        var altImg5 = response.response.hits[5].result.primary_artist.image_url;
+        var altURL5 = response.response.hits[5].result.primary_artist.url;
         // $('#resultsDiv').text('hellloooo');;
         var nameUprCase = artistNameSearch.toUpperCase();
-        $("#resultsArtistName").text(nameUprCase);
+        $("#resultsArtistName").html("SEARCH FOR:<br> \"" + nameUprCase + "\"");
         $("#artistURL").attr("href", artist_URL);
         $("#artistImg").attr("src", artist_Image);
 
+        $("#altImg1").attr("src", altImg1);
+        $("#altURL1").attr("href", altURL1);
+        $("#altImg2").attr("src", altImg2);
+        $("#altURL2").attr("href", altURL2);
+        $("#altImg3").attr("src", altImg3);
+        $("#altURL3").attr("href", altURL3);
+        $("#altImg4").attr("src", altImg4);
+        $("#altURL4").attr("href", altURL4);
+        $("#altImg5").attr("src", altImg5);
+        $("#altURL5").attr("href", altURL5);
         /* =================================================
         ====================================================
         HERE, WE STORE THE ARTIST ID IN ORDER TO PERFORM A
@@ -232,8 +328,22 @@ function geniusAPIFirstCall() {
         OBJECT FROM GENIUS API. NOW WE CAN USE IT'S OBJECT.
         ====================================================
         ================================================= */
-
+        sessionStorage.setItem("artistName", artistNameSearch);
         sessionStorage.setItem("artistId", artist_ID);
+        var newDiv = $("<div id='songsDiv'>");
+        newDiv.appendTo(".artistSongs");
+        // get top three hits and push to songList section under artistImg
+        for (var i = 0; i < 3; i++) {
+                var song = $('<p>');
+                topSongs.push((response.response.hits[i].result.title).toUpperCase());
+                song.append(topSongs[i]);
+                $('#songsDiv').append(song);
+                song.attr("id", "songTitle");
+        };
+        
+
+
+    console.log(topSongs);
         geniusAPISecondCall();
     });
 }
@@ -270,7 +380,62 @@ function geniusAPISecondCall() {
 
     // Show the populated results div!
     $("#resultsDiv").fadeIn(1000);
+
+    // IF THE CONCERT BUTTON IS CHECKED....
+    if($("#concertButton").is(":checked")){
+        console.log("SEARCHING SEATGEEK!");
+        seatGeekAPICall(); 
+    }
+    else{
+
+    }
     })
+}
+
+function seatGeekAPICall() {
+
+    var config = {
+        geniusKEY: 'c73834d65amsh116e415b6adfba2p14b76cjsnf234503f539a',
+        seatGeekKEY: 'MTg1NzgxOTZ8MTU2OTM0NDQ1NS44'
+    } 
+
+    let artistName = sessionStorage.getItem("artistName");
+    var seatGeekKEY = config.seatGeekKEY;
+    var queryURL = "https://api.seatgeek.com/2/events?q=" + artistName + "&client_id=" + seatGeekKEY;
+
+
+    // seat geek API call
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+
+    }).then(function (response) {
+        console.log(response)
+        $("#seatGeekRow").css("display", "block");
+        let geekResponse = response.events[0];
+        let info = {
+            eventName: geekResponse.short_title,
+            eventDate: geekResponse.datetime_local,
+            eventCity: geekResponse.venue.display_location,
+            eventCountry: geekResponse.venue.country,
+            eventVenue: geekResponse.venue.name,
+            eventAddress: geekResponse.venue.address,
+            eventLink: geekResponse.url,
+            eventPrice: geekResponse.stats.average_price,
+            eventImage: geekResponse.performers[0].image,
+        }
+        $("#seatGeekResultsEventDate").text(info.eventDate);
+        $("#seatGeekResultsEventName").text(info.eventName);
+        $("#seatGeekResultsEventCity").text(info.eventCity + " (" + info.eventCountry + ")");
+        $("#seatGeekResultsEventVenue").text(info.eventVenue);
+        $("#seatGeekResultsEventAddress").text(info.eventAddress);
+        $("#seatGeekResultsEventPrice").text("AVG. PRICE: $" + info.eventPrice);
+        $("#seatGeekResultsEventLink").attr("href", info.eventLink);
+        var EventImage = $("<img id='eventImage' src='" + info.eventImage + "'>");
+        EventImage.appendTo($("#seatGeekResultsEventLink"));
+        var findEventLink = "https://seatgeek.com/" + artistName + "-tickets?oq=" + artistName;
+        $("#findEventLink").attr("href", findEventLink);
+})
 }
 $("#resultsminbtn").on("click", function(){
     $("#resultsDiv").css("display", "")

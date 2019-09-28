@@ -17,8 +17,11 @@ body {
     overflow-y: auto;
 }
 img {
-    max-width: 150px;
-    max-height: 150px;
+    position: relative;
+    /* max-width: 150px;
+    max-height: 150px; */
+    max-width: 30vw;
+    max-width: 30vw;
 }
 label {
     font-size: 24pt;
@@ -30,6 +33,28 @@ label {
     text-shadow: 0px 2px 30px rgb(255, 197, 73);
     user-select: none;
 }
+
+
+.messageDiv {
+    position: relative;
+    margin-bottom: 30px;
+    background: rgba(0, 0, 0, 0.397);
+    border-radius: 15px;
+    border: rgb(33, 37, 41) 2px solid;
+}
+    .messageUsername {
+        font-size: 40px;
+    }
+    .messageMessage {
+        font-size: 18px;
+    }
+    .messageTimestamp {
+        text-align: right;
+        padding-right: 20px;
+    }
+
+
+
 .big {
     font-size: 40px;
 }
@@ -115,6 +140,7 @@ label {
     border-bottom: none;
 }
 #chatInput::placeholder {
+    text-align: center;
     color: white;
 }
 #chatNote {
@@ -144,7 +170,8 @@ label {
     color: white;
     padding-top: 10px;
     padding-left: 10px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto; 
     overflow-wrap: break-word;
     height: 415px;
     background: white;

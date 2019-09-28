@@ -3,16 +3,18 @@
 $(document).ready(function () {
 
     var firebaseConfig = {
-        apiKey: "AIzaSyCeGNMI-uJ6gVv7zoJIrSa-RU2G6UiIfk8",
-        authDomain: "project-one-153f1.firebaseapp.com",
-        databaseURL: "https://project-one-153f1.firebaseio.com",
-        projectId: "project-one-153f1",
+        apiKey: "AIzaSyA-boyJhILCEE5YejxDlFIhU37LYe-IXq8",
+        authDomain: "song-sparrow-app-ef307.firebaseapp.com",
+        databaseURL: "https://song-sparrow-app-ef307.firebaseio.com",
+        projectId: "song-sparrow-app-ef307",
         storageBucket: "",
-        messagingSenderId: "947287095403",
-        appId: "1:947287095403:web:c5d4b6022e2fdd90d6592e"
+        messagingSenderId: "233980157165",
+        appId: "1:233980157165:web:d15eacb9f1afb5022440e4"
       };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
+
+      var database = firebase.database();
 
 
     // Player Song Sparrow theme music...
@@ -62,13 +64,15 @@ $(document).ready(function () {
         if (e.which == 13) {
             e.preventDefault();
             username = $("#usernameForm").val().trim();
-
             if (username !== "") {
             // Clear the form
             $("#usernameForm").val("");
             console.log(username);
             localStorage.setItem('username', username);
-
+            database.ref("users/" + username).set({
+                key: username,
+                isOnline: true,
+            })
             // Open the main application...
             window.location.assign("soundSparrow.html") 
             }
@@ -76,6 +80,31 @@ $(document).ready(function () {
             else {
 
             }
+        }
+    })
+    
+    sessionStorage.setItem("rowNum", "1");
+    
+    database.ref("/searches").limitToLast(3).on("child_added", function(childSnap) {
+        var rowNumStr = sessionStorage.getItem("rowNum");
+        console.log(rowNumStr);
+        var rowNumInt = parseInt(rowNumStr);
+        console.log(rowNumInt);
+
+        if (rowNumInt < 4){
+            let latestSearch = childSnap.val().artistName;
+            let newTr = $("<tr class='added" + rowNumInt + "'>");
+            let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
+            let newTdName = $("<td class='added td" + rowNumInt + "'>" + latestSearch + "</td>");
+            newTdName.prependTo(newTr);
+            newTdNum.prependTo(newTr);
+            newTr.prependTo("tbody");
+            rowNumInt++;
+            sessionStorage.setItem("rowNum", rowNumInt);
+        }
+        else {
+            $(".added").remove();
+            sessionStorage.setItem("rowNum", "1");
         }
     })
 });
