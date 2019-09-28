@@ -18,6 +18,7 @@
 
     <!-- FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-database.js"></script>
 </head>
 
 <body>
@@ -46,7 +47,7 @@
                         <input type="checkbox"> LYRICS
                     </label>
                     <label class="btn buttonToggle">
-                        <input type="checkbox"> MEMBERS
+                        <input id="concertButton" type="checkbox"> CONCERTS
                     </label>
                 </div>
             </div>
@@ -69,18 +70,107 @@
     <!-- SEARCH RESULTS CONTAINER-->
     <div id="resultsDiv" class="container text-center">
         <div class="row">
-            <p id="resultsArtistName" class="col-6">NAME</p>
-            <p id="resultsArtistName" class="col-6">INFO</p>
+            <div class="col-12">
+                    <button id="searchClose" class="btn btn-primary float-right" type="button">CLOSE</button>
+            </div>
         </div>
         <div class="row">
-            <div class="col-6 er">
-                <a id="artistURL" target="_blank" rel="noopener" href=""><img id="artistImg" src=""></a>
+            <p id="resultsArtistName" class="col-6">NAME</p>
+            <p id="resultsArtistName" class="col-6">ARTIST <br> INFO</p>
+        </div>
+        <div class="row">
+            <div id="resultsCol1" class="col-6 er">
+                <a id="artistURL" target="_blank" rel="noopener" href="">
+                    <div class="imgWrap">
+                            <img id="artistImg" src="">
+                    </div>
+                </a>
             </div>
-            <p id="resultsContent" class="col-6">Click the artist image to visit their page.
+            <p id="resultsContent" class="col-6">Click the artist's image to visit their page. From there
+                you can view their top songs/albums, find their social media links, etc...
                 <br>
                 <button id="favoriteButton" class="btn btn-primary" type="button">ADD TO FAVORITES</button>
             </p>
         </div>
+        <div id="altRow" class="row">
+            <a id="altURL1" class="col" target="_blank" rel="noopener" href="">
+                <div class="imgWrap">
+                    <img id="altImg1" src="">
+                </div>
+            </a>
+            <a id="altURL2" class="col" target="_blank" rel="noopener" href="">
+                <div class="imgWrap">
+                    <img id="altImg2" src="">
+                </div>
+            </a>
+            <a id="altURL3" class="col" target="_blank" rel="noopener" href="">
+                <div class="imgWrap">
+                    <img id="altImg3" src="">
+                </div>
+            </a>
+            <a id="altURL4" class="col" target="_blank" rel="noopener" href="">
+                <div class="imgWrap">
+                    <img id="altImg4" src="">
+                </div>
+            </a>
+            <a id="altURL5" class="col" target="_blank" rel="noopener" href="">
+                    <div class="imgWrap">
+                        <img id="altImg5" src="">
+                    </div>
+                </a>
+        </div>
+        <div class="row">
+                <a id="altURL1" target="_blank" rel="noopener" href="">
+                    <div class="imgWrap">
+                        <img id="altImg1" src="">
+                    </div>
+                </a>
+                <a id="altURL2" target="_blank" rel="noopener" href="">
+                    <div class="imgWrap">
+                        <img id="altImg2" src="">
+                    </div>
+                </a>
+                <a id="altURL3" target="_blank" rel="noopener" href="">
+                    <div class="imgWrap">
+                        <img id="altImg3" src="">
+                    </div>
+                </a>
+                <a id="altURL4" target="_blank" rel="noopener" href="">
+                    <div class="imgWrap">
+                        <img id="altImg4" src="">
+                    </div>
+                </a>
+                <a id="altURL5" target="_blank" rel="noopener" href="">
+                        <div class="imgWrap">
+                            <img id="altImg5" src="">
+                        </div>
+                    </a>
+        </div>
+        
+        <div id="seatGeekRow" class="row">
+            <hr>
+            <div class="col-12">
+                <p id="seatGeekResultsTitle">FIND UPCOMING CONCERTS!</p>
+            </div>
+            <div id="seatGeekSubRowL" class="row">
+                    <div class="col-6 text-right">
+                            <p id="seatGeekResultsEventName">EVENT NAME:</p>
+                            <p id="seatGeekResultsEventCity">CITY NAME:</p>
+                            <p id="seatGeekResultsEventVenue">VENUE NAME:</p>
+                            <p id="seatGeekResultsEventAddress">VENUE ADDRESS:</p>
+                            <p id="seatGeekResultsEventDate">EVENT DATE:</p>
+                            <p id="seatGeekResultsEventPrice">AVG. PRICE:</p>
+                        </div>
+                        <div id="seatGeekSubRowR" class="col-4">
+                                <a id="seatGeekResultsEventLink" href="" target="_blank" rel="noopener">
+                                </a>
+                                <a id="findEventLink" href="" target="_blank" rel="noopener">
+                                <button id="findEventButton" class="btn btn-primary" type="button">OTHER EVENTS</button>
+                                </a>
+                            </div>
+            </div>
+        </div>
+        <br><br>
     </div>
 
     <!-- LOGO + CHAT CONTAINER -->
@@ -110,43 +200,25 @@
     <div id="metricsDiv" class="container-fluid">
         <div id="metricsRow" class="row">
             <div class="col-6 text-center">
-                <h2>TRENDING ARTISTS:</h2>
+                <h2>LATEST SEARCHES:</h2>
                 <table class="table table-bordered table-dark">
-                    <tbody>
+                    <tbody id="tbody" class="0">
                         <thead>
-                            <th>RANK #:</th>
+                            <th>#</th>
                             <th>NAME:</th>
                         </thead>
-                        <tr>
-                            <td class="">1</td>
-                            <td class="">GAINSTRIVE</td>
-                        </tr>
-                        <tr>
-                            <td class="">2</td>
-                            <td class="">ANOTHER ARTIST</td>
-                        </tr>
-                        <tr>
-                            <td class="">3</td>
-                            <td class="">YET ANOTHER ARTIST</td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
-            <div class="col-6 text-center">
+            <div class="col text-center">
                 <h2>FEATURED:</h2>
-                <div class="row">
-                    <img id="featuredImage" src="assets/images/featuredPlaceholder.jpg">
-                    <div class="col-6">
-                        <h3 class="text-center">GAINSTRIVE</h3>
-                        <span class="text-center">ALBUM:</span>
-                        <br>
-                        <span id="featuredAlbum" class="text-right">ANYWHERE BUT HERE</span>
-                        <br>
-                        <button class="btn btn-dark" type="button">
-                            <div class="col-12">
-                                <img id="spotify" src="assets/images/spotify.png">
-                            </div>
-                        </button>
+                    <div class="imgWrap">
+                            <a href="https://open.spotify.com/artist/5eL86LI7fwdOUiejOjhHOi" target="_blank" rel="noopener">
+                                <img id="featuredImage" src="assets/images/featuredPlaceholder.jpg">
+                            </a>
+                    </div>
+                    <p id="featuredText">FEATURED ARTIST: GAINSTRIVE</p>
                     </div>
                 </div>
             </div>
