@@ -273,9 +273,10 @@ function geniusAPISecondCall() {
     })
 }
 $("#resultsminbtn").on("click", function(){
-if($(this).text() === "+"){
-    $("#resultsminbtn").text("-")
-} else {
-    $("#resultsminbtn").text("+")
-}
-})
+    $("#resultsDiv").css("display", "")
+    if($(this).text() === "+"){
+        $("#resultsminbtn").text("-")
+    } else {
+        $("#resultsminbtn").text("+")
+    }
+    })

@@ -277,13 +277,7 @@ textarea {
 #bottomDiv {
     margin-top: 100px;
 }
-#chat {
-    position: relative;
-    top: -100%;
-    right: -40%;
-    width: 500px;
-    z-index: 100;
-}
+
 #chatDiv {
     margin-top: 20px;
     opacity: 0;
@@ -491,14 +485,13 @@ textarea {
     display: none;
 }
 #resultsDiv {
-
     position: relative;
     border: white solid 5px;    
     width:  100%;
     height: auto;
     border: 2px rgb(42, 37, 37) solid;
     background: rgba(34, 32, 32, 0.411);
-    padding-bottom: 50px;
+    padding-bottom: 5%;
     margin: 0 auto 0 auto;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -655,8 +648,7 @@ button#resultsminbtn {
     }
     #chat {
         position: relative;
-        left: 320px;
-        top: -95%;
+        left: 40%;
         width: 39vw;
     }
     #globalChat {
@@ -687,7 +679,6 @@ button#resultsminbtn {
     #chat {
         position: relative;
         left: 200px;
-        top: -28vw;
         width: 50vw;
     }
     #globalChat {
@@ -704,8 +695,7 @@ button#resultsminbtn {
     }   
     #chat {
         width: 80%;
-        left: 300px;
-        top: -320px;
+        left: 50%;
     }
     #globalChat {
         height: 100px;
@@ -718,8 +708,8 @@ button#resultsminbtn {
     }
     #chat {
         width: 85%;
-        left: 200px;
-        top: -320px;
+        left: 60%;
+
     }
     #globalChat {
         height: 100px;
@@ -738,7 +728,6 @@ button#resultsminbtn {
     #chat {
         width: 85%;
         left: 200px;
-        top: -320px;
     }
     #globalChat {
         height: 70px;
@@ -755,7 +744,7 @@ button#resultsminbtn {
     }
     #chat {
         width: 80%;
-        left: 170px;
+        left: 50%;
         top: -320px;
     }
     #globalChat {
@@ -777,7 +766,7 @@ button#resultsminbtn {
     #chat {
         margin-top: 200px;
         width: 150%;
-        left:-80px;
+        left: -24%;
         top: -320px;
     }
     #globalChat {
