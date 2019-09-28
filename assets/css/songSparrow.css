@@ -593,7 +593,7 @@ textarea {
     display: none;
 }
 #resultsDiv {
-    display: none;
+
     position: relative;
     border: white solid 5px;    
     width:  100%;
@@ -607,6 +607,23 @@ textarea {
     z-index: 100;
     transition: all .3s ease-in-out;
     box-shadow: 0px 0px 20px 20px rgba(39, 34, 34, 0.89) inset;
+}
+#resultsmindiv {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 2px rgb(42, 37, 37) solid;
+    margin-top:20px;
+    background: rgba(34, 32, 32, 0.411);
+    width: 100%;
+    padding: 0;
+}
+button#resultsminbtn {
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    padding: 0 10px 0 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    font-size: 1.2em;
+
 }
     #resultsArtistName {
         font-size: 3vw;

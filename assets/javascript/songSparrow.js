@@ -437,3 +437,10 @@ function seatGeekAPICall() {
         $("#findEventLink").attr("href", findEventLink);
 })
 }
+$("#resultsminbtn").on("click", function(){
+if($(this).text() === "+"){
+    $("#resultsminbtn").text("-")
+} else {
+    $("#resultsminbtn").text("+")
+}
+})
