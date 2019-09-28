@@ -40,6 +40,10 @@ h3 {
 h2 {
     color: white;
 }
+hr {
+    border-top: 2px white solid;
+    width: 80%;
+}
 span {
     color: white;
 }
@@ -52,7 +56,6 @@ textarea {
 /* ===================================================================================
    ==================================== CLASSES ======================================
    =================================================================================== */
-
 .buttonToggle {
     filter: saturate(.8);
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
@@ -130,7 +133,7 @@ textarea {
     user-select: none;
     z-index: 1000;
     background-color: rgba(36, 32, 32, 0.623);
-    border: rgb(33, 37, 41) 2px solid;
+    border: 3px rgb(36, 30, 30) solid;
     border-radius: 20px;
     box-shadow: 0px 0px 30px 10px rgb(47, 47, 47);
     animation: textGlow 2s infinite ease;
@@ -163,6 +166,13 @@ textarea {
     -webkit-text-stroke-width:2px;
     -webkit-text-stroke-color: rgba(0, 0, 0, 0.787);
     
+}
+.imgWrap {
+    filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.226));
+    transition: all .5s ease-in-out;
+}
+.imgWrap:hover {
+    filter: drop-shadow(0px 0px 20px rgb(255, 255, 255));
 }
 .modal-dialog {
     border: 15px rgba(255, 115, 0, 0.733) solid;
@@ -236,7 +246,15 @@ textarea {
             75% {transform: rotate(-5deg)}
             100% {transform: rotate(0deg)}
         }
-
+.td1{
+    font-size: 30px;
+}
+.td2{
+    font-size: 20px;
+}
+.td3{
+    font-size: 13px;
+}
 /* ===================================================================================
    ================================== UNIQUE ID'S ====================================
    =================================================================================== */
@@ -265,15 +283,80 @@ textarea {
     animation: textGlow 2s infinite ease;
 }
 #artistImg {
-    max-width: 250px;
-    max-height: 250px;
-    box-shadow: 0px 0px 10px 10px rgb(47, 40, 37), 0px 0px 50px 20px rgb(255, 117, 54);
-    transition: all .4s ease-in-out;
+    max-width: 30vw;
+    max-height: 20vw;
+    clip-path: circle(40% at 50% 50%);
+    transition: all .5s ease;
+    filter: grayscale(2);
 }
     #artistImg:hover {
-        filter: none;
         box-shadow: 0px 0px 10px 10px rgb(255, 178, 54), 0px 0px 50px 20px rgb(46, 40, 38);
+        transform: rotate(360deg);
+        filter: grayscale(.5);
     }
+#altRow {
+    margin-top: 5%;
+}
+#altImg1{
+    max-width: 30vw;
+    max-height: 10vw;
+    clip-path: circle(40% at 50% 50%);
+    transition: all .5s ease;
+    filter: grayscale(2);
+}
+    #altImg1:hover {
+        box-shadow: 0px 0px 10px 10px rgb(255, 178, 54), 0px 0px 50px 20px rgb(46, 40, 38);
+        transform: rotate(-360deg);
+        filter: grayscale(.5);
+    }
+#altImg2{
+    max-width: 30vw;
+    max-height: 9vw;
+    clip-path: circle(40% at 50% 50%);
+    transition: all .5s ease;
+    filter: grayscale(2);
+}
+    #altImg2:hover {
+        box-shadow: 0px 0px 10px 10px rgb(255, 178, 54), 0px 0px 50px 20px rgb(46, 40, 38);
+        transform: rotate(360deg);
+        filter: grayscale(.5);
+    }
+#altImg3{
+    max-width: 30vw;
+    max-height: 8vw;
+    clip-path: circle(40% at 50% 50%);
+    transition: all .5s ease;
+    filter: grayscale(2);
+}
+    #altImg3:hover {
+        box-shadow: 0px 0px 10px 10px rgb(255, 178, 54), 0px 0px 50px 20px rgb(46, 40, 38);
+        transform: rotate(-360deg);
+        filter: grayscale(.5);
+    }
+#altImg4{
+    max-width: 30vw;
+    max-height: 7vw;
+    clip-path: circle(40% at 50% 50%);
+    transition: all .5s ease;
+    filter: grayscale(2);
+}
+    #altImg4:hover {
+        box-shadow: 0px 0px 10px 10px rgb(255, 178, 54), 0px 0px 50px 20px rgb(46, 40, 38);
+        transform: rotate(360deg);
+        filter: grayscale(.5);
+    }
+    #altImg5{
+        max-width: 30vw;
+        max-height: 6vw;
+        clip-path: circle(40% at 50% 50%);
+        transition: all .5s ease;
+        filter: grayscale(2);
+    }
+        #altImg5:hover {
+            box-shadow: 0px 0px 10px 10px rgb(255, 178, 54), 0px 0px 50px 20px rgb(46, 40, 38);
+            transform: rotate(-360deg);
+            filter: grayscale(.5);
+        }
 #bottomDiv {
     margin-top: 100px;
 }
@@ -283,6 +366,7 @@ textarea {
     right: -40%;
     width: 500px;
     z-index: 100;
+    border: 3px rgb(36, 30, 30) solid;
 }
 #chatDiv {
     margin-top: 20px;
@@ -357,7 +441,8 @@ textarea {
 #favoriteButton {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
     border: 2px rgb(85, 72, 72) solid;
-    color: #495057;
+    color: #3d3333;
+    font-weight: bold;
 }
     #favoriteButton:focus {
         background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
@@ -389,10 +474,25 @@ textarea {
     padding-bottom: 30px;
     padding-top: 30px;
     background: rgba(39, 34, 34, 0.685);
+    border-top: 3px rgb(36, 30, 30) solid;
 }
 #featuredImage {
-    width: 40%;
-    height: 40%;
+    max-width: 30vw;
+    max-height: 20vw;
+    clip-path: circle(40% at 50% 50%);
+    transition: all .5s ease;
+    filter: grayscale(2);
+    position: relative;
+}
+#featuredImage:hover {
+    box-shadow: 0px 0px 10px 10px rgb(255, 178, 54), 0px 0px 50px 20px rgb(46, 40, 38);
+    transform: rotate(360deg);
+    filter: grayscale(.5);
+}
+#featuredText {
+    color: white;
+    font-size: 15px;
+    text-transform: uppercase;
 }
 #globalChat {
     color: white;
@@ -409,13 +509,14 @@ textarea {
 
 }
 #inputRow {
-    border: 2px rgb(42, 37, 37) solid;
-    background: rgba(34, 32, 32, 0.411);
+    border: 3px rgb(36, 30, 30) solid;
+    background: rgba(36, 30, 30, 0.356);
     padding-top: 30px;
     padding-bottom: 15px;
     margin: 30px auto 0 auto;
     border-radius: 15px;
-    box-shadow: 0px 0px 30px 30px rgba(255, 93, 18, 0.294);
+    box-shadow: 0px 0px 30px 30px rgba(255, 93, 18, 0.294),
+    0px 0px 100px 20px rgba(36, 31, 31, 0.835) inset;
     z-index: 100;
 }
     #artistNameForm {
@@ -456,11 +557,12 @@ textarea {
         100% {opacity: 1;}
     }
 #metricsDiv {
-    margin-top: -255px;
+    margin-top: -300px;
+    border: 3px rgb(36, 30, 30) solid;
     box-shadow: 0px 0px 30px 30px rgba(255, 102, 0, 0.37);
 }
 #metricsRow {
-    background: rgba(26, 23, 23, 0.589);
+    background: rgba(26, 23, 23, 0.815);
 }
 #modalHeader {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
@@ -497,13 +599,14 @@ textarea {
     width:  100%;
     height: auto;
     border: 2px rgb(42, 37, 37) solid;
-    background: rgba(34, 32, 32, 0.411);
-    padding-bottom: 50px;
-    margin: 0 auto 0 auto;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    background: rgba(34, 32, 32, 0.904);
+    padding-top: 30px;
+    padding-bottom: 40px;
+    margin: 20px auto 0 auto;
+    border-radius: 15px;
     z-index: 100;
     transition: all .3s ease-in-out;
+    box-shadow: 0px 0px 20px 20px rgba(39, 34, 34, 0.89) inset;
 }
 #resultsmindiv {
     border-top-left-radius: 5px;
@@ -526,13 +629,12 @@ button#resultsminbtn {
         font-size: 3vw;
         font-weight: bold;
         color: white;
-        -webkit-text-stroke-width: 2px;
-        -webkit-text-stroke-color: rgba(0, 0, 0, 0.787);
         z-index: 1000;
     }
     #resultsContent {
-        color: white;
+        color: rgb(255, 255, 255);
         font-weight: bold;
+        font-size: 2.5vw;
     }
 #searchButton {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
@@ -550,6 +652,17 @@ button#resultsminbtn {
         border:2px rgb(71, 63, 63) solid;
         box-shadow: 0px 0px 15px 5px rgba(255, 205, 68, 0.424);
     }
+#searchClose {
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    width: 100%;
+    font-weight: bold;
+    color: rgb(61, 49, 49);
+    border:2px rgb(71, 63, 63) solid;
+    border-radius: 50px;
+    width: 10vw;
+    font-size: 10px;
+    font-weight: bold;
+}
 #songSparrowLogo {
     position: relative;
     top: 10%;
@@ -576,6 +689,12 @@ button#resultsminbtn {
         50% {filter: saturate(1.5) drop-shadow(0px 0px 10px #ff5100)}
         100% {filter: saturate(1), drop-shadow(0px 0px 40px #ff5100)}
     }
+#songsDiv {
+    margin-top: 30px;
+}
+#songTitle {
+    font-size: 15px;
+}
 #spotify {
     width: 100%;
     height: 100%;
@@ -584,10 +703,90 @@ button#resultsminbtn {
     color: rgb(255, 233, 107);
 }
 
+
+#seatGeekRow {
+    display: none;
+    margin: none;
+}
+#seatGeekResultsTitle {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#seatGeekResultsEventDate {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#seatGeekResultsEventName{
+    margin: auto;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#seatGeekResultsEventCity{
+    margin: auto;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#seatGeekResultsEventVenue{
+    margin: auto;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#seatGeekResultsEventAddress {
+    margin: auto;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#seatGeekResultsEventPrice {
+    margin: auto;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#seatGeekSubRowL {
+    margin: 0;
+}
+#seatGeekSubRowR {
+    margin-right: 0;
+}
+    #eventImage {
+        position: relative;
+        width: 100%;
+        margin: 0;
+    }
+    #findEventButton {
+        background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+        border: 2px rgb(85, 72, 72) solid;
+        color: #3d3333;
+        font-weight: bold;
+        width: 100%;
+    }
+
+        #findEventButton:focus {
+            background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+            border: 2px rgb(85, 72, 72) solid;
+            box-shadow: 0px 2px 20px 10px rgba(255, 106, 19, 0.692);
+        }
 /* ===================================================================================
    ================================= MEDIA QUERIES ===================================
    =================================================================================== */
-
+@media (max-width: 2300px) {
+    #resultsContent {
+        font-size: 2vw;
+    }
+}
 @media (max-width: 2200px) {
     #bottomDiv {
         width: 50%;
@@ -763,6 +962,11 @@ button#resultsminbtn {
     }
     label.btn.buttonToggle {
         font-size: .8em;
+    }
+}
+@media (max-width: 800px) {
+    #resultsContent {
+        font-size: 2vw;
     }
 }
 @media (max-width: 700px) {

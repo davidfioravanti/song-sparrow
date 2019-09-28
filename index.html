@@ -18,6 +18,7 @@
     
     <!-- FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-database.js"></script>
 </head>
 
 
@@ -54,25 +55,14 @@
         <div id="metricsTab" class="container">
             <div class="row">
                 <div class="col-6 text-center">
-                    <h2>TRENDING ARTISTS:</h2>
+                    <h2>LATEST SEARCHES:</h2>
                     <table class="table table-bordered table-dark">
-                        <tbody>
+                        <tbody id="tbody" class="0">
                             <thead>
-                                <th>RANK #:</th>
+                                <th>#</th>
                                 <th>NAME:</th>
                             </thead>
-                            <tr>
-                                <td class="big">1</td>
-                                <td class="big">GAINSTRIVE</td>
-                            </tr>
-                            <tr>
-                                <td class="medium">2</td>
-                                <td class="medium">ANOTHER ARTIST</td>
-                            </tr>
-                            <tr>
-                                <td class="small">3</td>
-                                <td class="small">ANOTHER ARTIST</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -86,11 +76,14 @@
                             <br>
                             <span id="featuredAlbum" class="small text-right">ANYWHERE BUT HERE</span>
                             <br>
-                            <button class="btn btn-dark" type="button">
+                            <a href="https://open.spotify.com/artist/5eL86LI7fwdOUiejOjhHOi" 
+                            target="_blank" rel="noopener"> 
+                                <button id="spotifyButton" class="btn btn-dark" type="button">
                                 <div class="col-12">
                                     <img id="spotify" src="assets/images/spotify.png">
                                 </div>
                             </button>
+                            </a>
                         </div>
                     </div>
                 </div>
