@@ -155,6 +155,7 @@ $(document).ready(function () {
 
     // When the user clicks the seach button...
     $("#searchButton").on("click", function (){
+        $("#resultsmindiv").css("display", "block")
         let artistName = $("#artistNameForm").val().trim().toUpperCase();
         if (artistName !== "") {
             database.ref("/searches").push({
@@ -170,6 +171,7 @@ $(document).ready(function () {
     // When the user presses a key inside of a search form...
     $(".searchForm").on("keydown", function (e) {
         if (e.which == 13) {
+            $("#resultsmindiv").css("display", "block")
             e.preventDefault();
             let artistName = $("#artistNameForm").val().trim().toUpperCase();
             if (artistName !== "") {
@@ -189,6 +191,7 @@ $(document).ready(function () {
         $("#responseModal").css("display", "none");
     })
     $("#searchClose").on("click", function() {
+        $("#resultsmindiv").css("display", "none");
         $("#resultsDiv").css("display", "none");
     })
     // When the user clicks the about button in footer...
@@ -438,9 +441,10 @@ function seatGeekAPICall() {
 })
 }
 $("#resultsminbtn").on("click", function(){
-if($(this).text() === "+"){
-    $("#resultsminbtn").text("-")
-} else {
-    $("#resultsminbtn").text("+")
-}
-})
+    $("#resultsDiv").css("display", "")
+    if($(this).text() === "+"){
+        $("#resultsminbtn").text("-")
+    } else {
+        $("#resultsminbtn").text("+")
+    }
+    })
