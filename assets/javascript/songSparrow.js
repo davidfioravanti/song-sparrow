@@ -62,6 +62,7 @@ $(document).ready(function () {
         birdSound.play();
     })
 
+
     // UPDATES THE LATEST SEARCHES TABLE WITH RESULTS!
     database.ref("/searches").limitToLast(3).on("child_added", function(childSnap) {
         var rowNumStr = sessionStorage.getItem("rowNum");
@@ -95,6 +96,21 @@ $(document).ready(function () {
     // Change the username used for site chat to that username...
     $("#username").text(username);
 
+
+    database.ref("/users/" + username + "/(favorites)").on("child_added", function(favSnap) {
+        console.log(favSnap);
+        var favRow = $("<div id='newFavDiv' class='text-center newFav'>");
+        var favCol = $("<div id='newFavCol'>");
+        var favBr = $("<br>");
+        var favName = $("<p id='newFavName' class='col-12'>" + favSnap.val().name + "</p>");
+        var favImg = $("<a id='newFavLink' target='_blank' rel='noopener' href='" + favSnap.val().url + "'>" + 
+        "<img id='newFavImg' class='col-12' src='" + favSnap.val().img + "'>" + "</a>");
+        favRow.appendTo($("#favoritesPlaceholder"));
+        favCol.appendTo(favRow);
+        favName.appendTo(favCol);
+        favBr.appendTo(favName)
+        favImg.appendTo(favName);
+    })
 
     // When the user presses a key while inside the chat input area...
     $("#chatInput").on("keydown", function (e) {
@@ -205,16 +221,37 @@ $(document).ready(function () {
     })
 
     $("#favoriteButton").on("click", function(){
-        var artistImage = $("#artistImg").attr
+        var username =localStorage.getItem("username");
+        let favoriteName = sessionStorage.getItem("tempName");
+        let favoriteImg = $("#artistImg").attr("src");
+        let favoriteURL = $("#artistURL").attr("href");
+    
+        database.ref("/users/" + username + "/(favorites)").push({
+            name: favoriteName,
+            img: favoriteImg,
+            url: favoriteURL
+          });
     })
     // When the user clicks the favorites button in footer...
     $("#favoritesButton").on("click", function () {
         $("#favoritesModal").css("display", "block");
+        
+        $("#favoritesReset").on("mouseover mouseout", function() {
+            $("#warningText").toggle();
+        });
+
+        $("#favoritesReset").on("dblclick", function() {
+            var username = localStorage.getItem("username");
+            $(".newFav").remove();
+            database.ref("/users/" + username + "/(favorites)").set({
+
+            })
+        })
 
         // When the user clicks the close button...
         $("#closeButton2").on("click", function(){
             $("#favoritesModal").css("display", "none");
-        })
+        });
     })
 });
 
@@ -232,14 +269,12 @@ function search() {
         console.log("ARTIST NAME: " + artistName);
         geniusAPIFirstCall();
         
+        
     }
     // If artistsNameForm is EMPTY!
     else {
         searchErrorEmpty();
     }
-}
-
-function addToFavorites() {
 }
 
 function clearSearchForms() {
@@ -272,9 +307,9 @@ function geniusAPIFirstCall() {
     var geniusAPIKey = config.geniusKEY;
 
     var artistNameSearch = $('#artistNameForm').val().trim();
-    var songNameSearch = $('#songNameForm').val().trim();
-    var albumNameSearch = $('#albumNameForm').val().trim();
-    var yearNameSearch = $('#yearNameForm').val().trim();
+    // var songNameSearch = $('#songNameForm').val().trim();
+    // var albumNameSearch = $('#albumNameForm').val().trim();
+    // var yearNameSearch = $('#yearNameForm').val().trim();
 
     var GeniusQueryURL = 'https://genius.p.rapidapi.com/search?q=' + artistNameSearch;
 
@@ -293,7 +328,7 @@ function geniusAPIFirstCall() {
         }
     }).then(function (response) {
 
-        console.log(response.response);
+        // console.log(response.response);
 
         var artist_ID = response.response.hits[0].result.primary_artist.id;
         var artist_URL = response.response.hits[0].result.primary_artist.url;
@@ -325,6 +360,7 @@ function geniusAPIFirstCall() {
         $("#altURL4").attr("href", altURL4);
         $("#altImg5").attr("src", altImg5);
         $("#altURL5").attr("href", altURL5);
+
         /* =================================================
         ====================================================
         HERE, WE STORE THE ARTIST ID IN ORDER TO PERFORM A
@@ -345,6 +381,7 @@ function geniusAPIFirstCall() {
                 song.attr("id", "songTitle");
         };
         
+        // ENSURES THE MAIN ARTIST IMAGE BELONGS TO THE ONE THE USER SEARCHED FOR.
         var counter = 0;
         for (var i = 0; i < response.response.hits.length; i++) {
 
@@ -357,20 +394,25 @@ function geniusAPIFirstCall() {
 
                 var artist_URL = response.response.hits[i].result.primary_artist.url;
                 var artist_Image = response.response.hits[i].result.primary_artist.image_url;
+                var tempName = response.response.hits[i].result.primary_artist.name;
+                sessionStorage.setItem("tempName", tempName);
 
                 $("#artistURL").attr("href", artist_URL);
                 $("#artistImg").attr("src", artist_Image);
                 
             }
-
-            //console.log(response.response.hits[i].result.primary_artist.name);
+            else {
+                var tempSearch = $("#artistNameForm").val().trim();
+                sessionStorage.setItem("tempName", tempSearch);
+            }
         };
 
 
 
 
-    console.log(topSongs);
+    // console.log(topSongs);
         geniusAPISecondCall();
+        seatGeekSecondAPICall();
     });
 }
 
@@ -401,7 +443,8 @@ function geniusAPISecondCall() {
             "x-rapidapi-key": geniusAPIKey
         }
     }).then(function (response) {
-    console.log(response.response);
+    console.log('-----Genius Second API call------')
+    // console.log(response.response);
     
 
     // Show the populated results div!
@@ -416,6 +459,39 @@ function geniusAPISecondCall() {
 
     }
     })
+}
+
+function seatGeekSecondAPICall() {
+    var config = {
+        geniusKEY: 'c73834d65amsh116e415b6adfba2p14b76cjsnf234503f539a',
+        seatGeekKEY: 'MTg1NzgxOTZ8MTU2OTM0NDQ1NS44'
+    } 
+
+    let artistName = sessionStorage.getItem("artistName");
+    var seatGeekKEY = config.seatGeekKEY;
+    var queryURL = "https://api.seatgeek.com/2/events?q=" + artistName + "&client_id=" + seatGeekKEY;
+
+    var genresArr = [];
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response){
+
+        console.log(response);
+
+        if (response.events[0].perfomers[0].genre !== "") {
+        for (var i = 0; i < response.events[0].performers.length; i++) {
+            genresArr.push(i);
+
+        }
+        console.log(genresArr);
+
+    }
+
+
+    });
+
+
 }
 
 function seatGeekAPICall() {
@@ -436,7 +512,7 @@ function seatGeekAPICall() {
         method: "GET",
 
     }).then(function (response) {
-        console.log(response)
+        // console.log(response)
         $("#seatGeekRow").css("display", "block");
         let geekResponse = response.events[0];
         let info = {
@@ -470,4 +546,4 @@ $("#resultsminbtn").on("click", function(){
     } else {
         $("#resultsminbtn").text("+")
     }
-    })
+});

@@ -147,9 +147,8 @@ p {
     z-index: 1100;
    }
    #featuredImage {
-       max-width: 34%;
-       margin-left: 5%;
        transition: all .5s ease-in-out;
+       width: 50%;
    }
    #featuredAlbum {
        pointer-events: none;
@@ -293,7 +292,11 @@ p {
     transition: all .5s ease-in-out;
 }
 #spotify {
-    width:100%;
+    width: 50%;
+}
+#spotifyButton {
+    margin-top: 5px;
+    width: 100%;
 }
 #titleFont {
     font-family: "alexana_neueregular";
@@ -308,7 +311,11 @@ p {
 /* ===================================================================================
    ================================= MEDIA QUERIES ===================================
    =================================================================================== */
-
+@media (max-width: 2300px) {
+    #featuredImage {
+        width: 30%;
+    }
+}
 @media (max-width: 1900px) {
     #wrapper {
         left: -3%;
@@ -481,6 +488,12 @@ p {
         top: 325%;
     }
 } 
+@media (max-width: 992px) {
+    #featuredImage {
+        margin-top: 10px;
+        width: 50%;
+    }
+}
 @media (max-width: 990px) {
     #wrapper {
         left: -15%;
@@ -506,10 +519,6 @@ p {
     }
     #songSparrowLogo {
         left:50%;
-    }
-    #featuredImage {
-        width: 100px;
-        height: 100px;
     }
 } 
 @media (max-width: 855px) {
@@ -572,8 +581,8 @@ p {
     #mobileOnly {
         display: block;
         position: absolute;
-        left: 48%;
-        top: 550%;
+        left: 16%;
+        top: 60%;
     }
     .form-control {
         -webkit-text-stroke-width: 1px;
