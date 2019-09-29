@@ -47,18 +47,11 @@ connectedRef.on("value", function(snap) {
 });
 
   // Create a timestamp to include in user message...
-  var date = new Date();
   const unixTime = $("unixtime").val();
-  const currentTime = moment(unixTime).format("h:mm a");
+  const date = moment(unixTime).format("MM/DD/YY");
+  const currentTime = moment(unixTime).format("h:mm A");
 
-  var timestamp =
-    date.getUTCMonth() +
-    "/" +
-    date.getUTCDay() +
-    "/" +
-    date.getUTCFullYear() +
-    " - " +
-    currentTime;
+  var timestamp = currentTime + " - " + date ;
   /* =================================================================
     ====================================================================
     CURRENTLY THE FOLLOWING CODE DISPLAYS MESSAGES **TWICE** INSTEAD OF
