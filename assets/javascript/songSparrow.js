@@ -275,9 +275,9 @@ function geniusAPIFirstCall() {
     var geniusAPIKey = config.geniusKEY;
 
     var artistNameSearch = $('#artistNameForm').val().trim();
-    var songNameSearch = $('#songNameForm').val().trim();
-    var albumNameSearch = $('#albumNameForm').val().trim();
-    var yearNameSearch = $('#yearNameForm').val().trim();
+    // var songNameSearch = $('#songNameForm').val().trim();
+    // var albumNameSearch = $('#albumNameForm').val().trim();
+    // var yearNameSearch = $('#yearNameForm').val().trim();
 
     var GeniusQueryURL = 'https://genius.p.rapidapi.com/search?q=' + artistNameSearch;
 
@@ -348,6 +348,8 @@ function geniusAPIFirstCall() {
                 song.attr("id", "songTitle");
         };
         
+
+        // ENSURES THE MAIN ARTIST IMAGE BELONGS TO THE ONE THE USER SEARCHED FOR.
         var counter = 0;
         for (var i = 0; i < response.response.hits.length; i++) {
 

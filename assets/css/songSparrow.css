@@ -360,6 +360,14 @@ textarea {
 #bottomDiv {
     margin-top: 100px;
 }
+#chat {
+    position: relative;
+    top: -100%;
+    right: -40%;
+    width: 500px;
+    z-index: 100;
+    border: 3px rgb(36, 30, 30) solid;
+}
 #chatDiv {
     margin-top: 20px;
     opacity: 0;
@@ -431,6 +439,7 @@ textarea {
     background: rgb(54, 48, 48);
 }
 #favoriteButton {
+    margin-top: 15px;
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
     border: 2px rgb(85, 72, 72) solid;
     color: #3d3333;
@@ -581,6 +590,11 @@ textarea {
         border: 2px rgb(85, 72, 72) solid;
         box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726);
     }
+#relatedArtists {
+    color: rgb(223, 221, 219);
+    margin-bottom: -15px;
+    border-bottom: 2px white solid;
+}
 #responseModal {
     display: none;
 }
@@ -630,6 +644,7 @@ button#resultsminbtn {
         font-size: 2.5vw;
     }
 #searchButton {
+    margin-top: 15px;
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
     width: 100%;
     font-weight: bold;

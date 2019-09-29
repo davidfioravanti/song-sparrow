@@ -48,6 +48,9 @@ connectedRef.on("value", function(snap) {
 
   // Create a timestamp to include in user message...
   var date = new Date();
+  const unixTime = $("unixtime").val();
+  const currentTime = moment(unixTime).format("h:mm a");
+
   var timestamp =
     date.getUTCMonth() +
     "/" +
@@ -55,10 +58,7 @@ connectedRef.on("value", function(snap) {
     "/" +
     date.getUTCFullYear() +
     " - " +
-    date.getUTCHours() +
-    ":" +
-    date.getUTCMinutes();
-
+    currentTime;
   /* =================================================================
     ====================================================================
     CURRENTLY THE FOLLOWING CODE DISPLAYS MESSAGES **TWICE** INSTEAD OF
@@ -66,7 +66,7 @@ connectedRef.on("value", function(snap) {
     ====================================================================
     ================================================================= */
 
-  database.ref("/messages").on("child_added", function(childSnap) {
+  database.ref("/messages").limitToLast(10).on("child_added", function(childSnap) {
     // console.log(childSnap.val().message)
     console.log("i");
     console.log(childSnap.val());
