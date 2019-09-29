@@ -360,6 +360,14 @@ textarea {
 #bottomDiv {
     margin-top: 100px;
 }
+#chat {
+    position: relative;
+    top: -100%;
+    right: -40%;
+    width: 500px;
+    z-index: 100;
+    border: 3px rgb(36, 30, 30) solid;
+}
 #chatDiv {
     margin-top: 20px;
     opacity: 0;
@@ -431,6 +439,7 @@ textarea {
     background: rgb(54, 48, 48);
 }
 #favoriteButton {
+    margin-top: 15px;
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
     border: 2px rgb(85, 72, 72) solid;
     color: #3d3333;
@@ -445,6 +454,7 @@ textarea {
     border-bottom: none;
 }
 #favoritesModal {
+    overflow: scroll;
     position: fixed;
     top: -200px;
     width: 100%;
@@ -460,6 +470,59 @@ textarea {
     user-select: none;
     z-index: 1000;
     animation: textGlow 2s infinite ease;
+    margin-bottom: 20px;
+}
+#newFavDiv {
+    background: rgb(39, 35, 35);
+    border: 3px rgb(255, 124, 37) solid;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 100px 10px rgba(233, 119, 12, 0.342) inset;
+}
+#newFavImg {
+    width: 50%;
+    max-width: 30vw;
+    max-height: 20vw;
+    clip-path: circle(40% at 50% 50%);
+    transition: all .5s ease;
+    filter: grayscale(2);
+    position: relative;
+}
+#newFavImg:hover {
+    filter: grayscale(.5);
+}
+#newFavName {
+    font-size: 30px;
+    text-transform: uppercase;
+    font-family: "alexana_neueregular";
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+    text-shadow: 0px 0px 10px #000000af;
+}
+#favoritesReset {
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    border: 2px rgb(255, 102, 0) solid;
+    transition: all .2s ease-in-out;
+    background: rgb(255, 102, 0);
+}
+#favoritesReset:hover {
+    border: 2px red solid;
+    background: red;
+    animation: warningFlash .5s infinite ease-in-out;
+}
+#favoritesReset:focus {
+    box-shadow: 0px 0px 20px 5px rgba(255, 0, 0, 0.555);
+}
+@keyframes warningFlash {
+    0% {background: red;}
+    50% {background: rgb(255, 102, 0);}
+    100% {background: red;}
 }
 #featureButtons {
     margin-top: 30px;
@@ -581,6 +644,11 @@ textarea {
         border: 2px rgb(85, 72, 72) solid;
         box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726);
     }
+#relatedArtists {
+    color: rgb(223, 221, 219);
+    margin-bottom: -15px;
+    border-bottom: 2px white solid;
+}
 #responseModal {
     display: none;
 }
@@ -630,6 +698,7 @@ button#resultsminbtn {
         font-size: 2.5vw;
     }
 #searchButton {
+    margin-top: 15px;
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
     width: 100%;
     font-weight: bold;
@@ -770,6 +839,12 @@ button#resultsminbtn {
             border: 2px rgb(85, 72, 72) solid;
             box-shadow: 0px 2px 20px 10px rgba(255, 106, 19, 0.692);
         }
+    #warningText {
+        display: none;
+        font-weight: bold;
+        color: red;
+        text-shadow: 0px 0px 10px #cf0000;
+    }
 /* ===================================================================================
    ================================= MEDIA QUERIES ===================================
    =================================================================================== */

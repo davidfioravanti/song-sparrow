@@ -11,6 +11,29 @@ HAS YOUR BACK!</i></h2>
 <h2 class="centered">CHANGELOG:</h2>
 
 <hr>
+<h3>9/29/19:</h3>
+<p>&nbsp;&nbsp;&nbsp;
+Website is almost fully functional!</p>
+<p>&nbsp;&nbsp;&nbsp;
+Chat function is fully implemented and correctly displaying the 10 most recent messages. Included
+various methods of form validation to prevent users from injecting script into the chat. HTML markdown
+is fully supported in chat (IE: allows users to create html tags w/ pre-defined classes for styling)</p>
+<p>&nbsp;&nbsp;&nbsp;
+API integration is about 90% complete. As of now, the user can use the UI to query Genius for artist/song info
+AND Seat Geek to find out events/ticket pricing. We're looking at implementing a few more features to enrich
+the end-user experience.</p>
+<p>&nbsp;&nbsp;&nbsp;
+Firebase Real-Time Database is fully functional across the website. Currently it logs user searches/messages sent in the chat window/logs users. Firebase now also stores user favorites and with jquery dynamically populates each users favorites tab!
+</p>
+<p>
+
+- David Fioravanti (Gainstrive)
+<br>
+<br>
+
+<hr>
+
+<hr>
 <h3>9/23/19:</h3>
 <p>&nbsp;&nbsp;&nbsp;
 Added prototype files for the index, main-app, and popout-chat pages (including their respective css/js files).</p>

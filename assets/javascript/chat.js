@@ -47,18 +47,11 @@ connectedRef.on("value", function(snap) {
 });
 
   // Create a timestamp to include in user message...
-  var date = new Date();
-  var timestamp =
-    date.getUTCMonth() +
-    "/" +
-    date.getUTCDay() +
-    "/" +
-    date.getUTCFullYear() +
-    " - " +
-    date.getUTCHours() +
-    ":" +
-    date.getUTCMinutes();
+  const unixTime = $("unixtime").val();
+  const date = moment(unixTime).format("MM/DD/YY");
+  const currentTime = moment(unixTime).format("h:mm A");
 
+  var timestamp = currentTime + " - " + date ;
   /* =================================================================
     ====================================================================
     CURRENTLY THE FOLLOWING CODE DISPLAYS MESSAGES **TWICE** INSTEAD OF
@@ -66,7 +59,7 @@ connectedRef.on("value", function(snap) {
     ====================================================================
     ================================================================= */
 
-  database.ref("/messages").on("child_added", function(childSnap) {
+  database.ref("/messages").limitToLast(10).on("child_added", function(childSnap) {
     // console.log(childSnap.val().message)
     console.log("i");
     console.log(childSnap.val());
@@ -123,7 +116,7 @@ connectedRef.on("value", function(snap) {
         alert("NO STYLE FOR YOU!");
         clearForms();
       } else {
-        /* ==================================================================
+        /* ======================================================================
             =====================================================================
             THIS BLOCK IS ONLY FOR TESTING CHAT OUTPUT! NOT FOR LIVE-SITE!!!!
             =====================================================================

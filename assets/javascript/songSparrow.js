@@ -62,6 +62,7 @@ $(document).ready(function () {
         birdSound.play();
     })
 
+
     // UPDATES THE LATEST SEARCHES TABLE WITH RESULTS!
     database.ref("/searches").limitToLast(3).on("child_added", function(childSnap) {
         var rowNumStr = sessionStorage.getItem("rowNum");
@@ -95,6 +96,21 @@ $(document).ready(function () {
     // Change the username used for site chat to that username...
     $("#username").text(username);
 
+
+    database.ref("/users/" + username + "/(favorites)").on("child_added", function(favSnap) {
+        console.log(favSnap);
+        var favRow = $("<div id='newFavDiv' class='text-center newFav'>");
+        var favCol = $("<div id='newFavCol'>");
+        var favBr = $("<br>");
+        var favName = $("<p id='newFavName' class='col-12'>" + favSnap.val().name + "</p>");
+        var favImg = $("<a id='newFavLink' target='_blank' rel='noopener' href='" + favSnap.val().url + "'>" + 
+        "<img id='newFavImg' class='col-12' src='" + favSnap.val().img + "'>" + "</a>");
+        favRow.appendTo($("#favoritesPlaceholder"));
+        favCol.appendTo(favRow);
+        favName.appendTo(favCol);
+        favBr.appendTo(favName)
+        favImg.appendTo(favName);
+    })
 
     // When the user presses a key while inside the chat input area...
     $("#chatInput").on("keydown", function (e) {
@@ -205,16 +221,37 @@ $(document).ready(function () {
     })
 
     $("#favoriteButton").on("click", function(){
-        var artistImage = $("#artistImg").attr
+        var username =localStorage.getItem("username");
+        let favoriteName = sessionStorage.getItem("tempName");
+        let favoriteImg = $("#artistImg").attr("src");
+        let favoriteURL = $("#artistURL").attr("href");
+    
+        database.ref("/users/" + username + "/(favorites)").push({
+            name: favoriteName,
+            img: favoriteImg,
+            url: favoriteURL
+          });
     })
     // When the user clicks the favorites button in footer...
     $("#favoritesButton").on("click", function () {
         $("#favoritesModal").css("display", "block");
+        
+        $("#favoritesReset").on("mouseover mouseout", function() {
+            $("#warningText").toggle();
+        });
+
+        $("#favoritesReset").on("dblclick", function() {
+            var username = localStorage.getItem("username");
+            $(".newFav").remove();
+            database.ref("/users/" + username + "/(favorites)").set({
+
+            })
+        })
 
         // When the user clicks the close button...
         $("#closeButton2").on("click", function(){
             $("#favoritesModal").css("display", "none");
-        })
+        });
     })
 });
 
@@ -238,11 +275,6 @@ function search() {
     else {
         searchErrorEmpty();
     }
-}
-
-
-
-function addToFavorites() {
 }
 
 function clearSearchForms() {
@@ -275,9 +307,9 @@ function geniusAPIFirstCall() {
     var geniusAPIKey = config.geniusKEY;
 
     var artistNameSearch = $('#artistNameForm').val().trim();
-    var songNameSearch = $('#songNameForm').val().trim();
-    var albumNameSearch = $('#albumNameForm').val().trim();
-    var yearNameSearch = $('#yearNameForm').val().trim();
+    // var songNameSearch = $('#songNameForm').val().trim();
+    // var albumNameSearch = $('#albumNameForm').val().trim();
+    // var yearNameSearch = $('#yearNameForm').val().trim();
 
     var GeniusQueryURL = 'https://genius.p.rapidapi.com/search?q=' + artistNameSearch;
 
@@ -328,6 +360,7 @@ function geniusAPIFirstCall() {
         $("#altURL4").attr("href", altURL4);
         $("#altImg5").attr("src", altImg5);
         $("#altURL5").attr("href", altURL5);
+
         /* =================================================
         ====================================================
         HERE, WE STORE THE ARTIST ID IN ORDER TO PERFORM A
@@ -348,6 +381,7 @@ function geniusAPIFirstCall() {
                 song.attr("id", "songTitle");
         };
         
+        // ENSURES THE MAIN ARTIST IMAGE BELONGS TO THE ONE THE USER SEARCHED FOR.
         var counter = 0;
         for (var i = 0; i < response.response.hits.length; i++) {
 
@@ -360,13 +394,17 @@ function geniusAPIFirstCall() {
 
                 var artist_URL = response.response.hits[i].result.primary_artist.url;
                 var artist_Image = response.response.hits[i].result.primary_artist.image_url;
+                var tempName = response.response.hits[i].result.primary_artist.name;
+                sessionStorage.setItem("tempName", tempName);
 
                 $("#artistURL").attr("href", artist_URL);
                 $("#artistImg").attr("src", artist_Image);
                 
             }
-
-            //console.log(response.response.hits[i].result.primary_artist.name);
+            else {
+                var tempSearch = $("#artistNameForm").val().trim();
+                sessionStorage.setItem("tempName", tempSearch);
+            }
         };
 
 
@@ -455,7 +493,6 @@ function seatGeekSecondAPICall() {
 
 
 }
-
 
 function seatGeekAPICall() {
 
