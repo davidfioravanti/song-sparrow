@@ -488,6 +488,12 @@ p {
         top: 325%;
     }
 } 
+@media (max-width: 992px) {
+    #featuredImage {
+        margin-top: 10px;
+        width: 50%;
+    }
+}
 @media (max-width: 990px) {
     #wrapper {
         left: -15%;
@@ -575,8 +581,8 @@ p {
     #mobileOnly {
         display: block;
         position: absolute;
-        left: 48%;
-        top: 550%;
+        left: 16%;
+        top: 60%;
     }
     .form-control {
         -webkit-text-stroke-width: 1px;

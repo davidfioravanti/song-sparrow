@@ -23,7 +23,7 @@ API integration is about 90% complete. As of now, the user can use the UI to que
 AND Seat Geek to find out events/ticket pricing. We're looking at implementing a few more features to enrich
 the end-user experience.</p>
 <p>&nbsp;&nbsp;&nbsp;
-Firebase Real-Time Database is fully functional across the website. Currently it logs user searches/messages sent in the chat window/logs users. Looking into utilizing FBase for the "Favorites" feature of the website, instead of relying on local storage to hold favorites.
+Firebase Real-Time Database is fully functional across the website. Currently it logs user searches/messages sent in the chat window/logs users. Firebase now also stores user favorites and with jquery dynamically populates each users favorites tab!
 </p>
 <p>
 
