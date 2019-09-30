@@ -112,42 +112,102 @@ $(document).ready(function () {
         favImg.appendTo(favName);
     })
 
-    // When the user presses a key while inside the chat input area...
-    $("#chatInput").on("keydown", function (e) {
+    database.ref("/messages").limitToLast(10).on("child_added", function(childSnap) {
+        // console.log(childSnap.val().message)
+        console.log("i");
+        console.log(childSnap.val());
+        let Username = childSnap.val().username;
+        let Message = childSnap.val().message;
+        let Timestamp = childSnap.val().timestamp;
+        let invalidTag = "script";
+        let invalidCSS = "style";
+        if (Message.includes(invalidTag) || Message.includes(invalidCSS)) {
+          // DO NOTHING!
+        } else {
+          var newMessage = $(
+            "<div class='row messageDiv'>" +
+              "<span class='col-12 messageUsername'>" +
+              Username +
+              " : " +
+              "</span><span class='col-12 messageMessage'>" +
+              Message +
+              "<br>" +
+              "</span><span class='col-12 messageTimestamp'>" +
+              Timestamp +
+              "</span>"
+          );
+          newMessage.prependTo("#globalChat");
+          console.log(newMessage);
+        }
+      });
 
+    // Create a timestamp to include in user message...
+    const unixTime = $("unixtime").val();
+    const date = moment(unixTime).format("MM/DD/YY");
+    const currentTime = moment(unixTime).format("h:mm A");
+
+    var timestamp = currentTime + " - " + date ;
+
+    // When the user presses a key inside the chat input...
+    $("#chatInput").on("keydown", function(e) {
         // If the button pressed was "enter"...
         if (e.which == 13) {
-            e.preventDefault();
+        // Prevent page refresh...
+        e.preventDefault();
 
         // Store the users submitted message...
-        var chatMessage = $("#chatInput").val().trim();
-        // console.log(chatMessage);
+        var chatMessage = $("#chatInput")
+            .val()
+            .trim();
+        var invalidTag = "<script>";
+        let invalidCSS = "style";
 
-            if (chatMessage == "") {
-                // Dynamically create the appropriate error modal...
-                $("#modalTitle").text("UH-OH!");
-                $("#modalBody").empty();
-                var modalText = $("<p class='modalText'>");
-                modalText.text("YOUR CHAT MESSAGE CAN'T BE EMPTY!");
-                // Append created elements to the modal...
-                modalText.appendTo($("#modalBody"));
-                // Display the modal...
-                $("#responseModal").css("display", "block");
-            }
-
-            // If the user's message is NOT empty (contains at least one char.)...
-            else if (chatMessage !== "") {
-                // Create a new <p> tag...
-                var modalText = $("<p id='chatText'>");
-                // Change new <p> tag's html to (username: + chatMessage)...
-                modalText.html(username + ": &nbsp; &nbsp;" + chatMessage);
-                // PREPEND the new <p> tag to the chat window...
-                modalText.prependTo($("#globalChat"));
-                // Clear the chat input form...
-                clearChatForms();
-            }
+        // If the chat message is empty...
+        if (chatMessage == "") {
+            // DO NOTHING
         }
-    })
+        // If the chat message contained a script...
+        else if (chatMessage.includes(invalidTag)) {
+            alert("NICE TRY! NO JAVASCRIPT FOR YOU!");
+            clearForms();
+        }
+        // If the chat message contained css...
+        else if (chatMessage.includes(invalidCSS)) {
+            alert("NO STYLE FOR YOU!");
+            clearForms();
+        } else {
+            /* ======================================================================
+                =====================================================================
+                THIS BLOCK IS ONLY FOR TESTING CHAT OUTPUT! NOT FOR LIVE-SITE!!!!
+                =====================================================================
+                ================================================================== */
+
+            // // Create a new <p> tag...
+            // var modalText = $("<p id='chatText'>");
+            // // Set the new <p>'s html to (username: + chatMessage)...
+            // modalText.html(username + ": &nbsp; &nbsp;" + chatMessage);
+            // // Prepend the new <p> to the chat window...
+            // modalText.prependTo($("#globalChat"));
+            // // Clear all forms...
+
+            /* ===================================================================
+                ======================================================================
+                ======================================================================
+                =================================================================== */
+
+            database.ref("/messages").push({
+            username: username,
+            message: chatMessage,
+            timestamp: timestamp
+            });
+            clearForms();
+        }
+        }
+    });
+        // Clear all forms...
+        function clearForms() {
+            $("#chatInput").val("");
+        }
 
     // When the user clicks on the HTML Markdown Supported Button...
     $("#chatNote").on("click", function() {
@@ -164,7 +224,7 @@ $(document).ready(function () {
     // When the user clicks the POPOUT CHAT BUTTON...
     $("#popOutChat").on("click", function() {
         // Open a new "600x600" window, and open chat.html ...
-        window.open ("chat.html",
+        window.open ("popOutChat.html",
         "Song Sparrow Chat",
         "menubar=0,resizable=0,width=600,height=600");
     })
