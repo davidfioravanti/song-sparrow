@@ -502,8 +502,7 @@ textarea {
     box-shadow: 0px 0px 100px 10px rgba(233, 119, 12, 0.342) inset;
 }
 #newFavImg {
-    width: 50%;
-    max-width: 30vw;
+    max-width:20vw;
     max-height: 20vw;
     clip-path: circle(40% at 50% 50%);
     transition: all .5s ease;
