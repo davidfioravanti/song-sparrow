@@ -379,6 +379,10 @@ textarea {
             transform: rotate(-360deg);
             filter: grayscale(.5);
         }
+#attribution {
+    color: white;
+    font-weight: bold;
+}
 #bottomDiv {
     margin-top: 100px;
 }
@@ -476,10 +480,11 @@ textarea {
     border-bottom: none;
 }
 #favoritesModal {
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: fixed;
     top: -200px;
-    width: 100%;
+    width: auto;
     transition: all .5s ease;
 }
 #favoritesTitle {
@@ -699,6 +704,7 @@ textarea {
     width: 100%;
     padding: 0;
     display: none;
+    transition: all .3s ease-in-out;
 }
 button#resultsminbtn {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
@@ -959,7 +965,7 @@ button#resultsminbtn {
 }
 @media (max-width: 1500px) {
     #bottomDiv {
-        margin-top: 150px;
+        margin-top: 200px;
     }
     #songSparrowLogo {
         position: relative;
@@ -995,6 +1001,11 @@ button#resultsminbtn {
         height: 100px;
     }
 }
+@media (max-width: 950px) {
+    #bottomDiv {
+        margin-top: 270px;
+    }
+}
 @media (max-width: 880px) {
     #songSparrowLogo {
         width: 300px;
@@ -1015,34 +1026,22 @@ button#resultsminbtn {
     }   
 }
 @media (max-width: 792px) {
+    #bottomDiv {
+        margin-top: 340px;
+    }
     #songSparrowLogo {
-        width: 300px;
-        left: -180px;
-    }
-    #chat {
-        width: 85%;
-        left: 200px;
-    }
-    #globalChat {
-        height: 70px;
-    }
-  
-}
-@media (max-width: 792px) {
-    #songSparrowLogo {
-        width: 300px;
-        left: -180px;
+        display: none;
     }
     #chatNote {
         display: none;
     }
     #chat {
-        width: 80%;
-        left: 50%;
+        width: 600px;
+        left: -120px;
         top: -320px;
     }
     #globalChat {
-        height: 70px;
+        height: 300px;
     }
     label.btn.buttonToggle {
         font-size: .8em;
@@ -1063,13 +1062,13 @@ button#resultsminbtn {
         display: none;
     }
     #chat {
-        margin-top: 200px;
+        margin-top: 0px;
         width: 150%;
         left: -24%;
         top: -320px;
     }
     #globalChat {
-        height: 70px;
+        height: 200px;
     }
     label {
     font-size: 1em;
@@ -1088,13 +1087,15 @@ button#resultsminbtn {
         display: none;
     }
     #chat {
-        margin-top: 200px;
         width: 150%;
         left:-60px;
         top: -320px;
     }
     #globalChat {
-        height: 70px;
+        height: 200px;
+    }
+    .messageUsername {
+        font-size: 30px;
     }
 
 }
