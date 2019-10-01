@@ -22,7 +22,7 @@ $(document).ready(function () {
   // console.log(messagesRef)
   var connectedRef = database.ref(".info/connected/");
 
-  sessionStorage.setItem("rowNum", "1");
+  sessionStorage.setItem("rowNum", "3");
 
     // When the client's connection state changes...
     connectedRef.on("value", function(snap) {
@@ -70,7 +70,7 @@ $(document).ready(function () {
         var rowNumInt = parseInt(rowNumStr);
         console.log(rowNumInt);
 
-        if (rowNumInt < 4){
+        if (rowNumInt > 0){
             let latestSearch = childSnap.val().artistName;
             let newTr = $("<tr class='added" + rowNumInt + "'>");
             let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
@@ -78,12 +78,22 @@ $(document).ready(function () {
             newTdName.prependTo(newTr);
             newTdNum.prependTo(newTr);
             newTr.prependTo("tbody");
-            rowNumInt++;
+            rowNumInt--;
             sessionStorage.setItem("rowNum", rowNumInt);
         }
         else {
             $(".added").remove();
-            sessionStorage.setItem("rowNum", "1");
+            sessionStorage.setItem("rowNum", "3");
+
+            let latestSearch = childSnap.val().artistName;
+            let newTr = $("<tr class='added" + rowNumInt + "'>");
+            let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
+            let newTdName = $("<td class='added td" + rowNumInt + "'>" + latestSearch + "</td>");
+            newTdName.prependTo(newTr);
+            newTdNum.prependTo(newTr);
+            newTr.prependTo("tbody");
+            rowNumInt--;
+            sessionStorage.setItem("rowNum", rowNumInt);
         }
     })
 /* =================================================================
@@ -538,6 +548,10 @@ function geniusAPISecondCall() {
     })
 }
 
+/* =================================================================
+====================== SEATGEEK AJAX CALL 2 ========================
+================================================================= */
+
 function seatGeekSecondAPICall() {
     var config = {
         geniusKEY: 'c73834d65amsh116e415b6adfba2p14b76cjsnf234503f539a',
@@ -618,6 +632,11 @@ function seatGeekSecondAPICall() {
     });
 
 }
+
+/* =================================================================
+====================== SEATGEEK AJAX CALL 1 ========================
+================================================================= */
+
 
 function seatGeekAPICall() {
 
