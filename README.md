@@ -6,9 +6,25 @@
 <h2 class="centered"> Looking for music info on your favorite artists? <br>
 <i>YOUR BIRD-BUDDY SONG SPARROW <br>
 HAS YOUR BACK!</i></h2>
+<br>
+<h2 class="centered">FEATURES:</h2>
+<hr>
+<p>&nbsp;&nbsp;&nbsp;
+- Interact with our sleek and responsive UI to search for artists/songs!</p>
+<p>&nbsp;&nbsp;&nbsp;
+- Explore top songs/albums/lyrics and more by utlizing dynamicly generated links to<br> artist's Genius page (with Apple Music Integration). Hook into Genius' web app for more!</p>
+<p>&nbsp;&nbsp;&nbsp;
+- Save searches you want to keep track of with your own personal FAVORITES menu!</p>
+<p>&nbsp;&nbsp;&nbsp;
+- HTML Markdown is support in chat, so you can link images/videos/etc!</p>
+<p>&nbsp;&nbsp;&nbsp;
+- Chat with other users either on the main page, or in a pop-out chat window!</p>
+<p>&nbsp;&nbsp;&nbsp;
+- Find upcoming concerts for your favorite artists and check ticket prices</p>
 <hr>
 <br>
 <h2 class="centered">CHANGELOG:</h2>
+<br>
 
 <hr>
 <h3>9/29/19:</h3>
@@ -23,7 +39,7 @@ API integration is about 90% complete. As of now, the user can use the UI to que
 AND Seat Geek to find out events/ticket pricing. We're looking at implementing a few more features to enrich
 the end-user experience.</p>
 <p>&nbsp;&nbsp;&nbsp;
-Firebase Real-Time Database is fully functional across the website. Currently it logs user searches/messages sent in the chat window/logs users. Firebase now also stores user favorites and with jquery dynamically populates each users favorites tab!
+Firebase Real-Time Database is fully functional across the website. Currently it logs user searches/messages sent in the chat window/logs users. Firebase now also stores user favorites and (with JQuery) dynamically populates each user's favorites tab!
 </p>
 <p>
 
@@ -33,7 +49,6 @@ Firebase Real-Time Database is fully functional across the website. Currently it
 
 <hr>
 
-<hr>
 <h3>9/23/19:</h3>
 <p>&nbsp;&nbsp;&nbsp;
 Added prototype files for the index, main-app, and popout-chat pages (including their respective css/js files).</p>
@@ -56,6 +71,7 @@ Website logo and image assets created.</p>
 <p>&nbsp;&nbsp;&nbsp;
 Designed the site layout in photoshop to guide HTML design.
 </p>
+
 - David Fioravanti (Gainstrive)
 <br>
 <br>
