@@ -502,6 +502,9 @@ textarea {
     animation: textGlow 2s infinite ease;
     margin-bottom: 20px;
 }
+#genresTitle {
+    font-size: 15px;
+}
 #newFavDiv {
     background: rgb(39, 35, 35);
     border: 3px rgb(255, 124, 37) solid;
@@ -577,6 +580,9 @@ textarea {
     color: white;
     font-size: 15px;
     text-transform: uppercase;
+}
+#genresDiv {
+    margin-top: 30px;
 }
 #globalChat {
     color: white;
