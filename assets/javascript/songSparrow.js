@@ -549,25 +549,73 @@ function seatGeekSecondAPICall() {
     var queryURL = "https://api.seatgeek.com/2/events?q=" + artistName + "&client_id=" + seatGeekKEY;
 
     var genresArr = [];
+
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function(response){
 
+        console.log('--------- SeatGeekSecond API Call ---------')
         console.log(response);
 
-        if (response.events[0].perfomers[0].genre !== "") {
-        for (var i = 0; i < response.events[0].performers.length; i++) {
-            genresArr.push(i);
+        let geekResponse2 = response.events[0];
+        
+        // console.log(geekResponse2.performers[0].hasOwnProperty('genres')); // returns true
+        // console.log(data.Genres);
+
+        if (geekResponse2.hasOwnProperty("performers") && (geekResponse2.performers[0].hasOwnProperty("genres"))) {
+
+            let data = {
+                Performers: geekResponse2.performers[0],
+                Genres: geekResponse2.performers[0].genres
+            }
+
+            for (var i = 0; i < data.Genres.length; i++) {
+
+                genresArr.push(data.Genres[i].name);
+
+            }
+
+            console.log(genresArr);
+
+            $('#genius').remove();
+
+            var genresDiv = $('<div>');
+            $('#attribution').text('ARTIST GENRES:');
+
+            genresDiv.attr('id', 'artistGenres');
+
+
+            $('#attribution').append(genresDiv);
+
+            var newDiv = $('<div>');
+            newDiv.attr('id', 'genresDiv');
+
+            $('#attribution').append(newDiv);
+
+
+            $.each(genresArr, function (index, value) {
+                $('#attribution').append('<p id=genreTitle'+index+'>');
+                $('#genreTitle'+index).css('font-size', '15px');
+                $('#genreTitle'+index).text(value.toUpperCase());
+
+                // break loop after 2 since our row only shows 3 songs we'll only want
+                // 3 genres max
+                return index < 2;
+            });
+
+
+        } else {
+
+            // display the genius image in HTML/CSS
+            console.log('OOPS! No Genres Listed');
+            $('#artistGenres').append('<p id=attribution>POWERED BY GENIUS:</p>');
+            $('#artistGenres').append('<img id=genius src=assets/images/genius.png>');
+
 
         }
-        console.log(genresArr);
-
-    }
-
 
     });
-
 
 }
 
