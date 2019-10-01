@@ -52,6 +52,9 @@ hr {
 span {
     color: white;
 }
+table {
+    size: 10vw;
+}
 textarea {
     font-weight: bold;
     text-transform: uppercase;
@@ -269,13 +272,13 @@ textarea {
             100% {transform: rotate(0deg)}
         }
 .td1{
-    font-size: 30px;
+    font-size: 5vw;
 }
 .td2{
-    font-size: 20px;
+    font-size: 3vw;
 }
 .td3{
-    font-size: 13px;
+    font-size: 2vw;
 }
 /* ===================================================================================
    ================================== UNIQUE ID'S ====================================

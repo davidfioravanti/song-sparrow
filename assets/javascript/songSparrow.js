@@ -96,7 +96,7 @@ $(document).ready(function () {
     // Change the username used for site chat to that username...
     $("#username").text(username);
 
-
+    //
     database.ref("/users/" + username + "/(favorites)").on("child_added", function(favSnap) {
         console.log(favSnap);
         var favRow = $("<div id='newFavDiv' class='text-center newFav'>");
@@ -147,6 +147,10 @@ $(document).ready(function () {
     const currentTime = moment(unixTime).format("h:mm A");
 
     var timestamp = currentTime + " - " + date ;
+
+/* =================================================================
+======================== EVENT LISTENERS ===========================
+================================================================= */
 
     // When the user presses a key inside the chat input...
     $("#chatInput").on("keydown", function(e) {
@@ -266,6 +270,8 @@ $(document).ready(function () {
     $(".close").on("click", function() {
         $("#responseModal").css("display", "none");
     })
+
+    // When the user clicks the close search button...
     $("#searchClose").on("click", function() {
         $("#resultsmindiv").css("display", "none");
         $("#resultsDiv").css("display", "none");
@@ -292,6 +298,7 @@ $(document).ready(function () {
             url: favoriteURL
           });
     })
+
     // When the user clicks the favorites button in footer...
     $("#favoritesButton").on("click", function () {
         $("#favoritesModal").css("display", "block");
@@ -313,6 +320,16 @@ $(document).ready(function () {
             $("#favoritesModal").css("display", "none");
         });
     })
+
+    // When the user clicks the min/max button.
+    $("#resultsminbtn").on("click", function(){
+        $("#resultsDiv").css("display", "")
+        if($(this).text() === "+"){
+            $("#resultsminbtn").text("-")
+        } else {
+            $("#resultsminbtn").text("+")
+        }
+    });
 });
 
 function search() {
@@ -599,11 +616,3 @@ function seatGeekAPICall() {
         $("#findEventLink").attr("href", findEventLink);
 })
 }
-$("#resultsminbtn").on("click", function(){
-    $("#resultsDiv").css("display", "")
-    if($(this).text() === "+"){
-        $("#resultsminbtn").text("-")
-    } else {
-        $("#resultsminbtn").text("+")
-    }
-});
