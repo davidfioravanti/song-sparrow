@@ -96,7 +96,7 @@ $(document).ready(function () {
     // Change the username used for site chat to that username...
     $("#username").text(username);
 
-
+    //
     database.ref("/users/" + username + "/(favorites)").on("child_added", function(favSnap) {
         console.log(favSnap);
         var favRow = $("<div id='newFavDiv' class='text-center newFav'>");
@@ -112,42 +112,106 @@ $(document).ready(function () {
         favImg.appendTo(favName);
     })
 
-    // When the user presses a key while inside the chat input area...
-    $("#chatInput").on("keydown", function (e) {
+    database.ref("/messages").limitToLast(10).on("child_added", function(childSnap) {
+        // console.log(childSnap.val().message)
+        console.log("i");
+        console.log(childSnap.val());
+        let Username = childSnap.val().username;
+        let Message = childSnap.val().message;
+        let Timestamp = childSnap.val().timestamp;
+        let invalidTag = "script";
+        let invalidCSS = "style";
+        if (Message.includes(invalidTag) || Message.includes(invalidCSS)) {
+          // DO NOTHING!
+        } else {
+          var newMessage = $(
+            "<div class='row messageDiv'>" +
+              "<span class='col-12 messageUsername'>" +
+              Username +
+              " : " +
+              "</span><span class='col-12 messageMessage'>" +
+              Message +
+              "<br>" +
+              "</span><span class='col-12 messageTimestamp'>" +
+              Timestamp +
+              "</span>"
+          );
+          newMessage.prependTo("#globalChat");
+          console.log(newMessage);
+        }
+      });
 
+    // Create a timestamp to include in user message...
+    const unixTime = $("unixtime").val();
+    const date = moment(unixTime).format("MM/DD/YY");
+    const currentTime = moment(unixTime).format("h:mm A");
+
+    var timestamp = currentTime + " - " + date ;
+
+/* =================================================================
+======================== EVENT LISTENERS ===========================
+================================================================= */
+
+    // When the user presses a key inside the chat input...
+    $("#chatInput").on("keydown", function(e) {
         // If the button pressed was "enter"...
         if (e.which == 13) {
-            e.preventDefault();
+        // Prevent page refresh...
+        e.preventDefault();
 
         // Store the users submitted message...
-        var chatMessage = $("#chatInput").val().trim();
-        // console.log(chatMessage);
+        var chatMessage = $("#chatInput")
+            .val()
+            .trim();
+        var invalidTag = "<script>";
+        let invalidCSS = "style";
 
-            if (chatMessage == "") {
-                // Dynamically create the appropriate error modal...
-                $("#modalTitle").text("UH-OH!");
-                $("#modalBody").empty();
-                var modalText = $("<p class='modalText'>");
-                modalText.text("YOUR CHAT MESSAGE CAN'T BE EMPTY!");
-                // Append created elements to the modal...
-                modalText.appendTo($("#modalBody"));
-                // Display the modal...
-                $("#responseModal").css("display", "block");
-            }
-
-            // If the user's message is NOT empty (contains at least one char.)...
-            else if (chatMessage !== "") {
-                // Create a new <p> tag...
-                var modalText = $("<p id='chatText'>");
-                // Change new <p> tag's html to (username: + chatMessage)...
-                modalText.html(username + ": &nbsp; &nbsp;" + chatMessage);
-                // PREPEND the new <p> tag to the chat window...
-                modalText.prependTo($("#globalChat"));
-                // Clear the chat input form...
-                clearChatForms();
-            }
+        // If the chat message is empty...
+        if (chatMessage == "") {
+            // DO NOTHING
         }
-    })
+        // If the chat message contained a script...
+        else if (chatMessage.includes(invalidTag)) {
+            alert("NICE TRY! NO JAVASCRIPT FOR YOU!");
+            clearForms();
+        }
+        // If the chat message contained css...
+        else if (chatMessage.includes(invalidCSS)) {
+            alert("NO STYLE FOR YOU!");
+            clearForms();
+        } else {
+            /* ======================================================================
+                =====================================================================
+                THIS BLOCK IS ONLY FOR TESTING CHAT OUTPUT! NOT FOR LIVE-SITE!!!!
+                =====================================================================
+                ================================================================== */
+
+            // // Create a new <p> tag...
+            // var modalText = $("<p id='chatText'>");
+            // // Set the new <p>'s html to (username: + chatMessage)...
+            // modalText.html(username + ": &nbsp; &nbsp;" + chatMessage);
+            // // Prepend the new <p> to the chat window...
+            // modalText.prependTo($("#globalChat"));
+            // // Clear all forms...
+
+            /* ===================================================================
+                ======================================================================
+                ======================================================================
+                =================================================================== */
+
+            database.ref("/messages").push({
+            username: username,
+            message: chatMessage,
+            timestamp: timestamp
+            });
+            clearForms();
+        }
+        }
+    });
+        // Clear all forms...
+        function clearForms() {
+            $("#chatInput").val("");
+        }
 
     // When the user clicks on the HTML Markdown Supported Button...
     $("#chatNote").on("click", function() {
@@ -164,7 +228,7 @@ $(document).ready(function () {
     // When the user clicks the POPOUT CHAT BUTTON...
     $("#popOutChat").on("click", function() {
         // Open a new "600x600" window, and open chat.html ...
-        window.open ("chat.html",
+        window.open ("popOutChat.html",
         "Song Sparrow Chat",
         "menubar=0,resizable=0,width=600,height=600");
     })
@@ -206,6 +270,8 @@ $(document).ready(function () {
     $(".close").on("click", function() {
         $("#responseModal").css("display", "none");
     })
+
+    // When the user clicks the close search button...
     $("#searchClose").on("click", function() {
         $("#resultsmindiv").css("display", "none");
         $("#resultsDiv").css("display", "none");
@@ -232,6 +298,7 @@ $(document).ready(function () {
             url: favoriteURL
           });
     })
+
     // When the user clicks the favorites button in footer...
     $("#favoritesButton").on("click", function () {
         $("#favoritesModal").css("display", "block");
@@ -253,6 +320,16 @@ $(document).ready(function () {
             $("#favoritesModal").css("display", "none");
         });
     })
+
+    // When the user clicks the min/max button.
+    $("#resultsminbtn").on("click", function(){
+        $("#resultsDiv").css("display", "")
+        if($(this).text() === "+"){
+            $("#resultsminbtn").text("-")
+        } else {
+            $("#resultsminbtn").text("+")
+        }
+    });
 });
 
 function search() {
@@ -472,25 +549,73 @@ function seatGeekSecondAPICall() {
     var queryURL = "https://api.seatgeek.com/2/events?q=" + artistName + "&client_id=" + seatGeekKEY;
 
     var genresArr = [];
+
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function(response){
 
+        console.log('--------- SeatGeekSecond API Call ---------')
         console.log(response);
 
-        if (response.events[0].perfomers[0].genre !== "") {
-        for (var i = 0; i < response.events[0].performers.length; i++) {
-            genresArr.push(i);
+        let geekResponse2 = response.events[0];
+        
+        // console.log(geekResponse2.performers[0].hasOwnProperty('genres')); // returns true
+        // console.log(data.Genres);
+
+        if (geekResponse2.hasOwnProperty("performers") && (geekResponse2.performers[0].hasOwnProperty("genres"))) {
+
+            let data = {
+                Performers: geekResponse2.performers[0],
+                Genres: geekResponse2.performers[0].genres
+            }
+
+            for (var i = 0; i < data.Genres.length; i++) {
+
+                genresArr.push(data.Genres[i].name);
+
+            }
+
+            console.log(genresArr);
+
+            $('#genius').remove();
+
+            var genresDiv = $('<div>');
+            $('#attribution').text('ARTIST GENRES:');
+
+            genresDiv.attr('id', 'artistGenres');
+
+
+            $('#attribution').append(genresDiv);
+
+            var newDiv = $('<div>');
+            newDiv.attr('id', 'genresDiv');
+
+            $('#attribution').append(newDiv);
+
+
+            $.each(genresArr, function (index, value) {
+                $('#attribution').append('<p id=genreTitle'+index+'>');
+                $('#genreTitle'+index).css('font-size', '15px');
+                $('#genreTitle'+index).text(value.toUpperCase());
+
+                // break loop after 2 since our row only shows 3 songs we'll only want
+                // 3 genres max
+                return index < 2;
+            });
+
+
+        } else {
+
+            // display the genius image in HTML/CSS
+            console.log('OOPS! No Genres Listed');
+            $('#artistGenres').append('<p id=attribution>POWERED BY GENIUS:</p>');
+            $('#artistGenres').append('<img id=genius src=assets/images/genius.png>');
+
 
         }
-        console.log(genresArr);
-
-    }
-
 
     });
-
 
 }
 
@@ -539,11 +664,3 @@ function seatGeekAPICall() {
         $("#findEventLink").attr("href", findEventLink);
 })
 }
-$("#resultsminbtn").on("click", function(){
-    $("#resultsDiv").css("display", "")
-    if($(this).text() === "+"){
-        $("#resultsminbtn").text("-")
-    } else {
-        $("#resultsminbtn").text("+")
-    }
-});

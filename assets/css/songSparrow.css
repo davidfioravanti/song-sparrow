@@ -24,6 +24,11 @@ body {
     overflow-y: auto;
     /* box-shadow: 0px 0px 100px 10px rgba(255, 94, 0, 0.555) inset; */
 }
+img {
+    position: relative;
+    max-width: 20vw;
+    max-width: 20vw;
+}
 label {
     font-size: 24pt;
     font-weight: bold;
@@ -46,6 +51,9 @@ hr {
 }
 span {
     color: white;
+}
+table {
+    size: 10vw;
 }
 textarea {
     font-weight: bold;
@@ -174,6 +182,23 @@ textarea {
 .imgWrap:hover {
     filter: drop-shadow(0px 0px 20px rgb(255, 255, 255));
 }
+.messageDiv {
+    position: relative;
+    margin-bottom: 30px;
+    background: rgba(0, 0, 0, 0.397);
+    border-radius: 15px;
+    border: rgb(33, 37, 41) 2px solid;
+}
+    .messageUsername {
+        font-size: 40px;
+    }
+    .messageMessage {
+        font-size: 18px;
+    }
+    .messageTimestamp {
+        text-align: right;
+        padding-right: 20px;
+    }
 .modal-dialog {
     border: 15px rgba(255, 115, 0, 0.733) solid;
     border-radius: 5px;
@@ -247,13 +272,13 @@ textarea {
             100% {transform: rotate(0deg)}
         }
 .td1{
-    font-size: 30px;
+    font-size: 5vw;
 }
 .td2{
-    font-size: 20px;
+    font-size: 3vw;
 }
 .td3{
-    font-size: 13px;
+    font-size: 2vw;
 }
 /* ===================================================================================
    ================================== UNIQUE ID'S ====================================
@@ -357,6 +382,10 @@ textarea {
             transform: rotate(-360deg);
             filter: grayscale(.5);
         }
+#attribution {
+    color: white;
+    font-weight: bold;
+}
 #bottomDiv {
     margin-top: 100px;
 }
@@ -454,10 +483,11 @@ textarea {
     border-bottom: none;
 }
 #favoritesModal {
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: fixed;
     top: -200px;
-    width: 100%;
+    width: auto;
     transition: all .5s ease;
 }
 #favoritesTitle {
@@ -472,6 +502,9 @@ textarea {
     animation: textGlow 2s infinite ease;
     margin-bottom: 20px;
 }
+#genresTitle {
+    font-size: 15px;
+}
 #newFavDiv {
     background: rgb(39, 35, 35);
     border: 3px rgb(255, 124, 37) solid;
@@ -480,8 +513,7 @@ textarea {
     box-shadow: 0px 0px 100px 10px rgba(233, 119, 12, 0.342) inset;
 }
 #newFavImg {
-    width: 50%;
-    max-width: 30vw;
+    max-width:20vw;
     max-height: 20vw;
     clip-path: circle(40% at 50% 50%);
     transition: all .5s ease;
@@ -549,11 +581,15 @@ textarea {
     font-size: 15px;
     text-transform: uppercase;
 }
+#genresDiv {
+    margin-top: 30px;
+}
 #globalChat {
     color: white;
     padding-top: 10px;
     padding-left: 10px;
     overflow-y: scroll;
+    overflow-x: hidden;
     overflow-wrap: break-word;
     height: 130px;
     background: white;
@@ -678,6 +714,7 @@ textarea {
     
     padding: 0;
     display: none;
+    transition: all .3s ease-in-out;
 }
 button#resultsminbtn {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
@@ -939,7 +976,7 @@ button#resultsminbtn {
 }
 @media (max-width: 1500px) {
     #bottomDiv {
-        margin-top: 150px;
+        margin-top: 200px;
     }
     #songSparrowLogo {
         position: relative;
@@ -975,6 +1012,11 @@ button#resultsminbtn {
         height: 100px;
     }
 }
+@media (max-width: 950px) {
+    #bottomDiv {
+        margin-top: 270px;
+    }
+}
 @media (max-width: 880px) {
     #songSparrowLogo {
         width: 300px;
@@ -995,34 +1037,22 @@ button#resultsminbtn {
     }   
 }
 @media (max-width: 792px) {
+    #bottomDiv {
+        margin-top: 340px;
+    }
     #songSparrowLogo {
-        width: 300px;
-        left: -180px;
-    }
-    #chat {
-        width: 85%;
-        left: 200px;
-    }
-    #globalChat {
-        height: 70px;
-    }
-  
-}
-@media (max-width: 792px) {
-    #songSparrowLogo {
-        width: 300px;
-        left: -180px;
+        display: none;
     }
     #chatNote {
         display: none;
     }
     #chat {
-        width: 80%;
-        left: 50%;
+        width: 600px;
+        left: -120px;
         top: -320px;
     }
     #globalChat {
-        height: 70px;
+        height: 300px;
     }
     label.btn.buttonToggle {
         font-size: .8em;
@@ -1043,13 +1073,13 @@ button#resultsminbtn {
         display: none;
     }
     #chat {
-        margin-top: 200px;
+        margin-top: 0px;
         width: 150%;
         left: -24%;
         top: -320px;
     }
     #globalChat {
-        height: 70px;
+        height: 200px;
     }
     label {
     font-size: 1em;
@@ -1068,13 +1098,15 @@ button#resultsminbtn {
         display: none;
     }
     #chat {
-        margin-top: 200px;
         width: 150%;
         left:-60px;
         top: -320px;
     }
     #globalChat {
-        height: 70px;
+        height: 200px;
+    }
+    .messageUsername {
+        font-size: 30px;
     }
 
 }
