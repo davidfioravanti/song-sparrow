@@ -711,6 +711,7 @@ textarea {
     margin-top:20px;
     background: rgba(34, 32, 32, 0.904);
     width: 100%;
+    
     padding: 0;
     display: none;
     transition: all .3s ease-in-out;
@@ -720,7 +721,8 @@ button#resultsminbtn {
     padding: 0 10px 0 10px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bolder;
-    font-size: 1.2em;
+    font-size: 1.6em;
+    line-height: 1.14em;
 
 }
     #resultsArtistName {

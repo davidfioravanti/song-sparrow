@@ -305,7 +305,7 @@ p {
 }
 #wrapper {
     width: 100%;
-    position: fixed;
+    position: relative;
 }
 
 /* ===================================================================================
@@ -338,57 +338,57 @@ p {
 }
 @media (max-width: 1700px) {
     #wrapper {
-        left: -11%;
+        left:-26%;
     }
 }
 @media (max-width: 1650px) {
     #wrapper {
-        left: -13%;
+        left: -27%;
     }
 }
 @media (max-width: 1600px) {
     #wrapper {
-        left: -15%;
+        left: -28.5%;
     }
 }
 @media (max-width: 1550px) {
     #wrapper {
-        left: -17%;
+        left: -29%;
     }
 }
 @media (max-width: 1500px) {
     #wrapper {
-        left: -19%;
+        left: -31%;
     }
 }
 @media (max-width: 1450px) {
     #wrapper {
-        left: -21%;
+        left: -32%;
     }
 }
 @media (max-width: 1400px) {
     #wrapper {
-        left: -23%;
+        left: -33%;
     }
 }
 @media (max-width: 1350px) {
     #wrapper {
-        left: -25%;
+        left: -34%;
     }
 }
 @media (max-width: 1300px) {
     #wrapper {
-        left: -27%;
+        left: -34%;
     }
 }
 @media (max-width: 1280px) {
     #wrapper {
-        left: -29%;
+        left: -35.5%;
     }
 }
 @media (max-width: 1250px) {
     #wrapper {
-        left: -20%;
+        left: -32%;
         width: 80%;
     }
     .form-control {
@@ -399,11 +399,11 @@ p {
         font-size: 80pt;
     }
     #description {
-        top: 220%;
+        top: 210%;
         font-size:20pt;
     }
     #credits {
-        top: 285%;
+        top: 275%;
         font-size:20pt;
     }
     #metricsTab {
@@ -418,7 +418,7 @@ p {
 }
 @media (max-width: 1095px) {
     #wrapper {
-        left: -20%;
+        left: -32%;
         width: 80%;
     }
     .form-control {
@@ -429,11 +429,11 @@ p {
         font-size: 70pt;
     }
     #description {
-        top: 245%;
+        top: 235%;
         font-size:20pt;
     }
     #credits {
-        top: 309%;
+        top: 296%;
         font-size:20pt;
     }
     #metricsTab {
@@ -442,7 +442,7 @@ p {
 }
 @media (max-width: 1040px) {
     #wrapper {
-        left: -20%;
+        left: -31.5%;
         width: 80%;
     }
     .form-control {
@@ -453,11 +453,11 @@ p {
         font-size: 70pt;
     }
     #description {
-        top: 245%;
+        top: 235%;
         font-size:20pt;
     }
     #credits {
-        top: 309%;
+        top: 295%;
         font-size:20pt;
     }
     #metricsTab {
@@ -466,8 +466,8 @@ p {
 } 
 @media (max-width: 995px) {
     #wrapper {
-        left: -20%;
-        width: 80%;
+        /* left: -10%;
+        width: 60%; */
     }
     .form-control {
         font-size: 28pt;
@@ -477,7 +477,7 @@ p {
         font-size: 50pt;
     }
     #description {
-        top: 400%;
+        top: 380%;
         font-size:20pt;
         
     }
@@ -496,8 +496,8 @@ p {
 }
 @media (max-width: 990px) {
     #wrapper {
-        left: -15%;
-        width: 80%;
+        /* left: -15%;
+        width: 80%; */
     }
     .form-control {
         font-size: 25pt;
@@ -507,7 +507,7 @@ p {
         font-size: 50pt;
     }
     #description {
-        top: 400%;
+        top: 381%;
         font-size:20pt;
         
     }
@@ -523,8 +523,8 @@ p {
 } 
 @media (max-width: 855px) {
     #wrapper {
-        left: -20%;
-        width: 80%;
+        /* left: -20%;
+        width: 80%; */
     }
     .form-control {
         font-size: 20pt;
@@ -534,7 +534,7 @@ p {
         font-size: 50pt;
     }
     #description {
-        top: 400%;
+        top: 381%;
         font-size:20pt;
         
     }
@@ -547,8 +547,8 @@ p {
 } 
 @media (max-width: 770px) {
     #wrapper {
-        left: -20%;
-        width: 80%;
+        /* left: -20%;
+        width: 80%; */
     }
     .form-control {
         font-size: 20pt;
@@ -580,9 +580,26 @@ p {
 @media (max-width: 767px) {
     #mobileOnly {
         display: block;
-        position: absolute;
-        left: 16%;
-        top: 60%;
+        top: 0%;
+        margin-top: 430px;
+
+    }
+    #songSparrowLogo {
+        width: 60%;
+        left: 55%;
+        top: 90%;
+    }
+    h1.text-center.col-12 {
+        max-width: 100%;
+        left: 45%;
+
+    }
+    #description {
+        top: 430%;
+        left: 41%;
+    }
+    textarea#usernameForm {
+        left: 49%;
     }
     .form-control {
         -webkit-text-stroke-width: 1px;
@@ -593,6 +610,30 @@ p {
     }
     .form-control:focus {
         color: rgb(34, 32, 30);
+    }
+}
+@media (max-width: 700px) {
+    #mobileOnly {
+        display: block;
+        top: 0%;
+        margin-top: 430px;
+        width: 72%;
+
+    }
+    #songSparrowLogo {
+        width: 60%;
+        left: 55%;
+        top: 90%;
+    }
+    h1.text-center.col-12 {
+        max-width: 94%;
+        left: 45%;
+    }
+    #description {
+        display: none;
+    }
+    textarea#usernameForm {
+        left: 47%;
     }
 }
 /* ===================================================================================
