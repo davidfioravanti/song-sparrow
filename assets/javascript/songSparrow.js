@@ -1,70 +1,53 @@
 
 $(document).ready(function () {
 
-/* =================================================================
-======================== FIREBASE CONFIG ===========================
-================================================================= */
+    /* =================================================================
+    ======================== FIREBASE CONFIG ===========================
+    ================================================================= */
 
-  var firebaseConfig = {
-    apiKey: "AIzaSyA-boyJhILCEE5YejxDlFIhU37LYe-IXq8",
-    authDomain: "song-sparrow-app-ef307.firebaseapp.com",
-    databaseURL: "https://song-sparrow-app-ef307.firebaseio.com",
-    projectId: "song-sparrow-app-ef307",
-    storageBucket: "",
-    messagingSenderId: "233980157165",
-    appId: "1:233980157165:web:d15eacb9f1afb5022440e4"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  var database = firebase.database();
-  var database = firebase.database();
-  var connectionsRef = database.ref("/users/(connected)/");
-  // console.log(messagesRef)
-  var connectedRef = database.ref(".info/connected/");
-  var numVisits = localStorage.getItem("numVisits");
-
-  if (numVisits) {
-      var getVisits = parseInt(localStorage.getItem("numVisits"));
-      console.log("PREV. NUMBER OF SITE VISITS: " + getVisits);
-      getVisits++;
-      localStorage.setItem("numVisits", getVisits);
-      console.log("# OF SITE VISITS: " + getVisits);
-      numVisits = getVisits;
-  }
-  else {
-      localStorage.setItem("numVisits", "1")
-      var getVisitsNum = localStorage.getItem("numVisits");
-      console.log("FIRST VISIT: " + getVisitsNum);
-      numVisits = 1;   
-  }
-
-  sessionStorage.setItem("rowNum", "3");
+    var firebaseConfig = {
+        apiKey: "AIzaSyA-boyJhILCEE5YejxDlFIhU37LYe-IXq8",
+        authDomain: "song-sparrow-app-ef307.firebaseapp.com",
+        databaseURL: "https://song-sparrow-app-ef307.firebaseio.com",
+        projectId: "song-sparrow-app-ef307",
+        storageBucket: "",
+        messagingSenderId: "233980157165",
+        appId: "1:233980157165:web:d15eacb9f1afb5022440e4"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var database = firebase.database();
+    var database = firebase.database();
+    var connectionsRef = database.ref("/users/(connected)/");
+    // console.log(messagesRef)
+    var connectedRef = database.ref(".info/connected/");
+    var numVisits = localStorage.getItem("numVisits");
 
     // When the client's connection state changes...
-    connectedRef.on("value", function(snap) {
+    connectedRef.on("value", function (snap) {
 
         // If they are connected..
         if (snap.val()) {
-    
-        // Add user to the connections list.
-        var con = connectionsRef.push({
-            username,
-        })
-        // Remove user from the connection list when they disconnect.
-        con.onDisconnect().remove();
+
+            // Add user to the connections list.
+            var con = connectionsRef.push({
+                username,
+            })
+            // Remove user from the connection list when they disconnect.
+            con.onDisconnect().remove();
         }
     })
 
-/* =================================================================
-======================== ANIMATION/SOUNDS ==========================
-================================================================= */
+    /* =================================================================
+    ======================== ANIMATION/SOUNDS ==========================
+    ================================================================= */
 
     // Fade in speech bubble...
-    setTimeout(function() {
+    setTimeout(function () {
         $("#instructions").css("opacity", "1");
-        setTimeout(function() {
+        setTimeout(function () {
             // Fade out speech bubble...
-            $("#instructions").css("opacity" , "0");
+            $("#instructions").css("opacity", "0");
             // Fade in chat window...
             $("#chatDiv").css("opacity", "1");
         }, 2000);
@@ -78,33 +61,68 @@ $(document).ready(function () {
         birdSound.play();
     })
 
-/* =================================================================
-========================= MAIN APP LOGIC ===========================
-================================================================= */
+    /* =================================================================
+    ========================= MAIN APP LOGIC ===========================
+    ================================================================= */
 
+    // Check and set number of user visits...
+    if (numVisits) {
+        var getVisits = parseInt(localStorage.getItem("numVisits"));
+        console.log("PREV. NUMBER OF SITE VISITS: " + getVisits);
+        getVisits++;
+        localStorage.setItem("numVisits", getVisits);
+        console.log("# OF SITE VISITS: " + getVisits);
+        numVisits = getVisits;
+    }
+    else {
+        localStorage.setItem("numVisits", "1")
+        var getVisitsNum = localStorage.getItem("numVisits");
+        console.log("FIRST VISIT: " + getVisitsNum);
+        numVisits = 1;
+    }
+
+    sessionStorage.setItem("rowNum", "3");
     // Grab the username entered from Local Storage...
     let username = localStorage.getItem("username");
     // Change the username used for site chat to that username...
     $("#username").text(username);
+    
 
-/* =================================================================
-========================= LOGIN GREETING ===========================
-================================================================= */
+    /* =================================================================
+    ========================= LOGIN GREETING ===========================
+    ================================================================= */
 
-    if (numVisits % 3 === 0 || numVisits === 1) {
+    // Every five times the user visits the page and on the first visit...
+    if (numVisits % 5 === 0 || numVisits === 1) {
         $("#loginTitle").html("<h2 id='greeting' class='glow'>WELCOME BACK " + username + "!</h2>");
         $("#loginBody").html("<h4>SONG SPARROW USERS HAVE BEEN SEARCHING FOR: </h4><br>");
-        database.ref("/searches").limitToLast(3).on("child_added", function(loginSnap) {
-        var newSearchDiv = $("<div id='newSearchDiv'>")
-        var loginSearch = loginSnap.val().searchName;
-        var newLoginSearch = $("<p class='loginSearch'>" + loginSearch + "</p><br>" +
-        "<a href='" + loginSnap.val().searchURL + "' target='_blank' rel='noopener'>" +
-        "<img class='loginImg' src='" + loginSnap.val().searchImg + "'></a>");
-        newLoginSearch.appendTo(newSearchDiv);
-        newSearchDiv.appendTo("#loginBody");
+        database.ref("/searches").limitToLast(3).on("child_added", function (loginSnap) {
+            var newSearchDiv = $("<div id='newSearchDiv'>")
+            var loginSearch = loginSnap.val().searchName;
+            var newLoginSearch = $("<p class='loginSearch'>" + loginSearch + "</p><br>" +
+                "<a href='" + loginSnap.val().searchURL + "' target='_blank' rel='noopener'>" +
+                "<img class='loginImg' src='" + loginSnap.val().searchImg + "'></a>");
+            newLoginSearch.appendTo(newSearchDiv);
+            newSearchDiv.appendTo("#loginBody");
         })
         $("#loginModal").fadeIn();
-        $("#loginClose").on("click", function() {
+        $("#loginClose").on("click", function () {
+            $("#loginModal").fadeOut();
+            setTimeout(() => {
+                $("#loginModal").remove();
+            }, 1000);
+        })
+    }
+    // Every seven visits to the page...
+    else if (numVisits % 7 === 0) {
+        $("#loginTitle").html("<h2 id='greeting' class='glow'>WELCOME BACK " + username + "!</h2>");
+        $("#loginBody").html("<img id='tinyLogo' src='assets/images/songSparrowLogo.png'>" + 
+        "<h4 id='question'>ENJOYING SONG SPARROW? </h4><br>" +
+        "<p>WE'D LOVE YOUR FEEDBACK! CLICK THE GITHUB LINK AND LEAVE" +
+        " US SOME COMMENTS ON HOW WE CAN IMPROVE!</p>" + "<p>CHEERS!<br><h2 class='glow'>-THE DEVS</h2></p>" +
+        "<button class='btn btn-primary featureButton col' onclick='github()' type='button'>GITHUB</button>");
+        $("#loginModal").fadeIn();
+        $("#loginClose").on("click", function () {
             $("#loginModal").fadeOut();
             setTimeout(() => {
                 $("#loginModal").remove();
@@ -112,29 +130,29 @@ $(document).ready(function () {
         })
     }
 
-/* =================================================================
-========================= SEARCHES TABLE ===========================
-================================================================= */
+    /* =================================================================
+    ========================= SEARCHES TABLE ===========================
+    ================================================================= */
 
     // UPDATES THE LATEST SEARCHES TABLE WITH RESULTS!
-    database.ref("/searches").limitToLast(3).on("child_added", function(childSnap) {
+    database.ref("/searches").limitToLast(3).on("child_added", function (childSnap) {
         var rowNumStr = sessionStorage.getItem("rowNum");
         // console.log(rowNumStr);
         var rowNumInt = parseInt(rowNumStr);
         // console.log(rowNumInt);
 
-        if (rowNumInt > 0){
-                let latestSearch = childSnap.val().searchName;
-                let latestURL = childSnap.val().searchURL;
-                let newTr = $("<tr class='added" + rowNumInt + "'>");
-                let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
-                let newTdName = $("<a class='added td"+ rowNumInt + "' href='" + latestURL + "' target='_blank' rel='noopener'>" +
+        if (rowNumInt > 0) {
+            let latestSearch = childSnap.val().searchName;
+            let latestURL = childSnap.val().searchURL;
+            let newTr = $("<tr class='added" + rowNumInt + "'>");
+            let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
+            let newTdName = $("<a class='added td" + rowNumInt + "' href='" + latestURL + "' target='_blank' rel='noopener'>" +
                 "<td class='added td" + rowNumInt + "'>" + latestSearch + "</td></a>");
-                newTdName.prependTo(newTr);
-                newTdNum.prependTo(newTr);
-                newTr.prependTo("tbody");
-                rowNumInt--;
-                sessionStorage.setItem("rowNum", rowNumInt);
+            newTdName.prependTo(newTr);
+            newTdNum.prependTo(newTr);
+            newTr.prependTo("tbody");
+            rowNumInt--;
+            sessionStorage.setItem("rowNum", rowNumInt);
         }
         else if (rowNumInt <= 0) {
             $(".added").remove();
@@ -148,8 +166,8 @@ $(document).ready(function () {
             let latestURL = childSnap.val().searchURL;
             let newTr = $("<tr class='added" + rowNumInt + "'>");
             let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
-            let newTdName = $("<a class='added td"+ rowNumInt + "' href='" + latestURL + "' target='_blank' rel='noopener'>" + 
-            "<td class='added td" + rowNumInt + "'>" + latestSearch + "</td></a>");
+            let newTdName = $("<a class='added td" + rowNumInt + "' href='" + latestURL + "' target='_blank' rel='noopener'>" +
+                "<td class='added td" + rowNumInt + "'>" + latestSearch + "</td></a>");
             newTdName.prependTo(newTr);
             newTdNum.prependTo(newTr);
             newTr.prependTo("tbody");
@@ -158,18 +176,18 @@ $(document).ready(function () {
         }
     })
 
-/* =================================================================
-========================= USER FAVORITES ===========================
-================================================================= */
+    /* =================================================================
+    ========================= USER FAVORITES ===========================
+    ================================================================= */
 
-    database.ref("/users/" + username + "/(favorites)").on("child_added", function(favSnap) {
+    database.ref("/users/" + username + "/(favorites)").on("child_added", function (favSnap) {
         // console.log(favSnap);
         var favRow = $("<div id='newFavDiv' class='text-center newFav'>");
         var favCol = $("<div id='newFavCol'>");
         var favBr = $("<br>");
         var favName = $("<p id='newFavName' class='col-12'>" + favSnap.val().name + "</p>");
-        var favImg = $("<a id='newFavLink' target='_blank' rel='noopener' href='" + favSnap.val().url + "'>" + 
-        "<img id='newFavImg' class='col-12' src='" + favSnap.val().img + "'>" + "</a>");
+        var favImg = $("<a id='newFavLink' target='_blank' rel='noopener' href='" + favSnap.val().url + "'>" +
+            "<img id='newFavImg' class='col-12' src='" + favSnap.val().img + "'>" + "</a>");
         favRow.appendTo($("#favoritesPlaceholder"));
         favCol.appendTo(favRow);
         favName.appendTo(favCol);
@@ -177,7 +195,7 @@ $(document).ready(function () {
         favImg.appendTo(favName);
     })
 
-    database.ref("/messages").limitToLast(10).on("child_added", function(childSnap) {
+    database.ref("/messages").limitToLast(10).on("child_added", function (childSnap) {
         // console.log(childSnap.val().message)
         // console.log("i");
         // console.log(childSnap.val());
@@ -187,99 +205,99 @@ $(document).ready(function () {
         let invalidTag = "script";
         let invalidCSS = "style";
         if (Message.includes(invalidTag) || Message.includes(invalidCSS)) {
-          // DO NOTHING!
+            // DO NOTHING!
         } else {
-          var newMessage = $(
-            "<div class='row messageDiv'>" +
-              "<span class='col-12 messageUsername'>" +
-              Username +
-              " : " +
-              "</span><span class='col-12 messageMessage'>" +
-              Message +
-              "<br>" +
-              "</span><span class='col-12 messageTimestamp'>" +
-              Timestamp +
-              "</span>"
-          );
-          newMessage.prependTo("#globalChat");
-        // console.log(newMessage);
+            var newMessage = $(
+                "<div class='row messageDiv'>" +
+                "<span class='col-12 messageUsername'>" +
+                Username +
+                " : " +
+                "</span><span class='col-12 messageMessage'>" +
+                Message +
+                "<br>" +
+                "</span><span class='col-12 messageTimestamp'>" +
+                Timestamp +
+                "</span>"
+            );
+            newMessage.prependTo("#globalChat");
+            // console.log(newMessage);
         }
-      });
+    });
 
     // Create a timestamp to include in user message...
     const unixTime = $("unixtime").val();
     const date = moment(unixTime).format("MM/DD/YY");
     const currentTime = moment(unixTime).format("h:mm A");
 
-    var timestamp = currentTime + " - " + date ;
+    var timestamp = currentTime + " - " + date;
 
-/* =================================================================
-======================== EVENT LISTENERS ===========================
-================================================================= */
+    /* =================================================================
+    ======================== EVENT LISTENERS ===========================
+    ================================================================= */
 
     // When the user presses a key inside the chat input...
-    $("#chatInput").on("keydown", function(e) {
+    $("#chatInput").on("keydown", function (e) {
         // If the button pressed was "enter"...
         if (e.which == 13) {
-        // Prevent page refresh...
-        e.preventDefault();
+            // Prevent page refresh...
+            e.preventDefault();
 
-        // Store the users submitted message...
-        var chatMessage = $("#chatInput")
-            .val()
-            .trim();
-        var invalidTag = "<script>";
-        let invalidCSS = "style";
+            // Store the users submitted message...
+            var chatMessage = $("#chatInput")
+                .val()
+                .trim();
+            var invalidTag = "<script>";
+            let invalidCSS = "style";
 
-        // If the chat message is empty...
-        if (chatMessage == "") {
-            // DO NOTHING
-        }
-        // If the chat message contained a script...
-        else if (chatMessage.includes(invalidTag)) {
-            alert("NICE TRY! NO JAVASCRIPT FOR YOU!");
-            clearForms();
-        }
-        // If the chat message contained css...
-        else if (chatMessage.includes(invalidCSS)) {
-            alert("NO STYLE FOR YOU!");
-            clearForms();
-        } else {
-            /* ======================================================================
-                =====================================================================
-                THIS BLOCK IS ONLY FOR TESTING CHAT OUTPUT! NOT FOR LIVE-SITE!!!!
-                =====================================================================
-                ================================================================== */
+            // If the chat message is empty...
+            if (chatMessage == "") {
+                // DO NOTHING
+            }
+            // If the chat message contained a script...
+            else if (chatMessage.includes(invalidTag)) {
+                alert("NICE TRY! NO JAVASCRIPT FOR YOU!");
+                clearForms();
+            }
+            // If the chat message contained css...
+            else if (chatMessage.includes(invalidCSS)) {
+                alert("NO STYLE FOR YOU!");
+                clearForms();
+            } else {
+                /* ======================================================================
+                    =====================================================================
+                    THIS BLOCK IS ONLY FOR TESTING CHAT OUTPUT! NOT FOR LIVE-SITE!!!!
+                    =====================================================================
+                    ================================================================== */
 
-            // // Create a new <p> tag...
-            // var modalText = $("<p id='chatText'>");
-            // // Set the new <p>'s html to (username: + chatMessage)...
-            // modalText.html(username + ": &nbsp; &nbsp;" + chatMessage);
-            // // Prepend the new <p> to the chat window...
-            // modalText.prependTo($("#globalChat"));
-            // // Clear all forms...
+                // // Create a new <p> tag...
+                // var modalText = $("<p id='chatText'>");
+                // // Set the new <p>'s html to (username: + chatMessage)...
+                // modalText.html(username + ": &nbsp; &nbsp;" + chatMessage);
+                // // Prepend the new <p> to the chat window...
+                // modalText.prependTo($("#globalChat"));
+                // // Clear all forms...
 
-            /* ===================================================================
-                ======================================================================
-                ======================================================================
-                =================================================================== */
+                /* ===================================================================
+                    ======================================================================
+                    ======================================================================
+                    =================================================================== */
 
-            database.ref("/messages").push({
-            username: username,
-            message: chatMessage,
-            timestamp: timestamp
-            });
-            clearForms();
-        }
+                database.ref("/messages").push({
+                    username: username,
+                    message: chatMessage,
+                    timestamp: timestamp
+                });
+                clearForms();
+            }
         }
     });
-        // Clear all forms...
-        function clearForms() {
-            $("#chatInput").val("");
-        }
+    // Clear all forms...
+    function clearForms() {
+        $("#chatInput").val("");
+    }
 
     // When the user clicks on the HTML Markdown Supported Button...
-    $("#chatNote").on("click", function() {
+    $("#chatNote").on("click", function () {
         // Print out supported markdown into the chat window...
         var supportText1 = $("<span id='chatText'>");
         var supportText2 = $("<p id='chatText'> <br><br>");
@@ -289,17 +307,15 @@ $(document).ready(function () {
         supportText1.prependTo($("#globalChat"));
         supportText2.prependTo($("#globalChat"));
     })
-
     // When the user clicks the POPOUT CHAT BUTTON...
-    $("#popOutChat").on("click", function() {
+    $("#popOutChat").on("click", function () {
         // Open a new "600x600" window, and open chat.html ...
-        window.open ("popOutChat.html",
-        "Song Sparrow Chat",
-        "menubar=0,resizable=0,width=600,height=600");
+        window.open("popOutChat.html",
+            "Song Sparrow Chat",
+            "menubar=0,resizable=0,width=600,height=600");
     })
-
     // When the user clicks the seach button...
-    $("#searchButton").on("click", function (){
+    $("#searchButton").on("click", function () {
         $("#resultsmindiv").css("display", "block")
         let artistName = $("#artistNameForm").val().trim().toUpperCase();
         if (artistName !== "") {
@@ -309,7 +325,6 @@ $(document).ready(function () {
             searchErrorEmpty();
         }
     })
-
     // When the user presses a key inside of a search form...
     $(".searchForm").on("keydown", function (e) {
         if (e.which == 13) {
@@ -324,14 +339,12 @@ $(document).ready(function () {
             }
         }
     })
-
     // When the user clicks a close button on a response modal...
-    $(".close").on("click", function() {
+    $(".close").on("click", function () {
         $("#responseModal").css("display", "none");
     })
-
     // When the user clicks the close search button...
-    $("#searchClose").on("click", function() {
+    $("#searchClose").on("click", function () {
         $("#resultsmindiv").css("display", "none");
         $("#resultsDiv").css("display", "none");
     })
@@ -340,33 +353,36 @@ $(document).ready(function () {
         $("#aboutModal").css("display", "block");
 
         // When the user clicks the close button...
-        $("#closeButton").on("click", function(){
+        $("#closeButton").on("click", function () {
             $("#aboutModal").css("display", "none");
         })
     })
-
-    $("#favoriteButton").on("click", function(){
-        var username =localStorage.getItem("username");
+    // When the user clicks the lyrics button...
+    $("#lyricsButton").on("click", function() {
+        lyricsError();
+    })
+    // When the use clicks the add favorite button...
+    $("#favoriteButton").on("click", function () {
+        var username = localStorage.getItem("username");
         let favoriteName = sessionStorage.getItem("tempName");
         let favoriteImg = $("#artistImg").attr("src");
         let favoriteURL = $("#artistURL").attr("href");
-    
+
         database.ref("/users/" + username + "/(favorites)").push({
             name: favoriteName,
             img: favoriteImg,
             url: favoriteURL
-          });
+        });
     })
-
     // When the user clicks the favorites button in footer...
     $("#favoritesButton").on("click", function () {
         $("#favoritesModal").css("display", "block");
-        
-        $("#favoritesReset").on("mouseover mouseout", function() {
+
+        $("#favoritesReset").on("mouseover mouseout", function () {
             $("#warningText").toggle();
         });
 
-        $("#favoritesReset").on("dblclick", function() {
+        $("#favoritesReset").on("dblclick", function () {
             var username = localStorage.getItem("username");
             $(".newFav").remove();
             database.ref("/users/" + username + "/(favorites)").set({
@@ -375,15 +391,14 @@ $(document).ready(function () {
         })
 
         // When the user clicks the close button...
-        $("#closeButton2").on("click", function(){
+        $("#closeButton2").on("click", function () {
             $("#favoritesModal").css("display", "none");
         });
     })
-
     // When the user clicks the min/max button.
-    $("#resultsminbtn").on("click", function(){
+    $("#resultsminbtn").on("click", function () {
         $("#resultsDiv").css("display", "")
-        if($(this).text() === "+"){
+        if ($(this).text() === "+") {
             $("#resultsminbtn").text("-")
         } else {
             $("#resultsminbtn").text("+")
@@ -436,20 +451,33 @@ function searchErrorEmpty() {
     $("#responseModal").css("display", "block");
 }
 
+function lyricsError() {
+    $("#modalTitle").text("FEATURE IN DEV.");
+    $("#modalBody").empty();
+    var modalText = $("<p class='modalText'>");
+    modalText.html("<h2>LYRICS FEATURE IN DEVELOPMENT!</h2> <p id='lyricsErrorText'>UNFORTUNATELY FOR COPYRIGHT" +
+    " REASONS, <a href='https://genius.com/discussions/277279-Get-the-lyrics-of-a-song' target='_blank' rel='noopener'>" +
+    "GENIUS CAN'T OFFER LYRIC RESULTS IN ITS API.</a><br> WE ARE EXPLORING USING NODE AND CHEERIO TO WEBSCRAPE THE LYRICS INSTEAD!"+
+    "<br><br> FOR NOW, SEARCHING FOR A SONG OR ARTIST WILL OUTPUT SONG LINKS THAT TAKE YOU TO THE LYRICS!</p>");
+    modalText.appendTo($("#modalBody"));
+    $("#responseModal").css("display", "block");
+    $("#lyricsButton").addClass("disabled");
+}
+
 /* =================================================================
 ======================= GENIUS AJAX CALL #1 ========================
 ================================================================= */
 
 function geniusAPIFirstCall() {
 
-/* =================================================================
-======================= GENIUS API CONFIG ==========================
-================================================================= */
+    /* =================================================================
+    ======================= GENIUS API CONFIG ==========================
+    ================================================================= */
 
     var config = {
         geniusKEY: 'c73834d65amsh116e415b6adfba2p14b76cjsnf234503f539a',
         seatGeekKEY: 'MTg1NzgxOTZ8MTU2OTM0NDQ1NS44'
-    } 
+    }
     var geniusAPIKey = config.geniusKEY;
 
     var artistNameSearch = $('#artistNameForm').val().trim();
@@ -461,9 +489,9 @@ function geniusAPIFirstCall() {
 
     var topSongs = [];
 
-/* =================================================================
-====================== GENIUS AJAX CALL 1 ==========================
-================================================================= */
+    /* =================================================================
+    ====================== GENIUS AJAX CALL 1 ==========================
+    ================================================================= */
 
     $.ajax({
         url: GeniusQueryURL,
@@ -520,14 +548,14 @@ function geniusAPIFirstCall() {
         newDiv.appendTo(".artistSongs");
         // get top three hits and push to songList section under artistImg
         for (var i = 0; i < 3; i++) {
-                var songTitle = response.response.hits[i].result.title;
-                var songLink = response.response.hits[i].result.url;
-                var song = $("<a href='" + songLink + "' target='_blank' rel='noopeners'>" + 
+            var songTitle = response.response.hits[i].result.title;
+            var songLink = response.response.hits[i].result.url;
+            var song = $("<a href='" + songLink + "' target='_blank' rel='noopeners'>" +
                 "<p id='songTitle'>" + songTitle + "</p></a>");
-                $('#songsDiv').append(song);
-                song.attr("id", "songTitle");
+            $('#songsDiv').append(song);
+            song.attr("id", "songTitle");
         };
-        
+
         // ENSURES THE MAIN ARTIST IMAGE BELONGS TO THE ONE THE USER SEARCHED FOR.
         // var counter = 0;
         for (var i = 0; i < response.response.hits.length; i++) {
@@ -546,7 +574,7 @@ function geniusAPIFirstCall() {
 
                 $("#artistURL").attr("href", artist_URL);
                 $("#artistImg").attr("src", artist_Image);
-                
+
             }
             else {
                 var tempSearch = $("#artistNameForm").val().trim();
@@ -561,13 +589,13 @@ function geniusAPIFirstCall() {
         database.ref("/searches").push({
             searchName: nameUprCase,
             searchURL: SearchURL,
-            searchImg: SearchIMG,    
+            searchImg: SearchIMG,
         })
 
 
 
 
-    // console.log(topSongs);
+        // console.log(topSongs);
         geniusAPISecondCall();
         seatGeekSecondAPICall();
     });
@@ -582,20 +610,20 @@ function geniusAPISecondCall() {
     // Re-declare the config...
     var config = {
         geniusKEY: 'c73834d65amsh116e415b6adfba2p14b76cjsnf234503f539a',
-        seatGeekKEY: 'MTg1NzgxOTZ8MTU2OTM0NDQ1NS44'  
-    } 
+        seatGeekKEY: 'MTg1NzgxOTZ8MTU2OTM0NDQ1NS44'
+    }
     var geniusAPIKey = config.geniusKEY;
 
-/* =================================================================
-====================== GENIUS AJAX CALL 2 ==========================
-================================================================= */
+    /* =================================================================
+    ====================== GENIUS AJAX CALL 2 ==========================
+    ================================================================= */
 
     // Get the artist ID that was stored in first call...
     let artist_ID = sessionStorage.getItem("artistId");
     console.log("ARTIST ID:" + artist_ID);
     // Use it in a SECOND ajax call to get more information...
     var artistIDQueryURL = 'https://genius.p.rapidapi.com/search?q=' + artist_ID;
-    
+
     $.ajax({
         url: artistIDQueryURL,
         method: "GET",
@@ -604,21 +632,21 @@ function geniusAPISecondCall() {
             "x-rapidapi-key": geniusAPIKey
         }
     }).then(function (response) {
-    console.log('-----Genius Second API call------')
-    // console.log(response.response);
-    
+        console.log('-----Genius Second API call------')
+        // console.log(response.response);
 
-    // Show the populated results div!
-    $("#resultsDiv").fadeIn(1000);
 
-    // IF THE CONCERT BUTTON IS CHECKED....
-    if($("#concertButton").is(":checked")){
-        console.log("SEARCHING SEATGEEK!");
-        seatGeekAPICall(); 
-    }
-    else{
+        // Show the populated results div!
+        $("#resultsDiv").fadeIn(1000);
 
-    }
+        // IF THE CONCERT BUTTON IS CHECKED....
+        if ($("#concertButton").is(":checked")) {
+            console.log("SEARCHING SEATGEEK!");
+            seatGeekAPICall();
+        }
+        else {
+
+        }
     })
 }
 
@@ -630,7 +658,7 @@ function seatGeekSecondAPICall() {
     var config = {
         geniusKEY: 'c73834d65amsh116e415b6adfba2p14b76cjsnf234503f539a',
         seatGeekKEY: 'MTg1NzgxOTZ8MTU2OTM0NDQ1NS44'
-    } 
+    }
 
     let artistName = sessionStorage.getItem("artistName");
     var seatGeekKEY = config.seatGeekKEY;
@@ -641,13 +669,13 @@ function seatGeekSecondAPICall() {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response){
+    }).then(function (response) {
 
         console.log('--------- SeatGeekSecond API Call ---------')
         console.log(response);
 
         let geekResponse2 = response.events[0];
-        
+
         // console.log(geekResponse2.performers[0].hasOwnProperty('genres')); // returns true
         // console.log(data.Genres);
 
@@ -677,8 +705,8 @@ function seatGeekSecondAPICall() {
 
 
             $.each(genresArr, function (index, value) {
-                $('#attribution').append('<p id=genreTitle'+index+'>');
-                $('#genreTitle'+index).text(value.toUpperCase());
+                $('#attribution').append('<p id=genreTitle' + index + '>');
+                $('#genreTitle' + index).text(value.toUpperCase());
 
                 // break loop after 2 since our row only shows 3 songs we'll only want
                 // 3 genres max
@@ -705,7 +733,7 @@ function seatGeekAPICall() {
     var config = {
         geniusKEY: 'c73834d65amsh116e415b6adfba2p14b76cjsnf234503f539a',
         seatGeekKEY: 'MTg1NzgxOTZ8MTU2OTM0NDQ1NS44'
-    } 
+    }
 
     let artistName = sessionStorage.getItem("artistName");
     var seatGeekKEY = config.seatGeekKEY;
@@ -744,5 +772,5 @@ function seatGeekAPICall() {
         EventImage.appendTo($("#seatGeekResultsEventLink"));
         var findEventLink = "https://seatgeek.com/" + artistName + "-tickets?oq=" + artistName;
         $("#findEventLink").attr("href", findEventLink);
-})
+    })
 }
