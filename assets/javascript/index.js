@@ -98,9 +98,9 @@ $(document).ready(function () {
     
     database.ref("/searches").limitToLast(3).on("child_added", function(childSnap) {
         var rowNumStr = sessionStorage.getItem("rowNum");
-        console.log(rowNumStr);
+        // console.log(rowNumStr);
         var rowNumInt = parseInt(rowNumStr);
-        console.log(rowNumInt);
+        // console.log(rowNumInt);
 
         if (rowNumInt > 0){
             let latestSearch = childSnap.val().searchName;
@@ -115,7 +115,7 @@ $(document).ready(function () {
             rowNumInt--;
             sessionStorage.setItem("rowNum", rowNumInt);
         }
-        else if (rowNumInt >= 0) {
+        else if (rowNumInt <= 0) {
             $(".added").remove();
             sessionStorage.setItem("rowNum", "3");
             var rowNumStr = sessionStorage.getItem("rowNum");

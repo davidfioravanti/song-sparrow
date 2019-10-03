@@ -123,23 +123,20 @@ $(document).ready(function () {
         var rowNumInt = parseInt(rowNumStr);
         // console.log(rowNumInt);
 
-        // IF THE NUMBER OF ROWS DISPLAYED IS GREATER THAN 0...
         if (rowNumInt > 0){
-
-            // CREATE A NEW ROW!
-            let latestSearch = childSnap.val().searchName;
-            let latestURL = childSnap.val().searchURL;
-            let newTr = $("<tr class='added" + rowNumInt + "'>");
-            let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
-            let newTdName = $("<a class='added td"+ rowNumInt + "' href='" + latestURL + "' target='_blank' rel='noopener'>" + 
-            "<td class='added td" + rowNumInt + "'>" + latestSearch + "</td></a>");
-            newTdName.prependTo(newTr);
-            newTdNum.prependTo(newTr);
-            newTr.prependTo("tbody");
-            rowNumInt--;
-            sessionStorage.setItem("rowNum", rowNumInt);
+                let latestSearch = childSnap.val().searchName;
+                let latestURL = childSnap.val().searchURL;
+                let newTr = $("<tr class='added" + rowNumInt + "'>");
+                let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
+                let newTdName = $("<a class='added td"+ rowNumInt + "' href='" + latestURL + "' target='_blank> rel='noopener" +
+                "<td class='added td" + rowNumInt + "'>" + latestSearch + "</td></a>");
+                newTdName.prependTo(newTr);
+                newTdNum.prependTo(newTr);
+                newTr.prependTo("tbody");
+                rowNumInt--;
+                sessionStorage.setItem("rowNum", rowNumInt);
         }
-        else if (rowNumInt >= 0) {
+        else if (rowNumInt <= 0) {
             $(".added").remove();
             sessionStorage.setItem("rowNum", "3");
             var rowNumStr = sessionStorage.getItem("rowNum");
@@ -394,6 +391,7 @@ $(document).ready(function () {
     });
 });
 
+// Because chrome hates me...
 function search() {
 
     $("#resultsDiv").css("display", "none");
