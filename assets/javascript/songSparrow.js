@@ -128,7 +128,7 @@ $(document).ready(function () {
                 let latestURL = childSnap.val().searchURL;
                 let newTr = $("<tr class='added" + rowNumInt + "'>");
                 let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
-                let newTdName = $("<a class='added td"+ rowNumInt + "' href='" + latestURL + "' target='_blank> rel='noopener" +
+                let newTdName = $("<a class='added td"+ rowNumInt + "' href='" + latestURL + "' target='_blank' rel='noopener'>" +
                 "<td class='added td" + rowNumInt + "'>" + latestSearch + "</td></a>");
                 newTdName.prependTo(newTr);
                 newTdNum.prependTo(newTr);
