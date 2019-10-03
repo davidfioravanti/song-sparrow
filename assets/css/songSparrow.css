@@ -573,6 +573,9 @@ textarea {
 #findEventLink {
     text-decoration: none !important;
 }
+#genius {
+    max-width: 10vw;
+}
 #genresDiv {
     margin-top: 30px;
 }
