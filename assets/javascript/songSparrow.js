@@ -397,6 +397,7 @@ function search() {
     $("#seatGeekRow").css("display", "none");
     $("#eventImage").remove();
     $('#songsDiv').remove();
+    $("#genreTitle").remove();
     $("#seatGeekResultsEventDate").text("");
     $("#seatGeekResultsEventName").text("");
     $("#seatGeekResultsEventCity").text("");
@@ -676,8 +677,8 @@ function seatGeekSecondAPICall() {
 
 
             $.each(genresArr, function (index, value) {
-                $('#attribution').append('<p id=genreTitle>');
-                $('#genreTitle').text(value.toUpperCase());
+                $('#attribution').append('<p id=genreTitle'+index+'>');
+                $('#genreTitle'+index).text(value.toUpperCase());
 
                 // break loop after 2 since our row only shows 3 songs we'll only want
                 // 3 genres max

@@ -491,8 +491,14 @@ textarea {
     animation: textGlow 2s infinite ease;
     margin-bottom: 20px;
 }
-#genresTitle {
-    font-size: .20vw;
+#genreTitle0 {
+    font-size: 2.5vw;
+}
+#genreTitle1 {
+    font-size: 2.5vw;
+}
+#genreTitle2 {
+    font-size: 2.5vw;
 }
 #newFavDiv {
     background: rgb(39, 35, 35);
@@ -1072,7 +1078,7 @@ button#resultsminbtn {
         font-size: 2vw;
     }
     .td3 {
-        font-size: 1vw;
+        font-size: 1.8vw;
     }
     .table {
         margin-top: 8%;
