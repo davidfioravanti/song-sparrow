@@ -13,11 +13,12 @@
 
 a {
     font-size: 20px;
-    color: rgb(255, 251, 45);
+    color: rgb(255, 206, 45);
     text-decoration: underline;
 }
 a:hover {
     color: orange;
+    text-shadow: 0px 0px 10px rgb(255, 123, 0);
 }  
 body {
     background: url(../images/backgroundImage.png);
@@ -150,22 +151,6 @@ textarea {
     @keyframes textGlow {
         0% {text-shadow: 0px 10px 30px rgb(33,37,41)}
         50% {text-shadow: 0px 10px 40px rgb(255, 212, 19)}
-        100% {text-shadow: 0px 10px 30px rgb(33,37,41)}
-    }
-.h1:hover {
-    animation: textGlowMulti 4s infinite ease;
-}
-    @keyframes textGlowMulti {
-        0% {text-shadow: 0px 10px 30px rgb(33,37,41)}
-        10% {text-shadow: 0px 10px 40px rgb(0, 132, 255)}
-        20% {text-shadow: 0px 10px 30px rgb(255, 212, 19)}
-        30% {text-shadow: 0px 10px 40px rgb(255, 0, 0)}
-        40% {text-shadow: 0px 10px 30px rgb(255, 19, 224)}
-        50% {text-shadow: 0px 10px 40px rgb(39, 255, 19)}
-        60% {text-shadow: 0px 10px 30px rgb(255, 136, 0)}
-        70% {text-shadow: 0px 10px 40px rgb(0, 255, 200)}
-        80% {text-shadow: 0px 10px 40px rgb(86, 0, 224)}
-        80% {text-shadow: 0px 10px 20px rgb(168, 114, 255)}
         100% {text-shadow: 0px 10px 30px rgb(33,37,41)}
     }
 .h2 {
@@ -654,6 +639,19 @@ textarea {
 #loginBody {
     text-align: center;
 }
+#loginClose {
+    font-size: 20px;
+    color: rgb(47, 40, 40);
+    border: 2px rgb(85, 72, 72) solid;
+    background-image: linear-gradient(rgb(255, 131, 60), rgb(255, 117, 54));
+}
+    #loginClose:focus {
+        font-size: 20px;
+        color: rgb(47, 40, 40);
+        border: 2px rgb(85, 72, 72) solid;
+        background-image: linear-gradient(rgb(255, 131, 60), rgb(255, 117, 54));
+        box-shadow: 0px 0px 5px 5px #3d3333;
+    }
 #loginHeader {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
     color: rgb(32, 28, 27);

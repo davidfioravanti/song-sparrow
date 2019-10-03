@@ -391,7 +391,6 @@ $(document).ready(function () {
     });
 });
 
-// Because chrome hates me...
 function search() {
 
     $("#resultsDiv").css("display", "none");
@@ -435,6 +434,10 @@ function searchErrorEmpty() {
     modalText.appendTo($("#modalBody"));
     $("#responseModal").css("display", "block");
 }
+
+/* =================================================================
+======================= GENIUS AJAX CALL #1 ========================
+================================================================= */
 
 function geniusAPIFirstCall() {
 
@@ -567,6 +570,10 @@ function geniusAPIFirstCall() {
         seatGeekSecondAPICall();
     });
 }
+
+/* =================================================================
+======================= GENIUS AJAX CALL #2 ========================
+================================================================= */
 
 function geniusAPISecondCall() {
 
