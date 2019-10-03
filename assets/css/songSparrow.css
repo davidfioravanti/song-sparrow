@@ -492,7 +492,7 @@ textarea {
     margin-bottom: 20px;
 }
 #genresTitle {
-    font-size: 15px;
+    font-size: .20vw;
 }
 #newFavDiv {
     background: rgb(39, 35, 35);
@@ -578,6 +578,9 @@ textarea {
 }
 #genresDiv {
     margin-top: 30px;
+}
+#genreTitle {
+    font-size: 2vw;
 }
 #globalChat {
     color: white;
@@ -847,7 +850,7 @@ button#resultsminbtn {
     margin-top: 30px;
 }
 #songTitle {
-    font-size: 15px;
+    font-size: 2vw;
 }
 #spotify {
     width: 100%;

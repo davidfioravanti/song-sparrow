@@ -522,7 +522,7 @@ function geniusAPIFirstCall() {
                 var songTitle = response.response.hits[i].result.title;
                 var songLink = response.response.hits[i].result.url;
                 var song = $("<a href='" + songLink + "' target='_blank' rel='noopeners'>" + 
-                "<p>" + songTitle + "</p></a>");
+                "<p id='songTitle'>" + songTitle + "</p></a>");
                 $('#songsDiv').append(song);
                 song.attr("id", "songTitle");
         };
@@ -676,9 +676,8 @@ function seatGeekSecondAPICall() {
 
 
             $.each(genresArr, function (index, value) {
-                $('#attribution').append('<p id=genreTitle'+index+'>');
-                $('#genreTitle'+index).css('font-size', '15px');
-                $('#genreTitle'+index).text(value.toUpperCase());
+                $('#attribution').append('<p id=genreTitle>');
+                $('#genreTitle').text(value.toUpperCase());
 
                 // break loop after 2 since our row only shows 3 songs we'll only want
                 // 3 genres max
