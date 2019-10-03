@@ -16,7 +16,7 @@ HAS YOUR BACK!</i></h2>
 <p>&nbsp;&nbsp;&nbsp;
 - Save searches you want to keep track of with your own personal FAVORITES menu!</p>
 <p>&nbsp;&nbsp;&nbsp;
-- HTML Markdown is support in chat, so you can link images/videos/etc!</p>
+- HTML Markdown is supported in chat, so you can link images/videos/etc!</p>
 <p>&nbsp;&nbsp;&nbsp;
 - Chat with other users either on the main page, or in a pop-out chat window!</p>
 <p>&nbsp;&nbsp;&nbsp;
