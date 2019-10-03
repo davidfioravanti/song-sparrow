@@ -115,9 +115,25 @@ $(document).ready(function () {
             rowNumInt--;
             sessionStorage.setItem("rowNum", rowNumInt);
         }
-        else {
+        else if (rowNumInt >= 0) {
             $(".added").remove();
             sessionStorage.setItem("rowNum", "3");
+            var rowNumStr = sessionStorage.getItem("rowNum");
+
+            // console.log(rowNumStr);
+            var rowNumInt = parseInt(rowNumStr);
+            // console.log(rowNumInt);
+            let latestSearch = childSnap.val().searchName;
+            let latestURL = childSnap.val().searchURL;
+            let newTr = $("<tr class='added" + rowNumInt + "'>");
+            let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
+            let newTdName = $("<a class='added td"+ rowNumInt + "' href='" + latestURL + "' target='_blank' rel='noopener'>" + 
+            "<td class='added td" + rowNumInt + "'>" + latestSearch + "</td></a>");
+            newTdName.prependTo(newTr);
+            newTdNum.prependTo(newTr);
+            newTr.prependTo("tbody");
+            rowNumInt--;
+            sessionStorage.setItem("rowNum", rowNumInt);
         }
     })
 
