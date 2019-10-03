@@ -94,7 +94,7 @@ $(document).ready(function () {
         }
     })
     
-    sessionStorage.setItem("rowNum", "1");
+    sessionStorage.setItem("rowNum", "3");
     
     database.ref("/searches").limitToLast(3).on("child_added", function(childSnap) {
         var rowNumStr = sessionStorage.getItem("rowNum");
@@ -102,20 +102,21 @@ $(document).ready(function () {
         var rowNumInt = parseInt(rowNumStr);
         console.log(rowNumInt);
 
-        if (rowNumInt < 4){
-            let latestSearch = childSnap.val().artistName;
+        if (rowNumInt > 0){
+            let latestSearch = childSnap.val().searchName;
+            let latestURL = childSnap.val().searchURL;
             let newTr = $("<tr class='added" + rowNumInt + "'>");
             let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
-            let newTdName = $("<td class='added td" + rowNumInt + "'>" + latestSearch + "</td>");
+            let newTdName = $("<a class='added td"+ rowNumInt + "' href='" + latestURL + "'><td class='added td" + rowNumInt + "'>" + latestSearch + "</td></a>");
             newTdName.prependTo(newTr);
             newTdNum.prependTo(newTr);
             newTr.prependTo("tbody");
-            rowNumInt++;
+            rowNumInt--;
             sessionStorage.setItem("rowNum", rowNumInt);
         }
         else {
             $(".added").remove();
-            sessionStorage.setItem("rowNum", "1");
+            sessionStorage.setItem("rowNum", "3");
         }
     })
 
