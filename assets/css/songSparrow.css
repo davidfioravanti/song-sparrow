@@ -940,6 +940,18 @@ button#resultsminbtn {
     #resultsContent {
         font-size: 2vw;
     }
+    .td1 {
+        font-size: 1.5vw;
+    }
+    .td2 {
+        font-size: 1.4vw;
+    }
+    .td3 {
+        font-size: 1.3vw;
+    }
+    .table {
+        margin-top: 8%;
+    }
 }
 @media (max-width: 2200px) {
     #bottomDiv {
@@ -1043,6 +1055,18 @@ button#resultsminbtn {
     }
     #globalChat {
         height: 200px;
+    }
+    .td1 {
+        font-size: 2.5vw;
+    }
+    .td2 {
+        font-size: 2vw;
+    }
+    .td3 {
+        font-size: 1vw;
+    }
+    .table {
+        margin-top: 8%;
     }
 }
 @media (max-width: 1200px) {
