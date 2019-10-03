@@ -21,6 +21,22 @@ $(document).ready(function () {
   var connectionsRef = database.ref("/users/(connected)/");
   // console.log(messagesRef)
   var connectedRef = database.ref(".info/connected/");
+  var numVisits = localStorage.getItem("numVisits");
+
+  if (numVisits) {
+      var getVisits = parseInt(localStorage.getItem("numVisits"));
+      console.log("PREV. NUMBER OF SITE VISITS: " + getVisits);
+      getVisits++;
+      localStorage.setItem("numVisits", getVisits);
+      console.log("# OF SITE VISITS: " + getVisits);
+      numVisits = getVisits;
+  }
+  else {
+      localStorage.setItem("numVisits", "1")
+      var getVisitsNum = localStorage.getItem("numVisits");
+      console.log("FIRST VISIT: " + getVisitsNum);
+      numVisits = 1;   
+  }
 
   sessionStorage.setItem("rowNum", "3");
 
@@ -38,10 +54,10 @@ $(document).ready(function () {
         con.onDisconnect().remove()
         }
     })
+
 /* =================================================================
 ======================== ANIMATION/SOUNDS ==========================
 ================================================================= */
-
 
     // Fade in speech bubble...
     setTimeout(function() {
@@ -62,19 +78,60 @@ $(document).ready(function () {
         birdSound.play();
     })
 
+/* =================================================================
+========================= MAIN APP LOGIC ===========================
+================================================================= */
+
+    // Grab the username entered from Local Storage...
+    let username = localStorage.getItem("username");
+    // Change the username used for site chat to that username...
+    $("#username").text(username);
+
+/* =================================================================
+========================= LOGIN GREETING ===========================
+================================================================= */
+
+    if (numVisits % 3 === 0 || numVisits === 1) {
+        $("#loginTitle").html("<h2 id='greeting' class='glow'>WELCOME BACK " + username + "!</h2>");
+        $("#loginBody").html("<h4>SONG SPARROW USERS HAVE BEEN SEARCHING FOR: </h4><br>");
+        database.ref("/searches").limitToLast(3).on("child_added", function(loginSnap) {
+        var newSearchDiv = $("<div id='newSearchDiv'>")
+        var loginSearch = loginSnap.val().searchName;
+        var newLoginSearch = $("<p class='loginSearch'>" + loginSearch + "</p><br>" +
+        "<a href='" + loginSnap.val().searchURL + "' target='_blank' rel='noopener'>" +
+        "<img class='loginImg' src='" + loginSnap.val().searchImg + "'></a>");
+        newLoginSearch.appendTo(newSearchDiv);
+        newSearchDiv.appendTo("#loginBody");
+        })
+        $("#loginModal").fadeIn();
+        $("#loginClose").on("click", function() {
+            $("#loginModal").fadeOut();
+            setTimeout(() => {
+                $("#loginModal").remove();
+            }, 1000);
+        })
+    }
+
+/* =================================================================
+========================= SEARCHES TABLE ===========================
+================================================================= */
 
     // UPDATES THE LATEST SEARCHES TABLE WITH RESULTS!
     database.ref("/searches").limitToLast(3).on("child_added", function(childSnap) {
         var rowNumStr = sessionStorage.getItem("rowNum");
-        console.log(rowNumStr);
+        // console.log(rowNumStr);
         var rowNumInt = parseInt(rowNumStr);
-        console.log(rowNumInt);
+        // console.log(rowNumInt);
 
+        // IF THE NUMBER OF ROWS DISPLAYED IS GREATER THAN 0...
         if (rowNumInt > 0){
-            let latestSearch = childSnap.val().artistName;
+
+            // CREATE A NEW ROW!
+            let latestSearch = childSnap.val().searchName;
+            let latestURL = childSnap.val().searchURL;
             let newTr = $("<tr class='added" + rowNumInt + "'>");
             let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
-            let newTdName = $("<td class='added td" + rowNumInt + "'>" + latestSearch + "</td>");
+            let newTdName = $("<a class='added td"+ rowNumInt + "' href='" + latestURL + "'><td class='added td" + rowNumInt + "'>" + latestSearch + "</td></a>");
             newTdName.prependTo(newTr);
             newTdNum.prependTo(newTr);
             newTr.prependTo("tbody");
@@ -85,7 +142,7 @@ $(document).ready(function () {
             $(".added").remove();
             sessionStorage.setItem("rowNum", "3");
 
-            let latestSearch = childSnap.val().artistName;
+            let latestSearch = childSnap.val().searchName;
             let newTr = $("<tr class='added" + rowNumInt + "'>");
             let newTdNum = $("<td class='added td" + rowNumInt + "'>" + rowNumInt + "</td>")
             let newTdName = $("<td class='added td" + rowNumInt + "'>" + latestSearch + "</td>");
@@ -96,19 +153,13 @@ $(document).ready(function () {
             sessionStorage.setItem("rowNum", rowNumInt);
         }
     })
+
 /* =================================================================
-========================= MAIN APP LOGIC ===========================
+========================= USER FAVORITES ===========================
 ================================================================= */
 
-
-    // Grab the username entered from Local Storage...
-    let username = localStorage.getItem("username");
-    // Change the username used for site chat to that username...
-    $("#username").text(username);
-
-    //
     database.ref("/users/" + username + "/(favorites)").on("child_added", function(favSnap) {
-        console.log(favSnap);
+        // console.log(favSnap);
         var favRow = $("<div id='newFavDiv' class='text-center newFav'>");
         var favCol = $("<div id='newFavCol'>");
         var favBr = $("<br>");
@@ -124,8 +175,8 @@ $(document).ready(function () {
 
     database.ref("/messages").limitToLast(10).on("child_added", function(childSnap) {
         // console.log(childSnap.val().message)
-        console.log("i");
-        console.log(childSnap.val());
+        // console.log("i");
+        // console.log(childSnap.val());
         let Username = childSnap.val().username;
         let Message = childSnap.val().message;
         let Timestamp = childSnap.val().timestamp;
@@ -147,7 +198,7 @@ $(document).ready(function () {
               "</span>"
           );
           newMessage.prependTo("#globalChat");
-          console.log(newMessage);
+        // console.log(newMessage);
         }
       });
 
@@ -248,9 +299,6 @@ $(document).ready(function () {
         $("#resultsmindiv").css("display", "block")
         let artistName = $("#artistNameForm").val().trim().toUpperCase();
         if (artistName !== "") {
-            database.ref("/searches").push({
-                artistName: artistName,
-            })
             search();
         }
         else {
@@ -265,9 +313,6 @@ $(document).ready(function () {
             e.preventDefault();
             let artistName = $("#artistNameForm").val().trim().toUpperCase();
             if (artistName !== "") {
-                database.ref("/searches").push({
-                    artistName: artistName,
-                })
                 search();
             }
             else {
@@ -348,6 +393,13 @@ function search() {
     $("#seatGeekRow").css("display", "none");
     $("#eventImage").remove();
     $('#songsDiv').remove();
+    $("#seatGeekResultsEventDate").text("");
+    $("#seatGeekResultsEventName").text("");
+    $("#seatGeekResultsEventCity").text("");
+    $("#seatGeekResultsEventVenue").text("");
+    $("#seatGeekResultsEventAddress").text("");
+    $("#seatGeekResultsEventPrice").text("");
+    $("#findEventButton").css("display", "none");
     // If artistNameForm is not empty...
     if ($("#artistNameForm").val() !== "") {
         var artistName = $("#artistNameForm").val().trim();
@@ -355,8 +407,6 @@ function search() {
         console.log("SEARCH STARTED: ")
         console.log("ARTIST NAME: " + artistName);
         geniusAPIFirstCall();
-        
-        
     }
     // If artistsNameForm is EMPTY!
     else {
@@ -469,7 +519,7 @@ function geniusAPIFirstCall() {
         };
         
         // ENSURES THE MAIN ARTIST IMAGE BELONGS TO THE ONE THE USER SEARCHED FOR.
-        var counter = 0;
+        // var counter = 0;
         for (var i = 0; i < response.response.hits.length; i++) {
 
             var lowerCaseArtist = (response.response.hits[i].result.primary_artist.name).toLowerCase();
@@ -493,6 +543,16 @@ function geniusAPIFirstCall() {
                 sessionStorage.setItem("tempName", tempSearch);
             }
         };
+
+        // STORE THE SEARCH IN FIREBASE! 
+        var database = firebase.database();
+        var SearchURL = $("#artistURL").attr("href");
+        var SearchIMG = $("#artistImg").attr("src");
+        database.ref("/searches").push({
+            searchName: nameUprCase,
+            searchURL: SearchURL,
+            searchImg: SearchIMG,    
+        })
 
 
 
@@ -585,26 +645,20 @@ function seatGeekSecondAPICall() {
             }
 
             for (var i = 0; i < data.Genres.length; i++) {
-
                 genresArr.push(data.Genres[i].name);
-
             }
 
             console.log(genresArr);
-
             $('#genius').remove();
 
             var genresDiv = $('<div>');
             $('#attribution').text('ARTIST GENRES:');
-
             genresDiv.attr('id', 'artistGenres');
 
 
             $('#attribution').append(genresDiv);
-
             var newDiv = $('<div>');
             newDiv.attr('id', 'genresDiv');
-
             $('#attribution').append(newDiv);
 
 
@@ -618,19 +672,14 @@ function seatGeekSecondAPICall() {
                 return index < 2;
             });
 
-
         } else {
 
             // display the genius image in HTML/CSS
             console.log('OOPS! No Genres Listed');
             $('#artistGenres').append('<p id=attribution>POWERED BY GENIUS:</p>');
             $('#artistGenres').append('<img id=genius src=assets/images/genius.png>');
-
-
         }
-
     });
-
 }
 
 /* =================================================================
@@ -670,6 +719,7 @@ function seatGeekAPICall() {
             eventPrice: geekResponse.stats.average_price,
             eventImage: geekResponse.performers[0].image,
         }
+        $("#findEventButton").css("display", "block");
         $("#seatGeekResultsEventDate").text(info.eventDate);
         $("#seatGeekResultsEventName").text(info.eventName);
         $("#seatGeekResultsEventCity").text(info.eventCity + " (" + info.eventCountry + ")");

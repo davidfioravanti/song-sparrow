@@ -1,6 +1,6 @@
 
 # SONG SPARROW (beta v0.1):
-<h2>A website/web-app that searches for music info. </h2>
+<h2 class="centered">A website/web-app that searches for music info. </h2>
 <hr>
 <img class="logo" src="assets/images/songSparrowLogo.png">
 <h2 class="centered"> Looking for music info on your favorite artists? <br>
@@ -27,6 +27,28 @@ HAS YOUR BACK!</i></h2>
 <br>
 
 <hr>
+
+<h3>10/02/19:</h3>
+<p>&nbsp;&nbsp;&nbsp;
+ADDED NEW FEATURES:</p>
+<p>&nbsp;&nbsp;&nbsp;
+Song Sparrow will now display a pop-up every once and awhile showing you what other users have been searching for, along with an artist image and link to their genius page!</p>
+<p>&nbsp;&nbsp;&nbsp;
+The "Latest Searches" table now displays links to those searches so users can click and view the search for themselves.</p>
+<p>&nbsp;&nbsp;&nbsp;
+Changed the way firebase stores search and favorite information to include more useful metrics and data. Every search now also logs the artists link and the url of the artist image (so it can be used to dynamically create the new pop-up). This in-turn makes the website more interactive and useful in almost every function.
+</p>
+<p>&nbsp;&nbsp;&nbsp;
+Fixed an oversight in the code that would erase a users favorites upon logging back into Song Sparrow. "index.html" now does a ref().update() when logging in, as opposed to the erroneous ref().set() (which was clearing out all data).
+</p>
+<p>
+
+- David Fioravanti (Gainstrive)
+<br>
+<br>
+
+<hr>
+
 <h3>9/29/19:</h3>
 <p>&nbsp;&nbsp;&nbsp;
 Website is almost fully functional!</p>
