@@ -13,11 +13,12 @@
 
 a {
     font-size: 20px;
-    color: rgb(255, 251, 45);
+    color: rgb(255, 206, 45);
     text-decoration: underline;
 }
 a:hover {
     color: orange;
+    text-shadow: 0px 0px 10px rgb(255, 123, 0);
 }  
 body {
     background: url(../images/backgroundImage.png);
@@ -152,22 +153,6 @@ textarea {
         50% {text-shadow: 0px 10px 40px rgb(255, 212, 19)}
         100% {text-shadow: 0px 10px 30px rgb(33,37,41)}
     }
-.h1:hover {
-    animation: textGlowMulti 4s infinite ease;
-}
-    @keyframes textGlowMulti {
-        0% {text-shadow: 0px 10px 30px rgb(33,37,41)}
-        10% {text-shadow: 0px 10px 40px rgb(0, 132, 255)}
-        20% {text-shadow: 0px 10px 30px rgb(255, 212, 19)}
-        30% {text-shadow: 0px 10px 40px rgb(255, 0, 0)}
-        40% {text-shadow: 0px 10px 30px rgb(255, 19, 224)}
-        50% {text-shadow: 0px 10px 40px rgb(39, 255, 19)}
-        60% {text-shadow: 0px 10px 30px rgb(255, 136, 0)}
-        70% {text-shadow: 0px 10px 40px rgb(0, 255, 200)}
-        80% {text-shadow: 0px 10px 40px rgb(86, 0, 224)}
-        80% {text-shadow: 0px 10px 20px rgb(168, 114, 255)}
-        100% {text-shadow: 0px 10px 30px rgb(33,37,41)}
-    }
 .h2 {
     color: white;
     font-size: 40px;
@@ -272,6 +257,9 @@ textarea {
             75% {transform: rotate(-5deg)}
             100% {transform: rotate(0deg)}
         }
+.table {
+    box-shadow: 0px 0px 50px 5px rgba(0, 0, 0, 0.294);
+}
 .td1{
     font-size: 5vw;
 }
@@ -503,8 +491,14 @@ textarea {
     animation: textGlow 2s infinite ease;
     margin-bottom: 20px;
 }
-#genresTitle {
-    font-size: 15px;
+#genreTitle0 {
+    font-size: 2.5vw;
+}
+#genreTitle1 {
+    font-size: 2.5vw;
+}
+#genreTitle2 {
+    font-size: 2.5vw;
 }
 #newFavDiv {
     background: rgb(39, 35, 35);
@@ -585,8 +579,14 @@ textarea {
 #findEventLink {
     text-decoration: none !important;
 }
+#genius {
+    max-width: 10vw;
+}
 #genresDiv {
     margin-top: 30px;
+}
+#genreTitle {
+    font-size: 2vw;
 }
 #globalChat {
     color: white;
@@ -654,6 +654,19 @@ textarea {
 #loginBody {
     text-align: center;
 }
+#loginClose {
+    font-size: 20px;
+    color: rgb(47, 40, 40);
+    border: 2px rgb(85, 72, 72) solid;
+    background-image: linear-gradient(rgb(255, 131, 60), rgb(255, 117, 54));
+}
+    #loginClose:focus {
+        font-size: 20px;
+        color: rgb(47, 40, 40);
+        border: 2px rgb(85, 72, 72) solid;
+        background-image: linear-gradient(rgb(255, 131, 60), rgb(255, 117, 54));
+        box-shadow: 0px 0px 5px 5px #3d3333;
+    }
 #loginHeader {
     background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
     color: rgb(32, 28, 27);
@@ -689,6 +702,9 @@ textarea {
     box-shadow: 0px 0px 10px 10px rgb(255, 178, 54), 0px 0px 50px 20px rgb(46, 40, 38);
     transform: rotate(360deg);
     filter: grayscale(.5);
+}
+#lyricsErrorText {
+    font-size: 16px;
 }
 #newSearchDiv {
     margin-bottom: 5%;
@@ -731,6 +747,12 @@ textarea {
         border: 2px rgb(85, 72, 72) solid;
         box-shadow: 0px 2px 50px 20px rgba(255, 106, 19, 0.726);
     }
+#question {
+    text-shadow: 0px 0px 10px#000000;
+    box-shadow: 0px 0px 30px 20px#ff880094;
+    background-image: linear-gradient(rgb(255, 180, 60), rgb(255, 117, 54));
+    border-radius: 15px;
+}
 #relatedArtists {
     color: rgb(223, 221, 219);
     margin-bottom: -15px;
@@ -843,7 +865,7 @@ button#resultsminbtn {
     margin-top: 30px;
 }
 #songTitle {
-    font-size: 15px;
+    font-size: 2vw;
 }
 #spotify {
     width: 100%;
@@ -935,12 +957,30 @@ button#resultsminbtn {
         color: red;
         text-shadow: 0px 0px 10px #cf0000;
     }
+
+#tinyLogo {
+    filter: drop-shadow(0px 0px 5px rgb(255, 102, 0));
+    width: 20vw;
+    max-width: 200px;
+}
 /* ===================================================================================
    ================================= MEDIA QUERIES ===================================
    =================================================================================== */
 @media (max-width: 2300px) {
     #resultsContent {
         font-size: 2vw;
+    }
+    .td1 {
+        font-size: 1.5vw;
+    }
+    .td2 {
+        font-size: 1.4vw;
+    }
+    .td3 {
+        font-size: 1.3vw;
+    }
+    .table {
+        margin-top: 8%;
     }
 }
 @media (max-width: 2200px) {
@@ -1045,6 +1085,18 @@ button#resultsminbtn {
     }
     #globalChat {
         height: 200px;
+    }
+    .td1 {
+        font-size: 2.5vw;
+    }
+    .td2 {
+        font-size: 2vw;
+    }
+    .td3 {
+        font-size: 1.8vw;
+    }
+    .table {
+        margin-top: 8%;
     }
 }
 @media (max-width: 1200px) {

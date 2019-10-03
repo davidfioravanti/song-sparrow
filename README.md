@@ -28,6 +28,30 @@ HAS YOUR BACK!</i></h2>
 
 <hr>
 
+<h3>10/03/19:</h3>
+<p>&nbsp;&nbsp;&nbsp;
+EVEN MORE FEATURES!:</p>
+<p>&nbsp;&nbsp;&nbsp;
+Song Sparrow now dynamically keeps track of your viewership, occasionally generating useful popups and metrics that provide deeper insight
+into how you (and every user) interact with our app.</p>
+<p>&nbsp;&nbsp;&nbsp;
+The list of related songs generated after searching are now displayed as links! These links will take you to the song's lyrics page!
+Until we can implement web scraping to display the lyrics on our site, this is the best implementation. Genius' API does not return lyrics
+data for copyright reasons. </p>
+<p>&nbsp;&nbsp;&nbsp;
+Fixed a lot of small bugs sitewide, allowing for a smoother user experience.
+</p>
+<p>&nbsp;&nbsp;&nbsp;
+Updated a LOT of styles in each page to improve readability and to facilitate a more responsive site design.
+</p>
+<p>
+
+- David Fioravanti (Gainstrive)
+<br>
+<br>
+
+<hr>
+
 <h3>10/02/19:</h3>
 <p>&nbsp;&nbsp;&nbsp;
 ADDED NEW FEATURES:</p>
