@@ -28,7 +28,7 @@ $(document).ready(function () {
     // Check Local Storage for an existing username...
     var checkNameExists = localStorage.getItem("username");
     // If none exists...
-    if (checkNameExists !== "") {
+    if (checkNameExists) {
         // Populate the username form with the retrieved data...
         username = localStorage.getItem("username");
         $("#usernameForm").val(username);
@@ -64,22 +64,33 @@ $(document).ready(function () {
         if (e.which == 13) {
             e.preventDefault();
             username = $("#usernameForm").val().trim();
-            if (username !== "") {
+            var usernameLength = username.length;
+            if (username !== "" && usernameLength <= 15 && usernameLength > 2) {
             // Clear the form
             $("#usernameForm").val("");
             console.log(username);
             localStorage.setItem('username', username);
-            database.ref("users/" + username).set({
+            database.ref("users/" + username +"/").update({
                 key: username,
-                isOnline: true,
+                
+                
             })
             // Open the main application...
             window.location.assign("soundSparrow.html") 
             }
-
-            else {
-
+            else if (username == "") {
+                $("#errorModal").css("display", "block");
+                $(".modal-body").text("USERNAME CAN'T BE BLANK! CHOOSE A USERNAME CONTAINING 3-15 CHARACTERS!")
             }
+            else if (usernameLength <= 2) {
+                $("#errorModal").css("display", "block");
+                $(".modal-body").text("USERNAME MUST BE AT LEAST 3 CHARACTERS LONG, AND NO MORE THAN 15!")
+            }
+            else if (usernameLength > 15) {
+                $("#errorModal").css("display", "block");
+                $(".modal-body").text("USERNAME MUST BE NO MORE THAN 15 CHARACTERS IN LENGTH!")
+            }
+            
         }
     })
     
@@ -106,5 +117,9 @@ $(document).ready(function () {
             $(".added").remove();
             sessionStorage.setItem("rowNum", "1");
         }
+    })
+
+    $("#errorClose").on("click", function() {
+        $("#errorModal").css("display", "none");
     })
 });
