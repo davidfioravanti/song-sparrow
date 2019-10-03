@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    
+
 /* =================================================================
 ======================== FIREBASE CONFIG ===========================
 ================================================================= */
@@ -51,7 +51,7 @@ $(document).ready(function () {
             username,
         })
         // Remove user from the connection list when they disconnect.
-        con.onDisconnect().remove()
+        con.onDisconnect().remove();
         }
     })
 
@@ -473,7 +473,7 @@ function geniusAPIFirstCall() {
         }
     }).then(function (response) {
 
-        // console.log(response.response);
+        console.log(response.response);
 
         var artist_ID = response.response.hits[0].result.primary_artist.id;
         var artist_URL = response.response.hits[0].result.primary_artist.url;
@@ -519,9 +519,10 @@ function geniusAPIFirstCall() {
         newDiv.appendTo(".artistSongs");
         // get top three hits and push to songList section under artistImg
         for (var i = 0; i < 3; i++) {
-                var song = $('<p>');
-                topSongs.push((response.response.hits[i].result.title).toUpperCase());
-                song.append(topSongs[i]);
+                var songTitle = response.response.hits[i].result.title;
+                var songLink = response.response.hits[i].result.url;
+                var song = $("<a href='" + songLink + "' target='_blank' rel='noopeners'>" + 
+                "<p>" + songTitle + "</p></a>");
                 $('#songsDiv').append(song);
                 song.attr("id", "songTitle");
         };
