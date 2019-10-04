@@ -1,5 +1,5 @@
 
-# SONG SPARROW (beta v0.1):
+# SONG SPARROW (v1.0 (initial Release)):
 <h2 class="centered">A website/web-app that searches for music info. </h2>
 <hr>
 <img class="logo" src="assets/images/songSparrowLogo.png">
